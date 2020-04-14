@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const hoaDonSchema = mongoose.Schema({
    // _id: mongoose.Schema.Types.ObjectId,
-    tenHoaDon: { Type: String, require: true },
-    soTien: { Type: Number, require: true },
+    tenHoaDon: { Type: String, required: true },
+    soTien: { Type: Number, required: true },
     noiDung: String,
     tinhTrang: { Type: Boolean, default: false },
 })
