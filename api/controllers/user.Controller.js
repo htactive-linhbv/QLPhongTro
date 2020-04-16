@@ -1,4 +1,4 @@
-const Users = require('../models/user.Model');
+const Users = require('../models/user.Model')
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
     create: ((req, res) => {
         
         Users.find({email:req.body.user.email}).then(response=>{
-            if(response.length===0){
+            if(response.length==0){
                 //mã hoá mật khảu
         const salt = bcrypt.genSaltSync(10);
         const PasswardHash = bcrypt.hashSync(req.body.user.password, salt)
@@ -42,7 +42,7 @@ module.exports = {
             email: req.body.user.email,
             password: PasswardHash,
             gioiTinh: req.body.user.gioiTinh,
-            DiaChi: req.body.user.diaChi,
+            diaChi: req.body.user.diaChi,
         })
         user.save()
             .then(data => {
@@ -54,13 +54,17 @@ module.exports = {
             .catch(err => {
                 res.status(401).json(err)
             })
+            }else{
+                res.status(400).json({
+                    message: 'Tai Khoan da ton tai'
+                })
             }
         }).catch(err=>{
             res.status(400).json(err)
         })
         
     }),
-    update: ((res, res) => {
+    update: ((req, res) => {
         const id = req.params.id;
         const user = {
             hoTen: req.body.user.hoTen,

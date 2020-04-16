@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
 const dichVuSchema = mongoose.Schema({
-    tenDV: {Type:String,required:true},
-    khuTro_id:{ type: Schema.ObjectId, ref: "KhuTro" },
-    moTaDV: {Type: String},
-    donGia :{Type : Number, required: true},
-    donVi : {Type : Number, required: true},
-    quyTacTinhTien :{Type: String , required: true},
-    trangThai : {Type: Boolean , default : false},
+    _id: mongoose.Schema.Types.ObjectId,
+    tenDV: { type: String, required: true },
+    khuTro_id: { type: mongoose.Schema.Types.ObjectId, ref: "KhuTro" },
+    moTaDV: { type: String },
+    donGia: { type: Number, required: true },
+    donVi: { type: Number, required: true },
+    quyTacTinhTien: { type: String, required: true },
+    trangThai: { type: Boolean, default: false },
 })
-module.exports = mongoose.model('DichVu',dichVuSchema);
+module.exports = mongoose.model('DichVu', dichVuSchema);

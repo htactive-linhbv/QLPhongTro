@@ -19,9 +19,9 @@ mongoose.connect(
 );
 // khao báo Router
 const chutroRouter = require('./routes/chutro.Router');
-const userRouter = require('./routes/user.Router')
-const dichvuRouter= require('./routes/dichvu.Router')
-
+const userRouter = require('./routes/user.Router');
+const dichvuRouter= require('./routes/dichvu.Router');
+const loginRouter  = require('./routes/login.Router');
 //use middleware morgan
 app.use(morgan('dev'));
 
@@ -30,6 +30,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 // use router 
+app.use('/api/login',loginRouter);
+
 app.use('/api/chutro',chutroRouter);
 app.use('/api/user',userRouter);
 app.use('api/dichvu',dichvuRouter);

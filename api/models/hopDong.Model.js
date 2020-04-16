@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const hopDongSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     tenHopDong: { Type: String, require: true },
     user_id: { Type: Schema.ObjectId, ref: "User" },
     phongTro_id: { Type: Schema.ObjectId, ref: "PhongTro" },
