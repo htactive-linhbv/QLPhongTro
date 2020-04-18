@@ -2,6 +2,7 @@
   <div class="content-wrapper">
     <div class="page-header">
       <h3 class="page-title">Quản Lý thiết bị</h3>
+
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
@@ -26,52 +27,69 @@
                   class="form-control"
                   id="exampleInputUsername1"
                   placeholder="Tên Thiết Bị"
+                  name="tenThietBi"
+                  v-model="tenThietBi"
+                  @change="$v.tenThietBi.$touch()"
                 />
+                <div
+                  v-if="$v.tenThietBi.$error"
+                  class="alert alert-danger"
+                  role="alert"
+                >Tên Thiết bị không được trống</div>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Giá</label>
                 <div class="input-group">
                   <input
                     type="text"
+                    name="gia"
                     class="form-control"
                     aria-label="Amount (to the nearest dollar)"
-                    v-model="thietBi.gia"
-                    @change="FormatNumber(thietBi.gia)"
+                    v-model="gia"
+                    @change="$v.gia.$touch()"
                   />
                   <div class="input-group-prepend">
-                    <span class="input-group-text">{{giaF}}</span>
+                    <span class="input-group-text">000</span>
                   </div>
                   <div class="input-group-prepend">
                     <span class="input-group-text">VND</span>
                   </div>
                 </div>
-                <div class="alert alert-danger" role="alert">This is a danger alert—check it out!</div>
+                <div v-if="$v.gia.$error" class="alert alert-danger" role="alert">
+                  <p v-if="!$v.gia.required" style="margin:0px">-Giá ko được để trống trống</p>
+                  <p v-if="!$v.gia.numeric" style="margin:0px">-Nhập số tiền không đúng</p>
+                </div>
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="exampleInputUsername1">Số Lượng</label>
                 <input
-                  type="password"
+                  type="text"
                   class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
+                  id="exampleInputUsername1"
+                  placeholder="Tên Thiết Bị"
+                  name="soLuong"
+                  v-model="soLuong"
+                  @change="$v.soLuong.$touch()"
                 />
+                <div v-if="$v.soLuong.$error" class="alert alert-danger" role="alert">
+                  <p v-if="!$v.soLuong.required" style="margin:0px">-Số Lượng không được để trống trống</p>
+                  <p v-if="!$v.soLuong.numeric" style="margin:0px">-Số lượng phải là number</p>
+                </div>
               </div>
               <div class="form-group">
-                <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                <input
-                  type="password"
+                <label for="mota">mô tả</label>
+                <textarea
+                  type="text"
                   class="form-control"
-                  id="exampleInputConfirmPassword1"
-                  placeholder="Password"
+                  id="mota"
+                  rows="6"
+                  placeholder="Mô Tả"
+                  v-model="moTa"
                 />
               </div>
-              <div class="form-check form-check-flat form-check-primary">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" /> Remember me
-                </label>
-              </div>
-              <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-              <button class="btn btn-light">Cancel</button>
+
+              <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">Thêm Mới</button>
+              <button @click.prevent="reset()" class="btn btn-light">Reset</button>
             </form>
           </div>
         </div>
@@ -81,20 +99,60 @@
 </template>
 
 <script>
+const { required, numeric } = require("vuelidate/lib/validators");
+import axios from "axios";
 export default {
   data: function() {
     return {
-      thietBi: {
-        tenThietBi: "",
-        gia: "",
-        chuTro_id: "",
-        mota: ""
-      },
-      
+      tenThietBi: "",
+      gia: "",
+      chuTro_id: "",
+      soLuong:"",
+      moTa: ""
     };
   },
-  
-    
+  validations: {
+    tenThietBi: {
+      required
+    },
+    gia: {
+      required,
+      numeric
+    },
+    soLuong:{
+      required,
+      numeric
+    }
+  },
+  methods: {
+    create() {
+      if (!this.$v.$invalid) {
+        axios
+          .post("/thietbi", {
+            tenThietBi: this.tenThietBi,
+            gia: this.gia,
+            moTa: this.moTa,
+            soLuong: this.soLuong,
+            chuTro_id: localStorage.getItem('chutro-profile-id'),
+
+          })
+          .then(() => {
+            alert('Thêm Mới'+this.tenThietBi+" Thành Công");
+            this.$router.push({path:'danhsach'});
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        this.$v.$touch();
+      }
+    },
+    reset() {
+      this.tenThietBi = "";
+      this.gia = "";
+      this.$v.$reset();
+    }
+  }
 };
 </script>
     

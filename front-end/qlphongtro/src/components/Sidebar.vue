@@ -23,6 +23,19 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <span class="menu-title">Quản lý thiết bị</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-mouse-variant menu-icon"></i>
+      </a>
+      <div class="collapse" id="ui-basic">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <router-link class="nav-link" to="/thietbi/danhsach">Danh Sách</router-link></li>
+          <li class="nav-item"> <router-link class="nav-link" to="/thietbi/create">Thêm Mới</router-link></li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <span class="menu-title">Basic UI Elements</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-crosshairs-gps menu-icon"></i>

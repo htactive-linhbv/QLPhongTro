@@ -3,9 +3,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import Vuelidate from 'vuelidate'
+import VModal from 'vue-js-modal'
+
+
+
+Vue.use(VModal);
 
 axios.defaults.baseURL ='http://localhost:3000/api/'
-
+Vue.use(Vuelidate)
 Vue.config.productionTip = false
 
 new Vue({

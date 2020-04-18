@@ -12,6 +12,7 @@ Vue.use(VueRouter)
 const checkLogin = (to, from, next) => {
 
   const loggedIn = localStorage.getItem('chutro-token');
+  
   if (!loggedIn) {
     return next('/login');
 
@@ -50,8 +51,18 @@ const routes = [
         name:'thietBiCreate',
         component:()=>import('../views/ThietBi/Create.vue'),
       },
+      {
+        path:'danhsach',
+        name: 'thieBiDanhSach',
+        component:()=>import('../views/ThietBi/danhsach.vue')
+      },
     ],
     component:ThietBi,
+  },
+  {
+    path :'/dichvu',
+    name: 'dichvu',
+    component:()=>import('../views/DichVu.vue')
   }
 ]
 
