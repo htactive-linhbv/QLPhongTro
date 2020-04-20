@@ -1,10 +1,12 @@
 const jwt = require('jsonwebtoken')
 
-module.exports =(res,res,next)=>{
+module.exports =(req,res,next)=>{
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
         
     }
     const token = req.body.token  || req.headers|| req.headers['authorization'].split(' ')[1];
+    console.log(token);
+    
     if(token){
         jwt.verify(token,'Secret',(err,decoded)=>{
             if(err){

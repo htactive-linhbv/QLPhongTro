@@ -1,6 +1,7 @@
 const Users = require('../models/user.Model')
 const bcrypt = require('bcrypt');
 
+
 module.exports = {
     getId: ((req, res) => {
         const id = req.params.id;
@@ -37,6 +38,7 @@ module.exports = {
         const PasswardHash = bcrypt.hashSync(req.body.user.password, salt)
 
         user = new Users({
+            _id: new mongoose.Types.ObjectId(),
             hoTen: req.body.user.hoTen,
             soDienThoai: req.body.user.soDienThoai,
             email: req.body.user.email,

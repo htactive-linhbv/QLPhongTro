@@ -17,6 +17,7 @@ module.exports = {
     }),
     create: ((req, res) => {
         const hoaDon = new HoaDons({
+            _id: new mongoose.Types.ObjectId(),
             tenHoaDon: req.body.hoadon.tenHoaDon,
             soTien: Number(req.body.hoadon.soTien),
             noiDung: req.body.hoadon.noiDung,

@@ -1,109 +1,120 @@
 <template>
   <modal name="createDichVu" :scrollable="true" height="auto" width="60%">
-    <div class="col-md-12 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Thêm mới dịch vụ</h4>
+    <div class="row">
+      <div class="col-md-11"></div>
+      <button
+        class="btn btn-inverse-primary btn-rounded btn-icon"
+        @click="$modal.hide('createDichVu')"
+      >
+        <i class="mdi mdi-window-close"></i>
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Thêm mới dịch vụ</h4>
 
-          <form class="forms-sample">
-            <div class="form-group">
-              <label for="exampleInputUsername1">Tên dịch vụ</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputUsername1"
-                placeholder="Tên dịch vụ"
-                name="tenDV"
-                v-model="tenDV"
-                @change="$v.tenDV.$touch()"
-              />
-              <div
-                v-if="$v.tenDV.$error"
-                class="alert alert-danger"
-                role="alert"
-              >Tên dịch vụ không được trống</div>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Đơn Giá</label>
-              <div class="input-group">
+            <form class="forms-sample">
+              <div class="form-group">
+                <label for="exampleInputUsername1">Tên dịch vụ</label>
                 <input
                   type="text"
-                  name="donGia"
                   class="form-control"
-                  aria-label="Amount (to the nearest dollar)"
-                  v-model="donGia"
-                  placeholder="Đơn giá"
-                  @change="$v.donGia.$touch()"
+                  id="exampleInputUsername1"
+                  placeholder="Tên dịch vụ"
+                  name="tenDV"
+                  v-model="tenDV"
+                  @change="$v.tenDV.$touch()"
                 />
-                <div class="input-group-prepend">
-                  <span class="input-group-text">000</span>
+                <div
+                  v-if="$v.tenDV.$error"
+                  class="alert alert-danger"
+                  role="alert"
+                >Tên dịch vụ không được trống</div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Đơn Giá</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    name="donGia"
+                    class="form-control"
+                    aria-label="Amount (to the nearest dollar)"
+                    v-model="donGia"
+                    placeholder="Đơn giá"
+                    @change="$v.donGia.$touch()"
+                  />
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">000</span>
+                  </div>
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">VND</span>
+                  </div>
                 </div>
-                <div class="input-group-prepend">
-                  <span class="input-group-text">VND</span>
+                <div v-if="$v.donGia.$error" class="alert alert-danger" role="alert">
+                  <p v-if="!$v.donGia.required" style="margin:0px">-Giá ko được để trống trống</p>
+                  <p v-if="!$v.donGia.numeric" style="margin:0px">-Nhập số tiền không đúng</p>
                 </div>
               </div>
-              <div v-if="$v.donGia.$error" class="alert alert-danger" role="alert">
-                <p v-if="!$v.donGia.required" style="margin:0px">-Giá ko được để trống trống</p>
-                <p v-if="!$v.donGia.numeric" style="margin:0px">-Nhập số tiền không đúng</p>
+              <div class="form-group">
+                <label for="exampleInputUsername1">Đơn vị</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputUsername1"
+                  placeholder="Đơn vị"
+                  name="donVi"
+                  v-model="donVi"
+                  @change="$v.donVi.$touch()"
+                />
+                <div
+                  v-if="$v.donVi.$error"
+                  class="alert alert-danger"
+                  role="alert"
+                >Đơn vị không được bỏ trống</div>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputUsername1">Đơn vị</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputUsername1"
-                placeholder="Đơn vị"
-                name="donVi"
-                v-model="donVi"
-                @change="$v.donVi.$touch()"
-              />
-              <div
-                v-if="$v.donVi.$error"
-                class="alert alert-danger"
-                role="alert"
-              >Đơn vị không được bỏ trống</div>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputUsername1">Quy tắc tính tiền</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputUsername1"
-                placeholder="Quy tắc tính tiền"
-                name="quyTacTinhTien"
-                v-model="quyTacTinhTien"
-                @change="$v.quyTacTinhTien.$touch()"
-              />
-              <div
-                v-if="$v.quyTacTinhTien.$error"
-                class="alert alert-danger"
-                role="alert"
-              >Quy tắc tính không được trống</div>
-            </div>
-            <div class="form-group">
-              <label>Trang Thái</label>
+              <div class="form-group">
+                <label for="exampleInputUsername1">Quy tắc tính tiền</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleInputUsername1"
+                  placeholder="Quy tắc tính tiền"
+                  name="quyTacTinhTien"
+                  v-model="quyTacTinhTien"
+                  @change="$v.quyTacTinhTien.$touch()"
+                />
+                <div
+                  v-if="$v.quyTacTinhTien.$error"
+                  class="alert alert-danger"
+                  role="alert"
+                >Quy tắc tính không được trống</div>
+              </div>
+              <div class="form-group">
+                <label>Trang Thái</label>
 
-              <select class="form-control" v-model="trangThai">
-                <option value="true" selected="selected">bình thường</option>
-                <option value="false">Tạm dừng</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="mota">mô tả</label>
-              <textarea
-                type="text"
-                class="form-control"
-                id="mota"
-                rows="6"
-                placeholder="Mô Tả"
-                v-model="moTaDV"
-              />
-            </div>
+                <select class="form-control" v-model="trangThai">
+                  <option value="true" selected="selected">bình thường</option>
+                  <option value="false">Tạm dừng</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="mota">mô tả</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="mota"
+                  rows="6"
+                  placeholder="Mô Tả"
+                  v-model="moTaDV"
+                />
+              </div>
 
-            <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">Thêm Mới</button>
-            <button @click.prevent="$modal.hide('createDichVu')" class="btn btn-light">Đóng</button>
-          </form>
+              <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">Thêm Mới</button>
+              <button @click.prevent="$modal.hide('createDichVu')" class="btn btn-light">Đóng</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -143,23 +154,29 @@ export default {
   },
   methods: {
     create() {
-      axios.post("/dichvu/", {
-        tenDV: this.tenDV,
-        chuTro_id: localStorage.getItem("chutro-profile-id"),
-        moTaDV: this.moTaDV,
-        donGia: this.donGia,
-        donVi: this.donVi,
-        quyTacTinhTien: this.quyTacTinhTien,
-        trangThai: Boolean(this.trangThai)
-      }).then(()=>{
-            alert('Thêm mới thành công')
-            this.$emit('createSuccess');
-            this.$emit('createSuccess',"Thêm mới thành công");
-            this.$modal.hide('createDichVu');
-      }).catch(()=>{
-          alert('Thêm mới thất bại')
-      })      
-      
+      if (!this.$v.$invalid) {
+        axios
+          .post("/dichvu/", {
+            tenDV: this.tenDV,
+            chuTro_id: localStorage.getItem("chutro-profile-id"),
+            moTaDV: this.moTaDV,
+            donGia: this.donGia,
+            donVi: this.donVi,
+            quyTacTinhTien: this.quyTacTinhTien,
+            trangThai: Boolean(this.trangThai)
+          })
+          .then(() => {
+            alert("Thêm mới thành công");
+            this.$emit("createSuccess");
+            this.$emit("createSuccess", "Thêm mới thành công");
+            this.$modal.hide("createDichVu");
+          })
+          .catch(() => {
+            alert("Thêm mới thất bại");
+          });
+      } else {
+        this.$v.$touch();
+      }
     }
   }
 };

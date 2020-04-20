@@ -153,7 +153,8 @@ export default {
       });
     },
     update() {
-      axios.patch(`/dichvu/${this.idDV}/update`, {
+      if (!this.$v.$invalid) {
+         axios.patch(`/dichvu/${this.idDV}/update`, {
         tenDV: this.tenDV,
         moTaDV: this.moTaDV,
         donGia: this.donGia,
@@ -166,6 +167,11 @@ export default {
           this.$modal.hide('updateDichVu');
           
       });
+      }else{
+         this.$v.$touch();
+      }
+
+     
     }
   }
 };

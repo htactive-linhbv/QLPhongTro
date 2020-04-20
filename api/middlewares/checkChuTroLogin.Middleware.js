@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
-module.exports =(res,res,next)=>{
-    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT'){
-        
-    }
-    const token = req.body.token  || req.headers|| req.headers['authorization'].split(' ')[1];
+module.exports =(req,res,next)=>{
+    
+    const token = req.headers['authorization'].split(' ')[1];
+    
+    
     if(token){
         jwt.verify(token,'Secret',(err,decoded)=>{
             if(err){
@@ -14,17 +14,13 @@ module.exports =(res,res,next)=>{
             })
             }else{
                 if(decoded.quyen==="chuTro"){
-                    req.user = decoded;
+                    req.chuTro = decoded;
+                   
+                    
                     next();
                 }else{res.json({
                     message:"ban khong co quyen truy cap"
-                })}
-
-
-
-
-
-              
+                })}         
             }
             
         })

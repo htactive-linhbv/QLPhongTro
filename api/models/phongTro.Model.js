@@ -1,24 +1,23 @@
 const mongoose = require('mongoose');
 
+
 const phongTroSchema = mongoose.Schema({
+
     _id: mongoose.Schema.Types.ObjectId,
-    tenPhongTro: { Type: String, required: true },
-    slNguoiToiDa: { Type: Number, required: true },
-    dienTich: { Type: Number, required: true },
+    tenPhongTro: { type: String },
+    slNguoiToiDa: { type: Number },
+    dienTich: { type: Number },
     Tang: Number,
-    gacLung: { Type: Boolean, default: false },
-    giaPhong: { Type: Number, required: true },
+    gacLung: { type: Boolean, default: false },
+    giaPhong: { type: Number },
     moTa: String,
-    dichVu_ids: [{ Type: mongoose.Schema.Types.ObjectId, ref: 'DichVu' }],
-    tinhTrangPhong: { Type: Boolean, default: false },
-    ngayBatDau: { Type: Date, required: true },
-    NgayHetHan: { Type: Date, required: true },
-    tienCoc: Number,
-    khachThue_ids: [{ Type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    thietBi_ids: [{ Type: mongoose.Schema.Types.ObjectId, ref: "ThietBi" }],
-    hoaDon_ids: [{ Type: mongoose.Schema.Types.ObjectId, ref: "HoaDon" }],
+    dichVu_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'DichVu' }],
+    tinhTrangPhong: { type: Boolean, default: false },
+    khachThue_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'KhachThue' }],
+   
+    hoaDon_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'HoaDon' }],
     images: [{ image: String }],
-    
+
 })
 
 module.exports = mongoose.model('PhongTro', phongTroSchema);

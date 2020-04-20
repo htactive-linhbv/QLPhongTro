@@ -22,7 +22,13 @@ const chutroRouter = require('./routes/chutro.Router');
 const userRouter = require('./routes/user.Router');
 const dichvuRouter= require('./routes/dichvu.Router');
 const loginRouter  = require('./routes/login.Router');
-const thietBiRouter = require('./routes/thietbi.Router')
+const thietBiRouter = require('./routes/thietbi.Router');
+const khuTroRouter = require('./routes/khuTro.Router')
+const khachThueRouter = require('./routes/khachThue.Router')
+
+
+//middlerware
+
 //use middleware morgan
 app.use(morgan('dev'));
 
@@ -37,6 +43,8 @@ app.use('/api/chutro',chutroRouter);
 app.use('/api/user',userRouter);
 app.use('/api/dichvu',dichvuRouter);
 app.use('/api/thietbi',thietBiRouter)
+app.use('/api/khutro',khuTroRouter);
+app.use('/api/khachthue',khachThueRouter);
 //use err
 app.use((req,res,next) => {
     const error = new Error('not found');

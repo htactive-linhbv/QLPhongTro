@@ -1,5 +1,6 @@
 const ThietBis = require('../models/thietBi.Model');
 
+
 module.exports = {
     getAll: ((req, res) => {
         ThietBis.find().then(response => {
@@ -20,6 +21,7 @@ module.exports = {
     }),
     create: ((req, res) => {
         const thietbi = new ThietBis({
+            _id: new mongoose.Types.ObjectId(),
             tenThietBi: req.body.tenThietBi,
             gia: Number(req.body.gia),
             moTa: req.body.moTa,

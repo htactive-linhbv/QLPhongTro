@@ -3,6 +3,7 @@ const ChuTro = require('../models/chuTro.Model');
 const bcrypt = require('bcrypt');
 //const { validationResult } = require('express-validator');
 const { add } = require('date-fns');
+
 module.exports = {
     get: (req, res) => {
         // const  lengthdata = ChuTro.countDocuments({},number=>number);
@@ -68,6 +69,7 @@ module.exports = {
 
                 // tạo new đối tượng chutro
                 const chuTro = new ChuTro({
+                    _id: new mongoose.Types.ObjectId(),
                     hoVaTen: req.body.chutro.hoVaTen,
                     email: req.body.chutro.email,
                     soDienThoai: req.body.chutro.soDienThoai,

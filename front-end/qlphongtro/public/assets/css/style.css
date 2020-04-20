@@ -3091,7 +3091,9 @@ pre {
 
 .table-sm th,
 .table-sm td {
-  padding: 0.3rem; }
+  padding: 0.3rem; 
+  
+}
 
 .table-bordered {
   border: 1px solid #ebedf2; }
@@ -10148,13 +10150,18 @@ input:focus {
 body {
   font-size: 1rem;
   font-family: "ubuntu-regular", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: initial;
   line-height: normal;
   -webkit-font-smoothing: antialiased; }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "ubuntu-medium", sans-serif; }
+  font-family: "ubuntu-medium", sans-serif;
+  font-family: 'Oswald', sans-serif;
+  
+  
+}
 
 p {
   font-size: 0.875rem; }
@@ -10331,7 +10338,11 @@ code {
   -webkit-transition: all 0.25s ease;
   -ms-transition: all 0.25s ease;
   font-size: calc(0.875rem - 0.05rem);
-  font-family: "ubuntu-regular", sans-serif; }
+  font-family:  "ubuntu-regular", sans-serif;
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Asap Condensed', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+}
   .footer a {
     color: #1bcfb4;
     font-size: inherit; }
@@ -10433,7 +10444,9 @@ code {
   font-family: "ubuntu-light", sans-serif; }
 
 .font-weight-bold {
-  font-family: "ubuntu-bold", sans-serif; }
+  font-family: "ubuntu-bold", sans-serif; 
+  font-family: 'Markazi Text', serif;
+}
 
 .font-weight-normal {
   font-family: "ubuntu-regular", sans-serif; }

@@ -19,7 +19,7 @@ module.exports = {
     create: ((req, res) => {
         
         const dichVu = new DichVus({
-
+            _id: new mongoose.Types.ObjectId(),
             tenDV: req.body.tenDV,
             chuTro_id:req.body.chuTro_id,
             moTaDV: req.body.moTaDV,
