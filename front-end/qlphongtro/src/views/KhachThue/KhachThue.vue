@@ -96,11 +96,11 @@ export default {
       khachThues: null
     };
   },
-  mounted() {
-    axios.get("/khachthue/").then(response => {
-      this.khachThues = response.data.data;
-    });
-  },
+  // mounted() {
+  //   axios.get("/khachthue/").then(response => {
+  //     this.khachThues = response.data.data;
+  //   });
+  // },
 
   components: {
     //HelloWorld,

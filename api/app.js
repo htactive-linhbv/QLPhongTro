@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
+const path = require('path');
 const app = express();
 
 const cors = require('cors');
@@ -17,6 +18,11 @@ mongoose.connect(
     },
   
 );
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('public',express.static(path.join(__dirname, 'public')));
+
+
 // khao báo Router
 const chutroRouter = require('./routes/chutro.Router');
 const userRouter = require('./routes/user.Router');
