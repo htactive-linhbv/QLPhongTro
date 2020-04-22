@@ -1,5 +1,6 @@
 const KhuTros = require('../models/khuTro.Model');
 const PhongTros = require('../models/phongTro.Model');
+const mongoose = require('mongoose')
 
 module.exports = {
     getAll: ((req, res) => {

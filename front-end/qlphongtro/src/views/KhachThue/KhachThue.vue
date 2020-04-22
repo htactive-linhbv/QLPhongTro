@@ -31,30 +31,27 @@
                         <th>Tên Khách thuê</th>
                         <th>Số điện thoại</th>
                         <th>giới tính</th>
-                        <th>Phòng</th>
+                        <th>Số CMND</th>
                         
                         <th>Option</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="kthue in khuTros" :key="kthue._id">
+                      <tr v-for="kthue in khachThues" :key="kthue._id">
                         <td>{{kthue.tenKhachThue}}</td>
                         <td>{{kthue.sdtKhachThue}}</td>
                         <td>{{kthue.gioiTinh}}</td>
-                        <td>
-                          <label v-if="!kthue==null" class="badge badge-success">{{kthue.tenPhongTro}}</label>
-                          <label v-else class="badge badge-danger">Trống</label>
-                        </td>
+                       <td>{{kthue.soCMND}}</td>
                         
 
                         <td>
-                          <button class="btn btn-primary btn-icon" title="xem chi tiết">
+                          <button class="btn btn-primary btn-icon" title="xem chi tiết" @click="showModalGet(kthue._id)">
                             <i class="mdi mdi-mdi mdi-clipboard-text"></i>
                           </button>
                           <button
                             class="btn btn-info btn-icon"
                             title="Cập Nhập"
-                            @click="showModalUpdate(kt._id)"
+                            @click="showModalUpdate(kthue._id)"
                           >
                             <i class="mdi mdi-lead-pencil"></i>
                           </button>
@@ -78,6 +75,7 @@
     </div>
     <modal-create @createSuccess="getNewData"></modal-create>
     <modal-update @updateSuccess="getNewData"></modal-update>
+    <modal-get></modal-get>
   </div>
 </template>
 
@@ -88,6 +86,7 @@ import Narbar from "../../components/Navbar.vue";
 import Sidebar from "../../components/Sidebar.vue";
 import ModalCreate from "./Modal_Create_KThue.vue";
 import ModalUpdate from "./Modal_Create_KThue.vue";
+import ModalGet from "./Modal_Get_KThue";
 import axios from "axios";
 export default {
   name: "KhuTro",
@@ -96,18 +95,19 @@ export default {
       khachThues: null
     };
   },
-  // mounted() {
-  //   axios.get("/khachthue/").then(response => {
-  //     this.khachThues = response.data.data;
-  //   });
-  // },
+  mounted() {
+    axios.get("/khachthue/").then(response => {
+      this.khachThues = response.data.data;
+    });
+  },
 
   components: {
     //HelloWorld,
     appNarbar: Narbar,
     appSidebar: Sidebar,
     ModalCreate,
-    ModalUpdate
+    ModalUpdate,
+    ModalGet
   },
   methods: {
     showModalCreate() {
@@ -116,9 +116,12 @@ export default {
     showModalUpdate(id) {
       this.$modal.show("updateKhachThue", { id: id });
     },
+    showModalGet(id){
+       this.$modal.show("getKhachThue", { id: id });
+    },
     getNewData() {
-      axios.get("/khutro/").then(response => {
-        this.khuTros = response.data.data;
+      axios.get("/khachthue/").then(response => {
+        this.khachThues = response.data.data;
       });
     },
     remove(id) {

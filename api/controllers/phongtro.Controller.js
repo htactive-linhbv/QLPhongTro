@@ -34,7 +34,9 @@ module.exports = {
             images: [{ image: String }],
         })
         phong.save().then(response=>{
-            res.status(200).json({data:data})
+            console.log(response);
+            
+            res.status(200).json({data:response})
         }).catch(err=>{
             res.status(400).json(err)
         })

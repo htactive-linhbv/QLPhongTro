@@ -1,5 +1,5 @@
 const HopDongs = require('../models/hopDong.Model')
-
+const mongoose = require('mongoose')
 
 module.exports={
     getAll:((req,res)=>{

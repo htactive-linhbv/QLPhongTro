@@ -3,6 +3,7 @@ const ChuTro = require('../models/chuTro.Model');
 const bcrypt = require('bcrypt');
 //const { validationResult } = require('express-validator');
 const { add } = require('date-fns');
+const mongoose = require('mongoose')
 
 module.exports = {
     get: (req, res) => {

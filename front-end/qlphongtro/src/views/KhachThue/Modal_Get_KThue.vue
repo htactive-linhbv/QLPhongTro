@@ -1,11 +1,11 @@
 <template>
-  <modal name="createKhachThue" :scrollable="true" height="auto" width="80%">
+  <modal name="getKhachThue" :scrollable="true" height="auto" width="80%" @before-open="getData">
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
       <div class="col-md-1">
         <button
           class="btn btn-inverse-primary btn-rounded btn-icon"
-          @click="$modal.hide('createKhachThue')"
+          @click="$modal.hide('getKhachThue')"
         >
           <i class="mdi mdi-window-close" style="font-size:20px"></i>
         </button>
@@ -26,16 +26,11 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập Tên khách Thuê"
+                        
                         v-model="data.tenKhachThue"
-                        name="tenKhachThue"
-                        @change="$v.tenKhachThue.touch()"
+                        readonly="readonly"
                       />
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.tenKhachThue.$error"
-                        role="alert"
-                      > tên không được trống!</div>
+                      
                     </div>
                   </div>
                 </div>
@@ -46,18 +41,11 @@
                       <input
                         type="text"
                         class="form-control"
-                        name="sdtKhachThue"
-                        placeholder="Nhập số điện thoại"
+                       readonly="readonly"
                         v-model="data.sdtKhachThue"
-                        @change="$v.sdtKhachThue.touch()"
+                       
                       />
-                      <div v-if="$v.sdtKhachThue.$error" class="alert alert-danger" role="alert">
-                        <p v-if="!$v.sdtKhachThue.required" style="margin:0px">không được bỏ trống</p>
-                        <p
-                          v-if="!$v.sdtKhachThue.numeric"
-                          style="margin:0px"
-                        >số điện thoại không đúng</p>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -67,20 +55,15 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Giới tính</label>
                     <div class="col-sm-9">
-                      <select
+                      <input
                         class="form-control"
                         v-model="data.gioiTinh"
                         name="gioiTinh"
-                        @change="$v.gioiTinh.touch()"
+                       readonly="readonly"
                       >
-                        <option value="Nam">Nam</option>
-                        <option value="Nữ">Nữ</option>
-                      </select>
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.gioiTinh.$error"
-                        role="alert"
-                      >Chọn giới tính!</div>
+                        
+                     
+                      
                     </div>
                   </div>
                 </div>
@@ -90,16 +73,12 @@
                     <div class="col-sm-9">
                       <input
                         class="form-control"
-                        placeholder="dd-mm-yyyy"
+                        
                         v-model="data.ngaySinh"
                         name="ngaySinh"
-                        @change="$v.ngaySinh.touch()"
+                      readonly="readonly"
                       />
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.ngaySinh.$error"
-                        role="alert"
-                      >ngày Sinh ko được trống</div>
+                      
                     </div>
                   </div>
                 </div>
@@ -113,15 +92,12 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập CMND/CCCD"
+                        
                         name="soCMND"
-                        @change="$v.soCMND.touch()"
+                        readonly="readonly"
                         v-model="data.soCMND"
                       />
-                      <div v-if="$v.soCMND.$error" class="alert alert-danger" role="alert">
-                        <p v-if="!$v.soCMND.required" style="margin:0px">không được bỏ trống</p>
-                        <p v-if="!$v.soCMND.numeric" style="margin:0px">số CMND không đúng</p>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -132,16 +108,12 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="dd-mm-yyyy"
+                        readonly="readonly"
                         name="ngayCapCMND"
                         v-model="data.ngayCapCMND"
-                        @change="$v.ngayCapCMND.touch()"
+                      
                       />
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.ngayCapCMND.$error"
-                        role="alert"
-                      >Ngày cấp CMND ko được trống</div>
+                      
                     </div>
                   </div>
                 </div>
@@ -154,16 +126,12 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập Nơi cấp CMND"
+                        readonly="readonly"
                         v-model="data.noiCapCMND"
                         name="noiCapCMND"
-                        @change="$v.noiCapCMND.touch()"
+                       
                       />
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.noiCapCMND.$error"
-                        role="alert"
-                      >Nơi cấp không được trống</div>
+                      
                     </div>
                   </div>
                 </div>
@@ -174,16 +142,12 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập hộ khẩu"
+                        readonly="readonly"
                         v-model="data.hoKhau"
                         name="hoKhau"
-                        @change="$v.hoKhau.touch()"
+                        
                       />
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.hoKhau.$error"
-                        role="alert"
-                      >Hộ khẩu không được trống</div>
+                     
                     </div>
                   </div>
                 </div>
@@ -193,20 +157,16 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Nghề nghiệp</label>
                     <div class="col-sm-9">
-                      <select
+                      <input
                         class="form-control"
                         v-model="data.ngheNghiep"
                         name="ngheNghiep"
-                        @change="$v.ngheNghiep.touch()"
+                       readonly="readonly"
                       >
                         <option value="Sinh Viên">Sinh Viên</option>
                         <option value="Người Đi Làm">Người Đi Làm</option>
-                      </select>
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.ngheNghiep.$error"
-                        role="alert"
-                      >không được trống</div>
+                     
+                      
                     </div>
                   </div>
                 </div>
@@ -217,7 +177,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập trường học/Nơi làm việc"
+                       readonly="readonly"
                         v-model="data.noiCongTac"
                       />
                     </div>
@@ -233,7 +193,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập Tên người thân"
+                       readonly="readonly"
                         v-model="data.hoTenBoMe"
                       />
                     </div>
@@ -246,16 +206,12 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập số điện thoại liên hệ"
+                       
                         v-model="data.sdtBoMe"
                         name="sdtBoMe"
-                        @change="$v.sdtBoMe.touch()"
+                        readonly="readonly"
                       />
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.sdtBoMe.$error"
-                        role="alert"
-                      >số ĐT liên hệ không được trống</div>
+                      
                     </div>
                   </div>
                 </div>
@@ -268,7 +224,7 @@
                       <textarea
                         type="text"
                         class="form-control"
-                        placeholder="Nhập Mô tả"
+                        readonly="readonly"
                         v-model="data.ghiChu"
                       />
                     </div>
@@ -281,30 +237,16 @@
                   <div class="form-group row">
                     <label class="col-sm-12 col-form-label">Ảnh đại diện</label>
                     <div class="col-sm-12">
-                      <input
-                        type="file"
-                        class="form-control"
-                        @change="onChangeFileUpload1()"
-                        ref="anhDaiDien"
-                        name="anhDaiDien"
-                      />
+                     <img :src="'http://localhost:3000/'+data.anhDaiDien" alt="" class="img-thumbnail" height="500px" width="100%">
                     </div>
-                    <div class="col-sm-12 text-center">
-                      <img src class="rounded" alt="..." />
-                    </div>
+                   
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group row">
                     <label class="col-sm-12 col-form-label">Ảnh CMND mặt trước</label>
                     <div class="col-sm-12">
-                      <input
-                        type="file"
-                        class="form-control"
-                        @change="onChangeFileUpload2()"
-                        ref="anhCMNDTruoc"
-                        name="anhCMNDTruoc"
-                      />
+                      <img :src="'http://localhost:3000/'+data.anhCMNDTruoc" alt="" class="img-thumbnail" height="500px" width="100%">
                     </div>
                   </div>
                 </div>
@@ -312,21 +254,14 @@
                   <div class="form-group row">
                     <label class="col-sm-12 col-form-label">Ảnh CMND mặt sau</label>
                     <div class="col-sm-12">
-                      <input
-                        type="file"
-                        class="form-control"
-                        @change="onChangeFileUpload3()"
-                        ref="anhCMNDSau"
-                        name="anhCMNDSau"
-                      />
+                     <img :src="'http://localhost:3000/'+data.anhCMNDSau" alt="" class="img-thumbnail" height="500px" width="100%">
                     </div>
                   </div>
                 </div>
               </div>
               <p class="card-description"></p>
               <div class="row">
-                <button class="btn btn-gradient-primary mr-2" @click.prevent="create">Thêm Mới</button>
-                <button class="btn btn-light">Cancel</button>
+                <button class="btn btn-light"  @click.prevent="$modal.hide('getKhachThue')" >Cancel</button>
               </div>
             </form>
           </div>
@@ -339,103 +274,25 @@
 <script>
 //const { required, numeric } = require("vuelidate/lib/validators");
 import axios from "axios";
-const { required, numeric } = require("vuelidate/lib/validators");
+
 export default {
-  created() {},
+  
   data: function() {
     return {
-      data: {
-        tenKhachThue: null,
-        sdtKhachThue: null,
-        ngaySinh: null,
-        soCMND: null,
-        ngayCapCMND: null,
-        noiCapCMND: null,
-        ngheNghiep: null,
-        gioiTinh: null,
-        hoKhau: null,
-        noiCongTac: null,
-        hoTenBoMe: null,
-        sdtBoMe: null,
-        ghiChu: null
-      },
-
-      anhDaiDien: "",
-      anhCMNDTruoc: "",
-      anhCMNDSau: ""
+        idKthue:null,
+      data: {},
     };
   },
-  validations: {
-    tenKhachThue: {
-      required
-    },
-    sdtKhachThue: {
-      required
-    },
-    ngaySinh: {
-      required
-    },
-    soCMND: {
-      required,
-      numeric
-    },
-    ngayCapCMND: {
-      required
-    },
-    noiCapCMND: {
-      required
-    },
-    ngheNghiep: {
-      required
-    },
-    gioiTinh: {
-      required
-    },
-    hoKhau: {
-      required
-    },
-
-    sdtBoMe: { required }
-  },
+ 
   methods: {
-    onChangeFileUpload1() {
-      this.anhDaiDien = this.$refs.anhDaiDien.files[0];
+   
+    getData(event) {
+      axios.get(`/khachthue/${event.params.id}/chitiet`).then(response => {
+        this.idKthue = event.params.id;
+        this.data = response.data.data;
+        
+      });
     },
-    onChangeFileUpload2() {
-      this.anhCMNDTruoc = this.$refs.anhCMNDTruoc.files[0];
-    },
-    onChangeFileUpload3() {
-      this.anhCMNDSau = this.$refs.anhCMNDSau.files[0];
-    },
-    create() {
-      let formData = new FormData();
-      formData.append("anhDaiDien", this.anhDaiDien);
-      formData.append("anhCMNDTruoc", this.anhCMNDTruoc);
-      formData.append("anhCMNDSau", this.anhCMNDSau);
-
-      for (var key in this.data) {
-        formData.append(key, this.data[key]);
-      }
-
-      if (!this.$v.$invalid) {
-      axios
-        .post("/khachthue/create", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
-        .then(() => {
-          alert("Thêm mới thành công");
-          this.$emit("createSuccess");
-          this.$modal.hide("createKhuTro");
-        })
-        .catch(() => {
-          alert("Thêm mới thất bại");
-        });
-      } else {
-        this.$v.$touch();
-      }
-    }
   }
 };
 </script>
