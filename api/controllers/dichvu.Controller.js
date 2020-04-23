@@ -55,6 +55,8 @@ module.exports = {
             trangThai: Boolean(req.body.trangThai),
         }
         DichVus.findByIdAndUpdate(id,dichvuUpdate).then(response=>{
+            
+            
             res.status(200).json({data:response})
         }).catch(err=>{
             res.status(400).json(err)

@@ -58,7 +58,7 @@
                           <button
                             title="Xoá"
                             class="btn btn-danger btn-icon"
-                            @click="remove(kt._id)"
+                            @click="remove(kthue._id)"
                           >
                             <i class="mdi mdi-delete-forever"></i>
                           </button>
@@ -85,7 +85,7 @@
 import Narbar from "../../components/Navbar.vue";
 import Sidebar from "../../components/Sidebar.vue";
 import ModalCreate from "./Modal_Create_KThue.vue";
-import ModalUpdate from "./Modal_Create_KThue.vue";
+import ModalUpdate from "./Modal_Update_KThue.vue";
 import ModalGet from "./Modal_Get_KThue";
 import axios from "axios";
 export default {
@@ -128,7 +128,7 @@ export default {
       const result = confirm("Bạn có muốn xoá dịch vụ");
       if (result) {
         axios
-          .delete(`/khutro/${id}/delete`)
+          .delete(`/khachthue/${id}/delete`)
           .then(() => {
             alert("Delete thành công");
             this.getNewData();

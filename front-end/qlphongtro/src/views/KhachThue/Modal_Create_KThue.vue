@@ -29,13 +29,13 @@
                         placeholder="Nhập Tên khách Thuê"
                         v-model="data.tenKhachThue"
                         name="tenKhachThue"
-                        @change="$v.tenKhachThue.touch()"
+                        @change="$v.data.tenKhachThue.$touch()"
                       />
                       <div
                         class="alert alert-danger"
-                        v-if="$v.tenKhachThue.$error"
+                        v-if="$v.data.tenKhachThue.$error"
                         role="alert"
-                      > tên không được trống!</div>
+                      >tên không được trống!</div>
                     </div>
                   </div>
                 </div>
@@ -49,12 +49,19 @@
                         name="sdtKhachThue"
                         placeholder="Nhập số điện thoại"
                         v-model="data.sdtKhachThue"
-                        @change="$v.sdtKhachThue.touch()"
+                        @change="$v.data.sdtKhachThue.$touch()"
                       />
-                      <div v-if="$v.sdtKhachThue.$error" class="alert alert-danger" role="alert">
-                        <p v-if="!$v.sdtKhachThue.required" style="margin:0px">không được bỏ trống</p>
+                      <div
+                        v-if="$v.data.sdtKhachThue.$error"
+                        class="alert alert-danger"
+                        role="alert"
+                      >
                         <p
-                          v-if="!$v.sdtKhachThue.numeric"
+                          v-if="!$v.data.sdtKhachThue.required"
+                          style="margin:0px"
+                        >không được bỏ trống</p>
+                        <p
+                          v-if="!$v.data.sdtKhachThue.numeric"
                           style="margin:0px"
                         >số điện thoại không đúng</p>
                       </div>
@@ -71,14 +78,14 @@
                         class="form-control"
                         v-model="data.gioiTinh"
                         name="gioiTinh"
-                        @change="$v.gioiTinh.touch()"
+                        @change="$v.data.gioiTinh.$touch()"
                       >
                         <option value="Nam">Nam</option>
                         <option value="Nữ">Nữ</option>
                       </select>
                       <div
                         class="alert alert-danger"
-                        v-if="$v.gioiTinh.$error"
+                        v-if="$v.data.gioiTinh.$error"
                         role="alert"
                       >Chọn giới tính!</div>
                     </div>
@@ -88,16 +95,19 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Ngày Sinh</label>
                     <div class="col-sm-9">
-                      <input
-                        class="form-control"
-                        placeholder="dd-mm-yyyy"
+                      <date-dropdown
+                       min="1940"
+                       max="2030"
+                       default="1995-01-14"
+                      name='ngaySinh'
                         v-model="data.ngaySinh"
-                        name="ngaySinh"
-                        @change="$v.ngaySinh.touch()"
-                      />
+                        @change="$v.data.ngaySinh.$touch()"
+                        months-names="Tháng 1, Tháng 2, Tháng 3, Tháng 4, Tháng 5, Tháng 6, Tháng 7, Tháng 8, Tháng 9, Tháng 10, Tháng 11, Tháng 12s"
+                      ></date-dropdown>
+                      <p>{{data.ngaySinh}}</p>
                       <div
                         class="alert alert-danger"
-                        v-if="$v.ngaySinh.$error"
+                        v-if="$v.data.ngaySinh.$error"
                         role="alert"
                       >ngày Sinh ko được trống</div>
                     </div>
@@ -115,12 +125,12 @@
                         class="form-control"
                         placeholder="Nhập CMND/CCCD"
                         name="soCMND"
-                        @change="$v.soCMND.touch()"
+                        @change="$v.data.soCMND.$touch()"
                         v-model="data.soCMND"
                       />
-                      <div v-if="$v.soCMND.$error" class="alert alert-danger" role="alert">
-                        <p v-if="!$v.soCMND.required" style="margin:0px">không được bỏ trống</p>
-                        <p v-if="!$v.soCMND.numeric" style="margin:0px">số CMND không đúng</p>
+                      <div v-if="$v.data.soCMND.$error" class="alert alert-danger" role="alert">
+                        <p v-if="!$v.data.soCMND.required" style="margin:0px">không được bỏ trống</p>
+                        <p v-if="!$v.data.soCMND.numeric" style="margin:0px">số CMND không đúng</p>
                       </div>
                     </div>
                   </div>
@@ -129,17 +139,17 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Ngày cấp CMND</label>
                     <div class="col-sm-9">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="dd-mm-yyyy"
-                        name="ngayCapCMND"
+                      <date-dropdown
+                       min="1940"
+                       max="2030"
+                      name='ngayCapCMND'
                         v-model="data.ngayCapCMND"
-                        @change="$v.ngayCapCMND.touch()"
-                      />
+                        @change="$v.data.ngayCapCMND.$touch()"
+                        months-names="Tháng 1, Tháng 2, Tháng 3, Tháng 4, Tháng 5, Tháng 6, Tháng 7, Tháng 8, Tháng 9, Tháng 10, Tháng 11, Tháng 12s"
+                      ></date-dropdown>
                       <div
                         class="alert alert-danger"
-                        v-if="$v.ngayCapCMND.$error"
+                        v-if="$v.data.ngayCapCMND.$error"
                         role="alert"
                       >Ngày cấp CMND ko được trống</div>
                     </div>
@@ -157,11 +167,11 @@
                         placeholder="Nhập Nơi cấp CMND"
                         v-model="data.noiCapCMND"
                         name="noiCapCMND"
-                        @change="$v.noiCapCMND.touch()"
+                        @change="$v.data.noiCapCMND.$touch()"
                       />
                       <div
                         class="alert alert-danger"
-                        v-if="$v.noiCapCMND.$error"
+                        v-if="$v.data.noiCapCMND.$error"
                         role="alert"
                       >Nơi cấp không được trống</div>
                     </div>
@@ -177,11 +187,11 @@
                         placeholder="Nhập hộ khẩu"
                         v-model="data.hoKhau"
                         name="hoKhau"
-                        @change="$v.hoKhau.touch()"
+                        @change="$v.data.hoKhau.$touch()"
                       />
                       <div
                         class="alert alert-danger"
-                        v-if="$v.hoKhau.$error"
+                        v-if="$v.data.hoKhau.$error"
                         role="alert"
                       >Hộ khẩu không được trống</div>
                     </div>
@@ -197,14 +207,14 @@
                         class="form-control"
                         v-model="data.ngheNghiep"
                         name="ngheNghiep"
-                        @change="$v.ngheNghiep.touch()"
+                        @change="$v.data.ngheNghiep.$touch()"
                       >
                         <option value="Sinh Viên">Sinh Viên</option>
                         <option value="Người Đi Làm">Người Đi Làm</option>
                       </select>
                       <div
                         class="alert alert-danger"
-                        v-if="$v.ngheNghiep.$error"
+                        v-if="$v.data.ngheNghiep.$error"
                         role="alert"
                       >không được trống</div>
                     </div>
@@ -249,11 +259,11 @@
                         placeholder="Nhập số điện thoại liên hệ"
                         v-model="data.sdtBoMe"
                         name="sdtBoMe"
-                        @change="$v.sdtBoMe.touch()"
+                        @change="$v.data.sdtBoMe.$touch()"
                       />
                       <div
                         class="alert alert-danger"
-                        v-if="$v.sdtBoMe.$error"
+                        v-if="$v.data.sdtBoMe.$error"
                         role="alert"
                       >số ĐT liên hệ không được trống</div>
                     </div>
@@ -333,12 +343,16 @@
         </div>
       </div>
     </div>
+   
   </modal>
 </template>
 
 <script>
 //const { required, numeric } = require("vuelidate/lib/validators");
 import axios from "axios";
+import DateDropdown from "vue-date-dropdown";
+
+
 const { required, numeric } = require("vuelidate/lib/validators");
 export default {
   created() {},
@@ -365,37 +379,42 @@ export default {
       anhCMNDSau: ""
     };
   },
+  components: {
+    DateDropdown
+  },
   validations: {
-    tenKhachThue: {
-      required
-    },
-    sdtKhachThue: {
-      required
-    },
-    ngaySinh: {
-      required
-    },
-    soCMND: {
-      required,
-      numeric
-    },
-    ngayCapCMND: {
-      required
-    },
-    noiCapCMND: {
-      required
-    },
-    ngheNghiep: {
-      required
-    },
-    gioiTinh: {
-      required
-    },
-    hoKhau: {
-      required
-    },
+    data: {
+      tenKhachThue: {
+        required
+      },
+      sdtKhachThue: {
+        required
+      },
+      ngaySinh: {
+        required
+      },
+      soCMND: {
+        required,
+        numeric
+      },
+      ngayCapCMND: {
+        required
+      },
+      noiCapCMND: {
+        required
+      },
+      ngheNghiep: {
+        required
+      },
+      gioiTinh: {
+        required
+      },
+      hoKhau: {
+        required
+      },
 
-    sdtBoMe: { required }
+      sdtBoMe: { required }
+    }
   },
   methods: {
     onChangeFileUpload1() {
@@ -413,25 +432,25 @@ export default {
       formData.append("anhCMNDTruoc", this.anhCMNDTruoc);
       formData.append("anhCMNDSau", this.anhCMNDSau);
 
-      for (var key in this.data) {
+      for (let key in this.data) {
         formData.append(key, this.data[key]);
       }
 
-      if (!this.$v.$invalid) {
-      axios
-        .post("/khachthue/create", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
-        .then(() => {
-          alert("Thêm mới thành công");
-          this.$emit("createSuccess");
-          this.$modal.hide("createKhuTro");
-        })
-        .catch(() => {
-          alert("Thêm mới thất bại");
-        });
+      if (!this.$v.data.$invalid) {
+        axios
+          .post("/khachthue/", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
+          .then(() => {
+            alert("Thêm mới thành công");
+            this.$emit("createSuccess");
+            this.$modal.hide("createKhachThue");
+          })
+          .catch(() => {
+            alert("Thêm mới thất bại");
+          });
       } else {
         this.$v.$touch();
       }
