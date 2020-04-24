@@ -413,7 +413,6 @@ export default {
       axios.get(`/khachthue/${event.params.id}/chitiet`).then(response => {
         this.idKthue = event.params.id;
         this.data = response.data.data;
-        console.log(response.data.data);
         
       });
     },

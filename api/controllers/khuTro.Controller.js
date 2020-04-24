@@ -75,10 +75,12 @@ module.exports = {
         })
     }),
     getKhuTro:((req,res)=>{
-        const khuTro_id = req.params.id;
-        const chuTro_id = req.chuTro.chuTro_id;
-        KhuTros.findById(khuTro_id,{chuTro_id:chuTro_id}).populate({path:'phongTro_ids'}).then(response=>{
-            res.status(200).json({data:response})
-        })
+        const chuTro_id = req.chuTro._id;
+       KhuTros.find({chuTro_id:chuTro_id},{tenKhuTro:1,soTang:1}).then(response=>{
+        res.status(200).json({data:response})
+       }).catch(err=>{
+           res.status(400).json(err)
+       })   
     }),
+    
 }

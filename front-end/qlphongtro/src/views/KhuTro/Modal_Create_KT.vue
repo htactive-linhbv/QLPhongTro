@@ -107,8 +107,8 @@
                 <label>Trang Thái</label>
 
                 <select class="form-control" v-model="trangThai" name="trangThai">
-                  <option value="true" selected="selected">bình thường</option>
-                  <option value="false">Tạm dừng</option>
+                  <option value="1" selected="selected">bình thường</option>
+                  <option value="0">Tạm dừng</option>
                 </select>
                  <div v-if="$v.trangThai.$error" class="alert alert-danger" role="alert"> không được để trống </div>
               </div>
@@ -181,7 +181,7 @@ export default {
           tenKhuTro:this.tenKhuTro,
           mota:this.mota,
           soTang:this.soTang,
-          trangThai:Boolean(this.trangThai),
+          trangThai:Boolean(Number(this.trangThai)),
           diaChi:{
             Tinh:this.Tinh,
             Quan:this.Quan,

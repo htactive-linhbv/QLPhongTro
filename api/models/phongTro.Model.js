@@ -15,7 +15,7 @@ const phongTroSchema = mongoose.Schema({
     tinhTrangPhong: { type: Boolean, default: false },
     khachThue_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'KhachThue' }],
     hoaDon_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'HoaDon' }],
-    images: [{ image: String }],
+   
 
 })
 

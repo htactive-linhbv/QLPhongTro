@@ -73,6 +73,11 @@ const routes = [
     path: '/khachthue',
     name: 'khachthue',
     component: () => import('../views/KhachThue/KhachThue.vue')
+  },
+  {
+    path: '/phongtro',
+    name: 'phongtro',
+    component: () => import('../views/PhongTro/PhongTro.vue')
   }
 ]
 

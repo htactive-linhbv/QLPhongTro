@@ -85,8 +85,8 @@
               <label>Trang Thái</label>
 
               <select class="form-control" v-model="trangThai">
-                <option value="true" selected="selected">bình thường</option>
-                <option value="false">Tạm dừng</option>
+                <option value="1" selected="selected">bình thường</option>
+                <option value="0">Tạm dừng</option>
               </select>
             </div>
             <div class="form-group">
@@ -149,7 +149,7 @@ export default {
         this.donGia = response.data.data.donGia;
         this.donVi = response.data.data.donVi;
         this.quyTacTinhTien = response.data.data.quyTacTinhTien;
-        this.trangThai = String(response.data.data.trangThai);
+        this.trangThai = String(Number(response.data.data.trangThai));
       });
     },
     update() {
@@ -160,7 +160,7 @@ export default {
         donGia: this.donGia,
         donVi: this.donVi,
         quyTacTinhTien: this.quyTacTinhTien,
-        trangThai: Boolean(this.trangThai)
+        trangThai: Boolean(Number(this.trangThai))
       }).then(()=>{
           this.$emit('updateSuccess');
           alert('update thành công');

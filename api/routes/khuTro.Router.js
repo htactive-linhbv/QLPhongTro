@@ -9,5 +9,6 @@ router.get('/:id/chitiet',checkLoginMiddeware,khuTroController.getId)
 router.post('/',checkLoginMiddeware,khuTroController.create)
 router.patch('/:id/update',checkLoginMiddeware,khuTroController.update)
 router.delete('/:id/delete',checkLoginMiddeware,khuTroController.delete)
-router.get('/getDataKhu',checkLoginMiddeware,khuTroController.getKhuTro)
+router.get('/getkhutro',checkLoginMiddeware,khuTroController.getKhuTro)
+
 module.exports = router;

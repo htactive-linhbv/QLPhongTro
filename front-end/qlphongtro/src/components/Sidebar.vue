@@ -42,11 +42,18 @@
       </router-link>
     </li>
     <li class="nav-item">
+      <router-link to="/phongtro" class="nav-link">
+        <span class="menu-title">Quản Lý Phòng Trọ</span>
+        <i class="mdi mdi-hospital-building menu-icon"></i>
+      </router-link>
+    </li>
+    <li class="nav-item">
       <router-link to="/khachthue" class="nav-link">
         <span class="menu-title">Quản Lý Khách Thuê</span>
         <i class="mdi mdi-hospital-building menu-icon"></i>
       </router-link>
     </li>
+    
    
   </ul>
 </nav>
