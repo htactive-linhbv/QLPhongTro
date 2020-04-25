@@ -24,22 +24,30 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Danh Sách</h4>
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Chọn Khu Trọ</label>
-                      <div class="col-sm-9">
-                        <select
-                          class="form-control"
-                          v-model="khuTro_id"
-                          name="khuTro"
-                          @change="getDataPhong()"
-                        >
-                          <option
-                            v-for="khu in khuTros"
-                            :key="khu._id"
-                            :value="khu._id"
-                          >{{khu.tenKhuTro}}</option>
-                        </select>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Chọn Khu Trọ</label>
+
+                        <div class="col-sm-9">
+                          <select
+                            class="form-control"
+                            v-model="khuTro_id"
+                            name="khuTro"
+                            @change="getDataPhong()"
+                          >
+                            <option
+                              v-for="khu in khuTros"
+                              :key="khu._id"
+                              :value="khu._id"
+                            >{{khu.tenKhuTro}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div v-if="loading" class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
                       </div>
                     </div>
                   </div>
@@ -68,7 +76,7 @@
                         </td>
                         <td>
                           <label
-                            v-if="!phong.khachThue_ids.length===0"
+                            v-if="!phong.khachThue_ids.length==0"
                             class="badge badge-success"
                           >Đã được thê</label>
                           <label v-else class="badge badge-danger">Trống</label>
@@ -84,10 +92,26 @@
                               aria-expanded="false"
                             >Tác vụ</button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                              <button class="dropdown-item" type="button">Xem chi tiết</button>
-                              <button class="dropdown-item" type="button">Thêm Khách thuê phòng</button>
-                              <button class="dropdown-item" type="button" @click.prevent="showModalUpdate(phong._id,khuTro_id)" >Chỉnh sửa</button>
-                              <button class="dropdown-item" type="button" @click.prevent="remove(phong._id,khuTro_id)" >Xoá</button>
+                              <button
+                                class="dropdown-item"
+                                type="button"
+                                @click.prevent="showModalGet(phong._id,khuTro_id,khuTros)"
+                              >Xem chi tiết</button>
+                              <button
+                                class="dropdown-item"
+                                type="button"
+                                @click.prevent="showModalAdd(phong._id)"
+                              >Thêm xoá Khách thuê phòng</button>
+                              <button
+                                class="dropdown-item"
+                                type="button"
+                                @click.prevent="showModalUpdate(phong._id,khuTro_id,khuTros)"
+                              >Chỉnh sửa</button>
+                              <button
+                                class="dropdown-item"
+                                type="button"
+                                @click.prevent="remove(phong._id,khuTro_id)"
+                              >Xoá</button>
                             </div>
                           </div>
                         </td>
@@ -103,6 +127,8 @@
     </div>
     <modal-create @createSuccess="getNewData"></modal-create>
     <modal-update @updateSuccess="getNewData"></modal-update>
+    <modal-get></modal-get>
+    <modal-add></modal-add>
   </div>
 </template>
 
@@ -112,7 +138,9 @@
 import Narbar from "../../components/Navbar.vue";
 import Sidebar from "../../components/Sidebar.vue";
 import ModalCreate from "./Modal_Create_PT.vue";
-import ModalUpdate from "./Modal_Update_PT";
+import ModalUpdate from "./Modal_Update_PT.vue";
+import ModalGet from "./Modal_Get_PT.vue";
+import ModalAdd from "./Modal_Add_PT.vue";
 import axios from "axios";
 export default {
   name: "KhuTro",
@@ -120,7 +148,8 @@ export default {
     return {
       phongTros: null,
       khuTros: null,
-      khuTro_id: ""
+      khuTro_id: "",
+      loading: false
     };
   },
   created() {
@@ -134,22 +163,37 @@ export default {
     appNarbar: Narbar,
     appSidebar: Sidebar,
     ModalCreate,
-    ModalUpdate
+    ModalUpdate,
+    ModalGet,
+    ModalAdd
   },
   methods: {
     showModalCreate() {
       this.$modal.show("createPhongTro");
     },
-    showModalUpdate(id,khuTro_id) {
-      this.$modal.show("updatePhongTro", { id: id,khuTro_id:khuTro_id });
+    showModalUpdate(id, khuTro_id, khuTros) {
+      this.$modal.show("updatePhongTro", {
+        id: id,
+        khuTro_id: khuTro_id,
+        khuTros: khuTros
+      });
+    },
+    showModalGet(id, khuTro_id, khuTros) {
+      this.$modal.show("getPhongTro", {
+        id: id,
+        khuTro_id: khuTro_id,
+        khuTros: khuTros
+      });
+    },
+    showModalAdd(id) {
+      this.$modal.show("addPhongTro", { id: id });
     },
     getNewData() {
       axios.get(`/phongtro/${this.khuTro_id}/dataphong`).then(response => {
         this.phongTros = response.data.data.phongTro_ids;
-        console.log(response.data.data.phongTro_ids);
       });
     },
-    remove(id,khuTro_id) {
+    remove(id, khuTro_id) {
       const result = confirm("Bạn có muốn xoá dịch vụ");
       if (result) {
         axios
@@ -164,9 +208,10 @@ export default {
       }
     },
     getDataPhong() {
+      this.loading=true;
       axios.get(`/phongtro/${this.khuTro_id}/dataphong`).then(response => {
         this.phongTros = response.data.data.phongTro_ids;
-        console.log(response.data.data.phongTro_ids);
+        this.loading=false;
       });
     }
   }

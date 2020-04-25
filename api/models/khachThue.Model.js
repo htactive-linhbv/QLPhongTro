@@ -19,5 +19,6 @@ const khachThueSchema = mongoose.Schema({
     anhDaiDien:{type: String},
     anhCMNDTruoc:{type: String},
     anhCMNDSau:{type: String},
+    trangThai:{type:Boolean , default:false}
 })
 module.exports = mongoose.model("KhachThue", khachThueSchema);

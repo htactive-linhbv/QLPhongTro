@@ -1,6 +1,7 @@
 const PhongTros = require('../models/phongTro.Model');
 const KhuTros = require('../models/khuTro.Model');
 const mongoose = require('mongoose');
+const KhachThues = require('../models/khachThue.Model')
 
 module.exports = {
     getAll: ((req, res) => {
@@ -14,9 +15,17 @@ module.exports = {
 
     getId: ((req, res) => {
         const id = req.params.id;
-        PhongTros.findById(id).then(response => {
+        PhongTros.findById(id).populate({path:'khachThue_ids'}).then(response => {
             res.status(200).json({ data: response })
         }).catch(err => {
+            res.status(400).json(err)
+        })
+    }),
+    getChiTietKhachThue:((req,res)=>{
+        const id = req.params.id;
+        PhongTros.findById(id).populate({path:'khachThue_ids'}).then(response=>{
+            res.status(200).json({data:response})
+        }).catch(err=>{
             res.status(400).json(err)
         })
     }),
@@ -84,6 +93,21 @@ module.exports = {
         }).catch(err=>{
             res.status(400).json(err)
         })
+    }),
+    addkhachthue:((req,res)=>{
+        const id = req.body.phongTro_id;
+        const khachThue_id = req.body.khachThue_id;
+        console.log(id);
+       PhongTros.findByIdAndUpdate(id,{$push:{khachThue_ids:khachThue_id}}).then(()=>{
+           KhachThues.findByIdAndUpdate(khachThue_id,{trangThai:true}).then(doc=>{
+               res.status(200).json({data:doc})
+           }).catch(err=>{
+               res.status(400).json(err)
+           })
+       }).catch(err=>{
+           res.status(401).json(err)
+       })
+       
     })
 
 }

@@ -15,7 +15,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Thêm Mới phòng trọ</h4>
+            <h4 class="card-title">Chỉnh sửa phòng trọ</h4>
             <form class="form-sample">
               <div class="row">
                 <div class="col-md-6">
@@ -148,14 +148,19 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Giá phòng</label>
                     <div class="col-sm-9">
-                      <input
-                        type="text"
+                      <div class="input-group">
+                        <input  type="text"
                         class="form-control"
                         placeholder="Nhập giá phòng"
                         v-model="giaPhong"
                         name="giaPhong"
                         @change="$v.giaPhong.$touch()"
-                      />
+                        @input="changeGiaPhong()">
+                        
+                        <div class="input-group-append">
+                          <span class="input-group-text">{{giaPhongF}}</span>
+                        </div>
+                      </div>
                       <div v-if="$v.giaPhong.$error" class="alert alert-danger" role="alert">
                         <p
                           v-if="!$v.giaPhong.required"
@@ -186,7 +191,9 @@
               <div class="row">
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
-                  <button class="btn btn-success" @click.prevent="update">Cập Nhập</button>
+                  <button class="btn btn-success" @click.prevent="update">Cập Nhập 
+                  
+                    <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
                   <button class="btn - btn-danger"  @click.prevent="$modal.hide('updatePhongTro')">Huỷ bỏ</button>
                 </div>
               </div>
@@ -204,9 +211,7 @@ import axios from "axios";
 
 export default {
   created() {
-    axios.get("/khutro/getkhutro/").then(response => {
-      this.khuTros = response.data.data;
-    });
+   
   },
   data: function() {
     return {
@@ -219,7 +224,9 @@ export default {
             gacLung: null,
             giaPhong: null,
             moTa: null,
-            idPhong:null
+            idPhong:null,
+            giaPhongF:null,
+            loading:false,
     };
   },
 
@@ -253,7 +260,8 @@ export default {
     //   this.khuTros = response.data.data;
     // });
       axios.get(`/phongtro/${event.params.id}/chitiet`).then(response => {
-            this.idPhong = event.params.id;
+           this.khuTros = event.params.khuTros;
+           this.idPhong = event.params.id;
             this.khuTro_id=event.params.khuTro_id;
             this.tenPhongTro=response.data.data.tenPhongTro;
             this.slNguoiToiDa= response.data.data.slNguoiToiDa;
@@ -262,11 +270,14 @@ export default {
             this.gacLung= String(Number(response.data.data.gacLung));
             this.giaPhong= response.data.data.giaPhong;
             this.moTa= response.data.data.moTa;
-        
+            this.giaPhongF=new Intl.NumberFormat('it-IT',{style:'currency', currency:'VND'}).format(this.giaPhong)  
+
       });
     },
     update() {
+
       if (!this.$v.$invalid) {
+        this.loading=true;
         axios
           .patch(`/phongtro/${this.idPhong}/update`, {
             khuTro_id: this.khuTro_id,
@@ -279,8 +290,10 @@ export default {
             moTa: this.moTa
           })
           .then(() => {
+            this.loading=false;
             alert("Cập nhập thành công");
             this.$emit("updateSuccess");
+            
             this.$modal.hide("updatePhongTro");
           })
           .catch(() => {
@@ -290,6 +303,9 @@ export default {
         this.$v.$touch();
       }
     },
+    changeGiaPhong(){
+      this.giaPhongF = new Intl.NumberFormat('it-IT',{style:'currency', currency:'VND'}).format(this.giaPhong)  
+    }
   }
 };
 </script>

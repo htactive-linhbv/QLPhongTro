@@ -1,5 +1,12 @@
 <template>
-  <modal name="getPhongTro" :scrollable="true" height="auto" width="80%">
+  <modal
+    name="getPhongTro"
+    :scrollable="true"
+    height="auto"
+    width="80%"
+    @before-open="getData"
+    :delay="500"
+  >
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
       <div class="col-md-1">
@@ -22,23 +29,13 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Khu trọ</label>
                     <div class="col-sm-9">
-                      <select
-                        class="form-control"
-                        v-model="khuTro_id"
-                        name="khuTro_id"
-                        @change="$v.khuTro_id.$touch()"
-                      >
+                      <select class="form-control" v-model="khuTro_id" name="khuTro_id" readonly>
                         <option
                           v-for="khu in khuTros"
                           :key="khu._id"
                           :value="khu._id"
                         >{{khu.tenKhuTro}}</option>
                       </select>
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.khuTro_id.$error"
-                        role="alert"
-                      >khu trọ không được trống</div>
                     </div>
                   </div>
                 </div>
@@ -53,13 +50,8 @@
                         placeholder="Nhập Tên phòng trọ"
                         v-model="tenPhongTro"
                         name="tenPhongTro"
-                        @change="$v.tenPhongTro.$touch()"
+                        readonly
                       />
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.tenPhongTro.$error"
-                        role="alert"
-                      >Tên phòng không được trống</div>
                     </div>
                   </div>
                 </div>
@@ -67,7 +59,12 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Tầng</label>
                     <div class="col-sm-9">
-                      <input class="form-control" placeholder="Nhập Tên Tầng" v-model="Tang" />
+                      <input
+                        class="form-control"
+                        placeholder="Nhập Tên Tầng"
+                        v-model="Tang"
+                        readonly
+                      />
                     </div>
                   </div>
                 </div>
@@ -80,21 +77,10 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập số người ở tối đa"
                         v-model="slNguoiToiDa"
                         name="slNguoiToiDa"
-                        @change="$v.slNguoiToiDa.$touch()"
+                        readonly
                       />
-                      <div v-if="$v.slNguoiToiDa.$error" class="alert alert-danger" role="alert">
-                        <p
-                          v-if="!$v.slNguoiToiDa.required"
-                          style="margin:0px"
-                        >SỐ người tối đa không được bỏ trống</p>
-                        <p
-                          v-if="!$v.slNguoiToiDa.numeric"
-                          style="margin:0px"
-                        >số người tối đa không đúng</p>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -105,18 +91,10 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nhập Diện tích phòng"
                         v-model="dienTich"
                         name="dienTich"
-                        @change="$v.dienTich.$touch()"
+                        readonly
                       />
-                      <div v-if="$v.dienTich.$error" class="alert alert-danger" role="alert">
-                        <p
-                          v-if="!$v.dienTich.required"
-                          style="margin:0px"
-                        >diện tích không được bỏ trống</p>
-                        <p v-if="!$v.dienTich.numeric" style="margin:0px">diện tích không đúng</p>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -127,20 +105,14 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Gác lững</label>
                     <div class="col-sm-9">
-                      <select
+                      <input
+                        v-if="gacLung==1"
                         class="form-control"
-                        v-model="gacLung"
+                        value="Có"
                         name="gacLung"
-                        @change="$v.gacLung.$touch()"
-                      >
-                        <option value="1">Có</option>
-                        <option value="0">Không</option>
-                      </select>
-                      <div
-                        class="alert alert-danger"
-                        v-if="$v.gacLung.$error"
-                        role="alert"
-                      >Không được bỏ trống!</div>
+                        readonly
+                      />
+                      <input v-else class="form-control" value="Không" name="gacLung" readonly />
                     </div>
                   </div>
                 </div>
@@ -148,20 +120,34 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Giá phòng</label>
                     <div class="col-sm-9">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Nhập giá phòng"
-                        v-model="giaPhong"
-                        name="giaPhong"
-                        @change="$v.giaPhong.$touch()"
-                      />
-                      <div v-if="$v.giaPhong.$error" class="alert alert-danger" role="alert">
-                        <p
-                          v-if="!$v.giaPhong.required"
-                          style="margin:0px"
-                        >Giá phòng không được bỏ trống</p>
-                        <p v-if="!$v.giaPhong.numeric" style="margin:0px">giá phòng không đúng</p>
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Nhập giá phòng"
+                          v-model="giaPhongF"
+                          name="giaPhong"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Khách thuê</label>
+                    <div class="col-sm-9">
+                      <div class="list-group">
+                        <a
+                          class="list-group-item list-group-item-action list-group-item-danger"
+                          v-if="khachThue_ids.length===0"
+                        >Phòng trống</a>
+                        <a
+                          class="list-group-item list-group-item-action list-group-item-danger"
+                          v-else v-for="khach in khachThue_ids" :key="khach._id"
+                        >{{khach.tenKhachThue}}</a>
                       </div>
                     </div>
                   </div>
@@ -178,6 +164,7 @@
                         rows="4"
                         placeholder="Mô tả"
                         v-model="moTa"
+                        readonly
                       />
                     </div>
                   </div>
@@ -186,8 +173,7 @@
               <div class="row">
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
-                  <button class="btn btn-success" @click.prevent="create">Thêm Mới</button>
-                  <button class="btn - btn-danger"  @click.prevent="$modal.hide('createPhongTro')">Huỷ bỏ</button>
+                  <button class="btn - btn-danger" @click.prevent="$modal.hide('getPhongTro')">Đóng</button>
                 </div>
               </div>
             </form>
@@ -199,81 +185,48 @@
 </template>
 
 <script>
-const { required, numeric } = require("vuelidate/lib/validators");
 import axios from "axios";
 
 export default {
-  created() {
-    axios.get("/khutro/getkhutro/").then(response => {
-      this.khuTros = response.data.data;
-    });
-  },
+  
   data: function() {
     return {
-         khuTros:null,
-            khuTro_id:null,
-            tenPhongTro:null,
-            slNguoiToiDa: null,
-            dienTich: null,
-            Tang: null,
-            gacLung: null,
-            giaPhong: null,
-            moTa: null
-     
+      khuTros: null,
+      khuTro_id: null,
+      tenPhongTro: null,
+      slNguoiToiDa: null,
+      dienTich: null,
+      Tang: null,
+      gacLung: null,
+      giaPhong: null,
+      moTa: null,
+      idPhong: null,
+      giaPhongF: null,
+      khachThue_ids: []
     };
   },
-
-  validations: {
-      khuTro_id: {
-          required
-      },
-      tenPhongTro: {
-          required
-      },
-      slNguoiToiDa: {
-          required,
-          numeric
-      },
-      dienTich: {
-          required,
-          numeric
-      },
-      
-      gacLung: {
-          required
-      },
-      giaPhong: {
-          required,
-          numeric
-      },
-  },
   methods: {
-    create() {
-      if (!this.$v.$invalid) {
-        axios
-          .post("/phongtro/", {
-            khuTro_id: this.khuTro_id,
-            tenPhongTro: this.tenPhongTro,
-            slNguoiToiDa: this.slNguoiToiDa,
-            dienTich: this.dienTich,
-            Tang: this.Tang,
-            gacLung: Boolean(Number(this.gacLung)),
-            giaPhong: this.giaPhong,
-            moTa: this.moTa
-          })
-          .then(() => {
-              console.log( this.gacLung);
-              
-            alert("Thêm mới thành công");
-            this.$emit("createSuccess");
-            this.$modal.hide("createPhongTro");
-          })
-          .catch(() => {
-            alert("Thêm mới thất bại");
-          });
-      } else {
-        this.$v.$touch();
-      }
+    getData(event) {
+      //   axios.get("/khutro/getkhutro/").then(response => {
+      //   this.khuTros = response.data.data;
+      // });
+      axios.get(`/phongtro/${event.params.id}/chitiet`).then(response => {
+        this.khuTros = event.params.khuTros;
+        this.idPhong = event.params.id;
+        this.khuTro_id = event.params.khuTro_id;
+        this.tenPhongTro = response.data.data.tenPhongTro;
+        this.slNguoiToiDa = response.data.data.slNguoiToiDa;
+        this.dienTich = response.data.data.dienTich;
+        this.Tang = response.data.data.Tang;
+        this.gacLung = String(Number(response.data.data.gacLung));
+        this.giaPhong = response.data.data.giaPhong;
+        this.moTa = response.data.data.moTa;
+        this.khachThue_ids = response.data.data.khachThue_ids;
+        this.giaPhongF = new Intl.NumberFormat("it-IT", {
+          style: "currency",
+          currency: "VND"
+        }).format(this.giaPhong);
+      });
     }
   }
 };

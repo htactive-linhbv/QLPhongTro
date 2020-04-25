@@ -125,7 +125,7 @@ export default {
       });
     },
     remove(id) {
-      const result = confirm("Bạn có muốn xoá dịch vụ");
+      const result = confirm("Bạn có muốn xoá khách thuê");
       if (result) {
         axios
           .delete(`/khachthue/${id}/delete`)

@@ -34,13 +34,12 @@
                   v-model="donGia"
                   placeholder="Đơn giá"
                   @change="$v.donGia.$touch()"
+                  @input="changeDonGia()"
                 />
                 <div class="input-group-prepend">
-                  <span class="input-group-text">000</span>
+                  <span class="input-group-text">{{donGiaF}}</span>
                 </div>
-                <div class="input-group-prepend">
-                  <span class="input-group-text">VND</span>
-                </div>
+                
               </div>
               <div v-if="$v.donGia.$error" class="alert alert-danger" role="alert">
                 <p v-if="!$v.donGia.required" style="margin:0px">-Giá ko được để trống trống</p>
@@ -122,7 +121,8 @@ export default {
       donGia: null,
       donVi: null,
       quyTacTinhTien: null,
-      trangThai: null
+      trangThai: null,
+      donGiaF:null
     };
   },
   validations: {
@@ -150,6 +150,7 @@ export default {
         this.donVi = response.data.data.donVi;
         this.quyTacTinhTien = response.data.data.quyTacTinhTien;
         this.trangThai = String(Number(response.data.data.trangThai));
+        this.donGiaF = new Intl.NumberFormat('it-IT',{style:'currency', currency:'VND'}).format(this.donGia); 
       });
     },
     update() {
@@ -170,8 +171,9 @@ export default {
       }else{
          this.$v.$touch();
       }
-
-     
+    },
+    changeDonGia(){
+      this.donGiaF = new Intl.NumberFormat('it-IT',{style:'currency', currency:'VND'}).format(this.donGia)  
     }
   }
 };

@@ -15,7 +15,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Thêm mới khách thuê</h4>
+            <h4 class="card-title">Thông tin chi tiết</h4>
             <form class="form-sample">
               <p class="card-description">Thông tin Cá Nhân</p>
               <div class="row">

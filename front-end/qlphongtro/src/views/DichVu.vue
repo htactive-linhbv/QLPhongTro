@@ -40,7 +40,7 @@
                     <tbody>
                       <tr v-for="dv in dichVus" :key="dv._id">
                         <td>{{dv.tenDV}}</td>
-                        <td>{{dv.donGia}}</td>
+                        <td>{{changDonGia(dv.donGia)}}</td>
                         <td>{{dv.donVi}}</td>
                         <td>{{dv.quyTacTinhTien}}</td>
                         <td>{{dv.moTaDV}}</td>
@@ -91,13 +91,18 @@ export default {
   name: "DichVu",
   data() {
     return {
-      dichVus: null
+      dichVus: null,
+      donGiaF:null,
     };
   },
   mounted() {
     axios.get('/dichvu/').then(response => {
       this.dichVus = response.data.data;
+      
     });
+  },
+  computed:{
+   
   },
   components: {
     //HelloWorld,
@@ -108,6 +113,9 @@ export default {
 
   },
   methods: {
+    changDonGia(donGia){
+      return new Intl.NumberFormat('it-IT',{style:'currency', currency:'VND'}).format(donGia)
+    },
     showModalCreate() {
       this.$modal.show("createDichVu");
     },

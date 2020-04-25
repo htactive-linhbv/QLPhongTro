@@ -7,15 +7,7 @@ const getMonth = require('date-fns/getMonth');
 const fs = require('fs')
 
 module.exports = {
-    postImage: ((req, res) => {
-
-        //console.log(req.files);
-        console.log(req.files.anhDaiDien);
-        console.log(req.body.tenKhachThue);
-
-        res.status(200).json({ mesage: "messsage" })
-
-    }),
+   
 
     get: ((req, res) => {
         const chuTro_id = req.chuTro._id;
@@ -33,10 +25,18 @@ module.exports = {
 
             response._doc.ngaySinh = ngaySinhF;
             response._doc.ngayCapCMND = ngayCapCMNDF;
-            console.log(response);
+           
 
             res.status(200).json({ data: response });
         }).catch(err => {
+            res.status(400).json(err)
+        })
+    }),
+    getKhachThue:((req,res)=>{
+        chuTro_id = req.chuTro._id;
+        KhachThues.find({chuTro_id:chuTro_id,trangThai:false},{tenKhachThue:1}).then(response=>{
+            res.status(200).json({data:response})
+        }).catch(err=>{
             res.status(400).json(err)
         })
     }),
@@ -70,7 +70,7 @@ module.exports = {
     }),
     update: ((req, res) => {
         const id = req.params.id;
-        console.log(id);
+        
         const khachThue = {
             tenKhachThue: req.body.tenKhachThue,
             sdtKhachThue: req.body.sdtKhachThue,

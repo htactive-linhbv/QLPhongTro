@@ -148,14 +148,21 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Giá phòng</label>
                     <div class="col-sm-9">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Nhập giá phòng"
-                        v-model="giaPhong"
-                        name="giaPhong"
-                        @change="$v.giaPhong.$touch()"
-                      />
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Nhập giá phòng"
+                          v-model="giaPhong"
+                          name="giaPhong"
+                          @change="$v.giaPhong.$touch()"
+                          @input="changeGiaPhong()"
+                        />
+
+                        <div class="input-group-append">
+                          <span class="input-group-text">{{giaPhongF}}</span>
+                        </div>
+                      </div>
                       <div v-if="$v.giaPhong.$error" class="alert alert-danger" role="alert">
                         <p
                           v-if="!$v.giaPhong.required"
@@ -186,8 +193,14 @@
               <div class="row">
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
-                  <button class="btn btn-success" @click.prevent="create">Thêm Mới</button>
-                  <button class="btn - btn-danger"  @click.prevent="$modal.hide('createPhongTro')">Huỷ bỏ</button>
+                  <button class="btn btn-success" @click.prevent="create">
+                    Thêm Mới
+                    <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </button>
+                  <button
+                    class="btn - btn-danger"
+                    @click.prevent="$modal.hide('createPhongTro')"
+                  >Huỷ bỏ</button>
                 </div>
               </div>
             </form>
@@ -210,46 +223,48 @@ export default {
   },
   data: function() {
     return {
-         khuTros:null,
-            khuTro_id:null,
-            tenPhongTro:null,
-            slNguoiToiDa: null,
-            dienTich: null,
-            Tang: null,
-            gacLung: null,
-            giaPhong: null,
-            moTa: null
-     
+      khuTros: null,
+      khuTro_id: null,
+      tenPhongTro: null,
+      slNguoiToiDa: null,
+      dienTich: null,
+      Tang: null,
+      gacLung: null,
+      giaPhong: null,
+      moTa: null,
+      giaPhongF: null,
+      loading: false
     };
   },
 
   validations: {
-      khuTro_id: {
-          required
-      },
-      tenPhongTro: {
-          required
-      },
-      slNguoiToiDa: {
-          required,
-          numeric
-      },
-      dienTich: {
-          required,
-          numeric
-      },
-      
-      gacLung: {
-          required
-      },
-      giaPhong: {
-          required,
-          numeric
-      },
+    khuTro_id: {
+      required
+    },
+    tenPhongTro: {
+      required
+    },
+    slNguoiToiDa: {
+      required,
+      numeric
+    },
+    dienTich: {
+      required,
+      numeric
+    },
+
+    gacLung: {
+      required
+    },
+    giaPhong: {
+      required,
+      numeric
+    }
   },
   methods: {
     create() {
       if (!this.$v.$invalid) {
+        this.loading = true;
         axios
           .post("/phongtro/", {
             khuTro_id: this.khuTro_id,
@@ -262,6 +277,7 @@ export default {
             moTa: this.moTa
           })
           .then(() => {
+            this.loading = false;
             alert("Thêm mới thành công");
             this.$emit("createSuccess");
             this.$modal.hide("createPhongTro");
@@ -272,6 +288,12 @@ export default {
       } else {
         this.$v.$touch();
       }
+    },
+    changeGiaPhong() {
+      this.giaPhongF = new Intl.NumberFormat("it-IT", {
+        style: "currency",
+        currency: "VND"
+      }).format(this.giaPhong);
     }
   }
 };

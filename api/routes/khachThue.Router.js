@@ -14,7 +14,7 @@ router.post('/', checkLogin, upload.fields([
 ]), khachThueController.create);
 router.patch('/:id/update', checkLogin, khachThueController.update)
 router.delete('/:id/delete', checkLogin, khachThueController.delete)
-
+router.get('/getkhachthue',checkLogin,khachThueController.getKhachThue);
 
 
 module.exports = router;
