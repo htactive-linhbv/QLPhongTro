@@ -335,7 +335,7 @@
               </div>
               <p class="card-description"></p>
               <div class="row">
-                <button class="btn btn-gradient-primary mr-2" @click.prevent="create">Thêm Mới</button>
+                <button class="btn btn-gradient-primary mr-2" @click.prevent="create">Thêm Mới <span v-if="onLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
                 <button class="btn btn-light">Cancel</button>
               </div>
             </form>
@@ -359,6 +359,7 @@ export default {
   data: function() {
     return {
       data: {
+        onLoading:false,
         tenKhachThue: null,
         sdtKhachThue: null,
         ngaySinh: null,
@@ -427,6 +428,7 @@ export default {
       this.anhCMNDSau = this.$refs.anhCMNDSau.files[0];
     },
     create() {
+      this.onLoading=true;
       let formData = new FormData();
       formData.append("anhDaiDien", this.anhDaiDien);
       formData.append("anhCMNDTruoc", this.anhCMNDTruoc);
@@ -444,6 +446,7 @@ export default {
             }
           })
           .then(() => {
+            this.onLoading=false
             alert("Thêm mới thành công");
             this.$emit("createSuccess");
             this.$modal.hide("createKhachThue");
@@ -452,6 +455,7 @@ export default {
             alert("Thêm mới thất bại");
           });
       } else {
+        this.onLoading=false;
         this.$v.$touch();
       }
     }

@@ -113,5 +113,13 @@ module.exports = {
             }
         })
 
+    }),
+    getKhachThueAll:((req,res)=>{
+        const chuTro_id = req.chuTro._id;
+        KhachThues.find({chuTro_id:chuTro_id},{tenKhachThue:1}).then(response=>{
+            res.status(200).json({data:response})
+        }).catch(err=>{
+            res.status(400).json(err)
+        })
     })
 }

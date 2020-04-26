@@ -68,7 +68,7 @@
                       <tr v-for="phong in phongTros" :key="phong._id">
                         <td>{{phong.tenPhongTro }}</td>
                         <td>{{phong.Tang}}</td>
-                        <td>{{phong.slNguoiToiDa}}</td>
+                        <td>{{phong.slNguoiToiDa}} Người/Phòng</td>
                         <td>{{phong.dienTich}}/m2</td>
                         <td>
                           <label v-if="phong.gacLung" class="badge badge-success">Có gác</label>
@@ -153,8 +153,10 @@ export default {
     };
   },
   created() {
-    axios.get("/khutro/getkhutro/").then(response => {
+    this.loading=true;
+    axios.get("/khutro/getphongtro/").then(response => {
       this.khuTros = response.data.data;
+      this.loading=false;
     });
   },
 
@@ -189,9 +191,13 @@ export default {
       this.$modal.show("addPhongTro", { id: id });
     },
     getNewData() {
-      axios.get(`/phongtro/${this.khuTro_id}/dataphong`).then(response => {
-        this.phongTros = response.data.data.phongTro_ids;
-      });
+     this.loading=true;
+      axios.get("/khutro/getphongtro/").then(response => {
+      this.khuTros = response.data.data;
+       this.phongTros = this.khuTros.find(item => item._id == this.khuTro_id).phongTro_ids;
+      this.loading=false;
+
+    });
     },
     remove(id, khuTro_id) {
       const result = confirm("Bạn có muốn xoá dịch vụ");
@@ -209,10 +215,8 @@ export default {
     },
     getDataPhong() {
       this.loading=true;
-      axios.get(`/phongtro/${this.khuTro_id}/dataphong`).then(response => {
-        this.phongTros = response.data.data.phongTro_ids;
-        this.loading=false;
-      });
+       this.phongTros = this.khuTros.find(item => item._id == this.khuTro_id).phongTro_ids;
+     this.loading= false;
     }
   }
 };

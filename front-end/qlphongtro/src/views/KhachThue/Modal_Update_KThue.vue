@@ -336,7 +336,7 @@
               </div>-->
               <p class="card-description"></p>
               <div class="row">
-                <button class="btn btn-gradient-primary mr-2" @click.prevent="update()">Update</button>
+                <button class="btn btn-gradient-primary mr-2" @click.prevent="update()">Update <span v-if="onLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
                 <button class="btn btn-light" @click.prevent="$modal.hide('updateKhachThue')">Cancel</button>
               </div>
             </form>
@@ -358,8 +358,10 @@ export default {
       data: {
         ngaySinh:"",
         ngayCapCMND:""
+        
       },
-      idKthue: null
+      idKthue: null,
+      onLoading:false
       //   anhDaiDien: "",
       //   anhCMNDTruoc: "",
       //   anhCMNDSau: ""
@@ -420,14 +422,17 @@ export default {
     update() {
      
       if (!this.$v.$invalid) {
+        this.onLoading=true;
         axios
           .patch(`khachthue/${this.idKthue}/update`, this.data)
           .then(() => {
+            this.onLoading=false;
             alert("cập nhâp thành công");
             this.$emit("updateSuccess");
             this.$modal.hide("updateKhachThue");
           })
           .catch(() => {
+            this.onLoading=false
             alert("cập nhập thất bại");
           });
       } else {

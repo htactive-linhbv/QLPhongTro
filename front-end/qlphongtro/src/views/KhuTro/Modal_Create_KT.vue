@@ -124,7 +124,7 @@
                 />
               </div>
 
-              <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">Thêm Mới</button>
+              <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">Thêm Mới <span v-if="onLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
               <button @click.prevent="$modal.hide('createKhuTro')" class="btn btn-light">Đóng</button>
             </form>
           </div>
@@ -146,7 +146,8 @@ export default {
       Duong: null,
       mota: null,
       soTang: null,
-      trangThai: null
+      trangThai: null,
+      onLoading : false
     };
   },
   validations: {
@@ -176,6 +177,7 @@ export default {
   methods: {
     create() {
         if (!this.$v.$invalid) {
+          this.onLoading=true;
             axios
         .post("/khutro/", {
           tenKhuTro:this.tenKhuTro,
@@ -189,11 +191,13 @@ export default {
           }
         })
         .then(() => {
+          this.onLoading=false
           alert("Thêm mới thành công");
           this.$emit("createSuccess");
           this.$modal.hide("createKhuTro");
         })
         .catch(() => {
+          this.onLoading=false
           alert("Thêm mới thất bại");
         })
         }else{

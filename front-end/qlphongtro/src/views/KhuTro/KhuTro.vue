@@ -18,7 +18,11 @@
               <button class="btn btn-success" @click="showModalCreate()">Thêm mới</button>
             </nav>
           </div>
-
+           <div v-if="onLoading" class="d-flex justify-content-center text-primary">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
@@ -86,12 +90,15 @@ export default {
   name: "KhuTro",
   data() {
     return {
+      onLoading:false,
       khuTros: null
     };
   },
   mounted() {
+    this.onLoading=true;
     axios.get('/khutro/').then(response => {
       this.khuTros = response.data.data;
+      this.onLoading=false
     });
   },
  
@@ -111,17 +118,22 @@ export default {
         this.$modal.show('updateKhuTro',{id:id})
     },
     getNewData(){
+      this.onLoading=true
          axios.get('/khutro/').then(response => {
       this.khuTros = response.data.data;
+      this.onLoading = false
     });
     },
     remove(id){
          const result = confirm("Bạn có muốn xoá dịch vụ");
       if (result) {
+        this.onLoading=true;
         axios.delete(`/khutro/${id}/delete`).then(() => {
           alert("Delete thành công");
+          this.onLoading=false;
          this.getNewData();
         }).catch(()=>{
+          this.onLoading=false;
             alert('delete thất bại')
         });
       }

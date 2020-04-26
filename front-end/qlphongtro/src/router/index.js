@@ -79,6 +79,11 @@ const routes = [
     path: '/phongtro',
     name: 'phongtro',
     component: () => import('../views/PhongTro/PhongTro.vue')
+  },
+  {
+    path: '/hopdong',
+    name: 'hopdong',
+    component: () => import('../views/HopDong/HopDong.vue')
   }
 ]
 

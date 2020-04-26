@@ -124,7 +124,7 @@
                 />
               </div>
 
-              <button @click.prevent="update()" class="btn btn-gradient-primary mr-2">Cập nhập</button>
+              <button @click.prevent="update()" class="btn btn-gradient-primary mr-2">Cập nhập <span v-if="onLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
               <button @click.prevent="$modal.hide('updateKhuTro')" class="btn btn-light">Đóng</button>
             </form>
           </div>
@@ -147,7 +147,8 @@ export default {
       Duong: null,
       mota: null,
       soTang: null,
-      trangThai: null
+      trangThai: null,
+      onLoading:false
     };
   },
   validations: {
@@ -176,6 +177,7 @@ export default {
   },
   methods: {
      getData(event) {
+       
       axios.get(`/khutro/${event.params.id}/chitiet`).then(response => {
         this.idKV = event.params.id;
       this.tenKhuTro= response.data.data.tenKhuTro;
@@ -188,8 +190,9 @@ export default {
       });
     },
     update() {
+      
         if (!this.$v.$invalid) {
-            
+            this.onLoading=true;
         axios.patch(`/khutro/${this.idKV}/update`, {
           tenKhuTro:this.tenKhuTro,
           mota:this.mota,
@@ -202,11 +205,13 @@ export default {
           }
         })
         .then(() => {
+          this.onLoading=false
           alert("update thành công");
           this.$emit("updateSuccess");
           this.$modal.hide("updateKhuTro");
         })
         .catch(() => {
+          this.onLoading=false
           alert("update thất bại");
         })
         }else{

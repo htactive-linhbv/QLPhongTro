@@ -82,5 +82,13 @@ module.exports = {
            res.status(400).json(err)
        })   
     }),
+    getPhongTro:((req,res)=>{
+        const chuTro_id = req.chuTro._id;
+        KhuTros.find({chuTro_id:chuTro_id},{tenKhuTro:1,phongTro_ids:1}).populate({path:'phongTro_ids'}).then(response=>{
+            res.status(200).json({data:response})
+        }).catch(err=>{
+            res.status(400).json(err)
+        })
+    })
     
 }

@@ -108,6 +108,19 @@ module.exports = {
            res.status(401).json(err)
        })
        
+    }),
+    deleteKhachThue:((req,res)=>{
+        const id = req.body.phongTro_id;
+        const khachThue_id = req.body.khachThue_id;
+        PhongTros.findByIdAndUpdate(id,{$pull:{khachThue_ids:khachThue_id}}).then(()=>{
+            KhachThues.findByIdAndUpdate(khachThue_id,{trangThai:false}).then((doc)=>{
+                res.status(200).json({data:doc})
+            }).catch(err=>{
+                res.status(400).json(err)
+            })
+        }).catch(err=>{
+            res.status(401).json(err)
+        })
     })
 
 }

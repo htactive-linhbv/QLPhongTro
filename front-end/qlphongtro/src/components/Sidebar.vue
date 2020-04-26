@@ -54,7 +54,12 @@
       </router-link>
     </li>
     
-   
+   <li class="nav-item">
+      <router-link to="/hopdong" class="nav-link">
+        <span class="menu-title">Quản Lý Hợp Đồng</span>
+        <i class="mdi mdi-account-search menu-icon"></i>
+      </router-link>
+    </li>
   </ul>
 </nav>
 </template>

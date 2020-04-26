@@ -31,6 +31,7 @@
             <form class="form-sample">
               <div class="row">
                 <div class="col-md-6">
+                   <div v-if="isMesage" class="alert alert-danger" role="alert">{{isMesage}}</div>
                   <ul class="list-group">
                     <li
                       class="list-group-item d-flex justify-content-between align-items-center list-group-item-info"
@@ -45,7 +46,10 @@
                       :key="khach._id"
                     >
                       {{khach.tenKhachThue}}
-                      <button class="btn btn-danger">xoá</button>
+                      <button
+                        class="btn btn-danger"
+                        @click.prevent="remove(khach._id)"
+                      >xoá</button>
                     </li>
                   </ul>
                 </div>
@@ -62,6 +66,7 @@
                       Không có khách thuê trống
                       <button
                         class="btn btn-success btn-icon-text"
+                        @click.prevent="showModalCreate"
                       >Thêm mới khách thuê</button>
                     </li>
 
@@ -79,16 +84,25 @@
                 </div>
               </div>
             </form>
+            <div class="row" style="margin-top: 30px">
+              <div class="col-md-6"></div>
+              <div class="col-md-4">
+                <button class="btn btn-success" @click.prevent="$modal.hide('addPhongTro')">Xong</button>
+              </div>
+            </div>
           </div>
+           
         </div>
+       
       </div>
+      <modal-them-khach @createSuccess="getNewData2"></modal-them-khach>
     </div>
   </modal>
 </template>
 
 <script>
 import axios from "axios";
-
+import ModalThemKhach from '../KhachThue/Modal_Create_KThue'
 export default {
   mounted() {
     this.onLoading = true;
@@ -104,10 +118,14 @@ export default {
       khachThues: [],
       mesage: "",
       onLoading: true,
-      phongTro_id: ""
+      phongTro_id: "",
+      isMesage:'',
     };
   },
   methods: {
+     showModalCreate() {
+      this.$modal.show("createKhachThue");
+    },
     getData(event) {
       this.onLoading = true;
       axios
@@ -144,7 +162,7 @@ export default {
         this.onLoading = false;
         setTimeout(() => {
           this.mesage = "";
-        }, 3000);
+        }, 5000);
       } else {
         axios
           .post("/phongtro/addkhachthue", {
@@ -161,10 +179,32 @@ export default {
             this.onLoading = false;
             setTimeout(() => {
               this.mesage = "";
-            }, 3000);
+            }, 5000);
           });
       }
+    },
+    remove(id) {
+      this.onLoading = true;
+      axios
+        .post("/phongtro/deletekhachthue", {
+          phongTro_id: this.phongTros._id,
+          khachThue_id: id
+        })
+        .then(() => {
+          this.getNewData();
+          this.getNewData2();
+          this.onLoading = false;
+        }).catch(()=>{
+           this.isMesage = "xoá thất bại";
+            this.onLoading = false;
+            setTimeout(() => {
+              this.isMesage = "";
+            }, 5000);
+        });
     }
+  },
+  components:{
+    ModalThemKhach
   }
 };
 </script>
