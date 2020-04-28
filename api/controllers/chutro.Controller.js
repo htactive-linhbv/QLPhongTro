@@ -3,7 +3,10 @@ const ChuTro = require('../models/chuTro.Model');
 const bcrypt = require('bcrypt');
 //const { validationResult } = require('express-validator');
 const { add } = require('date-fns');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const getYear = require('date-fns/getYear');
+const getDate = require('date-fns/getDate');
+const getMonth = require('date-fns/getMonth');
 
 module.exports = {
     get: (req, res) => {
@@ -128,6 +131,15 @@ module.exports = {
             })
         }).catch(err => {
             res.status(401).json(err)
+        })
+    }),
+    getchuTro:((req,res)=>{
+        const id = req.chuTro._id;
+        ChuTro.findById(id).then(response=>{
+            response._doc.ngayHetHan = `${getDate(response.ngayHetHan)}/${getMonth(response.ngayHetHan)+1}/${getYear(response.ngayHetHan)}`; 
+            res.status(200).json({data:response})
+        }).catch(err=>{
+            res.status(400).json(err)
         })
     })
 

@@ -55,35 +55,47 @@ const routes = [
       {
         path: 'danhsach',
         name: 'thieBiDanhSach',
-        component: () => import('../views/ThietBi/danhsach.vue')
+        component: () => import('../views/ThietBi/danhsach.vue'),
       },
     ],
     component: ThietBi,
+    beforeEnter: checkLogin,
   },
   {
     path: '/dichvu',
     name: 'dichvu',
-    component: () => import('../views/DichVu.vue')
+    component: () => import('../views/DichVu.vue'),
+    beforeEnter: checkLogin,
   },
   {
     path: '/khutro',
     name: 'khutro',
-    component: () => import('../views/KhuTro/KhuTro.vue')
+    component: () => import('../views/KhuTro/KhuTro.vue'),
+    beforeEnter: checkLogin,
   },
   {
     path: '/khachthue',
     name: 'khachthue',
-    component: () => import('../views/KhachThue/KhachThue.vue')
+    component: () => import('../views/KhachThue/KhachThue.vue'),
+    beforeEnter: checkLogin,
   },
   {
     path: '/phongtro',
     name: 'phongtro',
-    component: () => import('../views/PhongTro/PhongTro.vue')
+    component: () => import('../views/PhongTro/PhongTro.vue'),
+    beforeEnter: checkLogin,
   },
   {
     path: '/hopdong',
     name: 'hopdong',
-    component: () => import('../views/HopDong/HopDong.vue')
+    component: () => import('../views/HopDong/HopDong.vue'),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: '/taikhoan',
+    name: 'taikhoan',
+    component: () => import('../views/ChuTro/ChuTro.vue'),
+    beforeEnter: checkLogin,
   }
 ]
 

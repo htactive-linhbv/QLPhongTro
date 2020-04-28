@@ -1,5 +1,5 @@
 <template>
-  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <nav class="sidebar sidebar-offcanvas active" id="sidebar">
   <ul class="nav">
     <li class="nav-item nav-profile">
       <a href="#" class="nav-link">
@@ -16,7 +16,7 @@
       </a>
     </li>
     
-    <li class="nav-item">
+    <li   class="nav-item"  >
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <span class="menu-title">Quản lý thiết bị</span>
         <i class="menu-arrow"></i>
@@ -24,42 +24,42 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <router-link class="nav-link" to="/thietbi/danhsach">Danh Sách</router-link></li>
-          <li class="nav-item"> <router-link class="nav-link" to="/thietbi/create">Thêm Mới</router-link></li>
+          <router-link  tag="li" class="nav-item"  active-class="active" to="/thietbi/danhsach"> <a class="nav-link" >Danh Sách</a></router-link>
+          <router-link  tag="li" class="nav-item"  active-class="active" to="/thietbi/create"> <a class="nav-link" >Thêm Mới</a></router-link>
         </ul>
       </div>
     </li>
-    <li class="nav-item">
-      <router-link to="/dichvu" class="nav-link" >
+    <router-link  tag="li" class="nav-item"  to="/dichvu" active-class="active">
+      <a  class="nav-link" >
         <span class="menu-title">Quản Lý dịch vụ</span>
         <i class="mdi mdi-wifi menu-icon"></i>
-      </router-link>
-    </li>
-    <li class="nav-item">
-      <router-link to="/khutro" class="nav-link">
+      </a>
+    </router-link>
+   <router-link  tag="li" class="nav-item"  to="/khutro" active-class="active">
+      <a  class="nav-link">
         <span class="menu-title">Quản Lý Khu trọ</span>
         <i class="mdi mdi-hospital-building menu-icon"></i>
-      </router-link>
-    </li>
-    <li class="nav-item">
-      <router-link to="/phongtro" class="nav-link">
+      </a>
+   </router-link>
+    <router-link  tag="li" class="nav-item"  to="/phongtro" active-class="active">
+      <a  class="nav-link ">
         <span class="menu-title">Quản Lý Phòng Trọ</span>
         <i class="mdi mdi-home-map-marker menu-icon"></i>
-      </router-link>
-    </li>
-    <li class="nav-item">
-      <router-link to="/khachthue" class="nav-link">
+      </a>
+    </router-link>
+   <router-link  tag="li" class="nav-item"  to="/khachthue" active-class="active">
+      <a class="nav-link">
         <span class="menu-title">Quản Lý Khách Thuê</span>
         <i class="mdi mdi-account-search menu-icon"></i>
-      </router-link>
-    </li>
+      </a>
+   </router-link>
     
-   <li class="nav-item">
-      <router-link to="/hopdong" class="nav-link">
+   <router-link class="nav-item" tag="li" to="/hopdong" active-class="active">
+      <a  class="nav-link" >
         <span class="menu-title">Quản Lý Hợp Đồng</span>
-        <i class="mdi mdi-account-search menu-icon"></i>
-      </router-link>
-    </li>
+        <i class="mdi mdi-file-document-box menu-icon"></i>
+      </a>
+   </router-link>
   </ul>
 </nav>
 </template>

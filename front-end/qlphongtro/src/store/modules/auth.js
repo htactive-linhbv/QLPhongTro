@@ -37,8 +37,6 @@ export default ({
 
     actions: {
         LOGIN({ commit }, data) {
-            console.log(data);
-
             return new Promise((resolve, reject) => {
                 axios.post('login/chutro', {
                     email: data.email,

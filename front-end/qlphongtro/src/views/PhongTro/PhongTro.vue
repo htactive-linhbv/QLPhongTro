@@ -200,7 +200,7 @@ export default {
     });
     },
     remove(id, khuTro_id) {
-      const result = confirm("Bạn có muốn xoá dịch vụ");
+      const result = confirm("Bạn có muốn xoá Phòng trọ");
       if (result) {
         axios
           .delete(`/phongtro/${id}/${khuTro_id}/delete`)

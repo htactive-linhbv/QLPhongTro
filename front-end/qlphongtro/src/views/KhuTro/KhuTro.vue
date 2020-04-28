@@ -125,7 +125,7 @@ export default {
     });
     },
     remove(id){
-         const result = confirm("Bạn có muốn xoá dịch vụ");
+         const result = confirm("Bạn có muốn xoá Khu Trọ");
       if (result) {
         this.onLoading=true;
         axios.delete(`/khutro/${id}/delete`).then(() => {

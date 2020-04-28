@@ -1,5 +1,5 @@
 <template>
-  <modal name="createKhuTro" :scrollable="true" height="auto" width="60%">
+  <modal name="createKhuTro" :scrollable="true" height="auto" width="60%" >
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
       <div class="col-md-1">

@@ -20,8 +20,8 @@ module.exports = {
     getId: ((req, res) => {
         const id = req.params.id;
         KhachThues.findById(id).then(response => {
-            const ngaySinhF = `${getDate(response.ngaySinh)}.${getMonth(response.ngaySinh)}.${getYear(response.ngaySinh)}`;
-            const ngayCapCMNDF = `${getDate(response.ngayCapCMND)}.${getMonth(response.ngayCapCMND)}.${getYear(response.ngayCapCMND)}`;
+            const ngaySinhF = `${getDate(response.ngaySinh)}.${getMonth(response.ngaySinh)+1}.${getYear(response.ngaySinh)}`;
+            const ngayCapCMNDF = `${getDate(response.ngayCapCMND)}.${getMonth(response.ngayCapCMND)+1}.${getYear(response.ngayCapCMND)}`;
 
             response._doc.ngaySinh = ngaySinhF;
             response._doc.ngayCapCMND = ngayCapCMNDF;

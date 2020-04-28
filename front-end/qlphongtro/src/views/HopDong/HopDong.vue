@@ -33,7 +33,7 @@
                     <thead>
                       <tr>
                         <th>Tên Hợp đồng</th>
-                        <th>Loại hợp đồng</th>
+                        <th>Khu Trọ</th>
                         <th>Tên Khách thuê</th>
                         <th>Phòng</th>
                         <th>Thời hạn</th>
@@ -44,33 +44,44 @@
                     <tbody>
                       <tr v-for="hd in hopDongs" :key="hd._id">
                         <td>{{hd.tenHopDong}}</td>
-                        <td>{{hd.loaiHopDong}}</td>
+                        <td>{{hd.khuTro_id.tenKhuTro}}</td>
                         <td>{{hd.khachThue_id.tenKhachThue}}</td>
                         <td>{{hd.phongTro_id.tenPhongTro}}</td>
                         <td>{{hd.thoiHan}}</td>
-                        <td>{{hd.tienCoc}}</td>
                         <td>
-                          <button
-                            class="btn btn-primary btn-icon"
-                            title="xem chi tiết"
-                            @click="showModalGet(kthue._id)"
-                          >
-                            <i class="mdi mdi-mdi mdi-clipboard-text"></i>
-                          </button>
-                          <button
-                            class="btn btn-info btn-icon"
-                            title="Cập Nhập"
-                            @click="showModalUpdate(kthue._id)"
-                          >
-                            <i class="mdi mdi-lead-pencil"></i>
-                          </button>
-                          <button
-                            title="Xoá"
-                            class="btn btn-danger btn-icon"
-                            @click="remove(kthue._id)"
-                          >
-                            <i class="mdi mdi-delete-forever"></i>
-                          </button>
+                          {{new Intl.NumberFormat("it-IT", {
+                          style: "currency",
+                          currency: "VND"
+                          }).format(hd.tienCoc)}}
+                        </td>
+                        <td>
+                          <div class="dropdown">
+                            <button
+                              class="btn btn-info btn-fw dropdown-toggle"
+                              type="button"
+                              id="dropdownMenu2"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >Tác vụ</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                              <button
+                                class="dropdown-item"
+                                type="button"
+                                @click.prevent="showModalGet(hd._id)"
+                              >Xem chi tiết</button>
+                              <button
+                                class="dropdown-item"
+                                type="button"
+                                @click.prevent="showModalUpdate(hd._id,)"
+                              >Chỉnh sửa</button>
+                              <button
+                                class="dropdown-item"
+                                type="button"
+                                @click.prevent="remove(hd._id)"
+                              >Xoá</button>
+                            </div>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -84,6 +95,7 @@
     </div>
     <modal-create @createSuccess="getNewData"></modal-create>
     <modal-update @updateSuccess="getNewData"></modal-update>
+    <modal-get></modal-get>
   </div>
 </template>
 
@@ -94,6 +106,7 @@ import Narbar from "../../components/Navbar.vue";
 import Sidebar from "../../components/Sidebar.vue";
 import ModalCreate from "./Modal_Create_HD";
 import ModalUpdate from "./Modal_Update_HD";
+import ModalGet from './Modal_Get_HD';
 
 import axios from "axios";
 export default {
@@ -106,7 +119,7 @@ export default {
   },
   mounted() {
     this.onLoading = true;
-    axios.get("/hopDongs/").then(response => {
+    axios.get("/hopdong/").then(response => {
       this.hopDongs = response.data.data;
       this.onLoading = false;
     });
@@ -118,27 +131,36 @@ export default {
     appSidebar: Sidebar,
     ModalCreate,
     ModalUpdate,
-    
+    ModalGet
   },
   methods: {
     showModalCreate() {
       this.$modal.show("createHopDong");
     },
     showModalUpdate(id) {
-      this.$modal.show("updateHopDong", { id: id });
+       const hopDong = this.hopDongs.find(
+        item => item._id == id
+      );
+      this.$modal.show("updateHopDong", { hopDong: hopDong });
+    },
+     showModalGet(id) {
+      const hopDong = this.hopDongs.find(
+        item => item._id == id
+      );
+     this.$modal.show("getHopDong", { hopDong: hopDong });
     },
     getNewData() {
       this.onLoading = true;
-      axios.get("/khachthue/").then(response => {
-        this.khachThues = response.data.data;
+      axios.get("/hopdong/").then(response => {
+      this.hopDongs = response.data.data;
         this.onLoading = false;
       });
     },
     remove(id) {
-      const result = confirm("Bạn có muốn xoá khách thuê");
+      const result = confirm("Bạn có muốn xoá Hợp Đồng");
       if (result) {
         axios
-          .delete(`/khachthue/${id}/delete`)
+          .delete(`/hopdong/${id}/delete`)
           .then(() => {
             alert("Delete thành công");
             this.getNewData();

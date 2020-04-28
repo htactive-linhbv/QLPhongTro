@@ -32,7 +32,7 @@ const thietBiRouter = require('./routes/thietbi.Router');
 const khuTroRouter = require('./routes/khuTro.Router')
 const khachThueRouter = require('./routes/khachThue.Router')
 const phongTroRouter = require('./routes/phongtro.Router')
-
+const hopDongRouter = require('./routes/hopDong.Router')
 //middlerware
 
 //use middleware morgan
@@ -52,6 +52,7 @@ app.use('/api/thietbi',thietBiRouter)
 app.use('/api/khutro',khuTroRouter);
 app.use('/api/khachthue',khachThueRouter);
 app.use('/api/phongtro',phongTroRouter);
+app.use('/api/hopdong',hopDongRouter)
 //use err
 app.use((req,res,next) => {
     const error = new Error('not found');
