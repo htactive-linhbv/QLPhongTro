@@ -96,6 +96,12 @@ const routes = [
     name: 'taikhoan',
     component: () => import('../views/ChuTro/ChuTro.vue'),
     beforeEnter: checkLogin,
+  },
+  {
+    path: '/hoadon',
+    name: '/hoadon',
+    component: () => import('../views/HoaDon/HoaDon.vue'),
+    beforeEnter: checkLogin,
   }
 ]
 

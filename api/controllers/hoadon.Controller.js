@@ -3,7 +3,21 @@ const mongoose = require('mongoose')
 
 module.exports = {
     get: ((req, res) => {
-        HoaDons.find().then(response => {
+        const chuTro_id = req.chuTro._id;
+        HoaDons.find({chuTro_id:chuTro_id}).populate([
+            {
+                path:'khuTro_id',
+                select:'tenKhuTro'
+            },
+            {
+                path:'KhachThue_id',
+                select:'KhachThue_id'
+            },
+            {
+                path:'phongTro_id',
+                select:'tenPhongTro'
+            }
+        ]).then(response => {
             res.status(200).json({ data: response })
         }).catch(err => {
             res.status(400).json(err)

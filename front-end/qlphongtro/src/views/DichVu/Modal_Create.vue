@@ -75,15 +75,13 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputUsername1">Quy tắc tính tiền</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputUsername1"
-                  placeholder="Quy tắc tính tiền"
-                  name="quyTacTinhTien"
-                  v-model="quyTacTinhTien"
-                  @change="$v.quyTacTinhTien.$touch()"
-                />
+              
+                <select class="form-control" v-model="quyTacTinhTien" name="quyTacTinhTien"  @change="$v.quyTacTinhTien.$touch()">
+                        <option value="1">Theo Số Người/Phòng</option>
+                         <option value="2">Tính theo phòng</option>
+                         <option value="3">Tính theo số tiêu thụ</option>
+                         <option value="4">Dịch vụ Miễn phí</option>
+                      </select>
                 <div
                   v-if="$v.quyTacTinhTien.$error"
                   class="alert alert-danger"

@@ -60,6 +60,12 @@
         <i class="mdi mdi-file-document-box menu-icon"></i>
       </a>
    </router-link>
+   <router-link class="nav-item" tag="li" to="/hoadon" active-class="active">
+      <a  class="nav-link" >
+        <span class="menu-title">Quản Lý Hoá đơn</span>
+        <i class="mdi mdi-file-document-box menu-icon"></i>
+      </a>
+   </router-link>
   </ul>
 </nav>
 </template>

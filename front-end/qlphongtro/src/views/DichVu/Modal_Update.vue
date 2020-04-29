@@ -65,15 +65,12 @@
             </div>
             <div class="form-group">
               <label for="exampleInputUsername1">Quy tắc tính tiền</label>
-              <input
-                type="text"
-                class="form-control"
-                id="exampleInputUsername1"
-                placeholder="Quy tắc tính tiền"
-                name="quyTacTinhTien"
-                v-model="quyTacTinhTien"
-                @change="$v.quyTacTinhTien.$touch()"
-              />
+              <select class="form-control" v-model="quyTacTinhTien" name="quyTacTinhTien"  @change="$v.quyTacTinhTien.$touch()">
+                        <option value="1">Theo Số Người/Phòng</option>
+                         <option value="2">Tính theo phòng</option>
+                         <option value="3">Tính theo số tiêu thụ</option>
+                         <option value="4">Dịch vụ Miễn phí</option>
+                      </select>
               <div
                 v-if="$v.quyTacTinhTien.$error"
                 class="alert alert-danger"
@@ -100,7 +97,7 @@
               />
             </div>
 
-            <button @click.prevent="update()" class="btn btn-gradient-primary mr-2">Cập Nhập</button>
+            <button @click.prevent="update()" class="btn btn-gradient-primary mr-2">Cập Nhập<span v-if="onLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
             <button @click.prevent="$modal.hide('updateDichVu')" class="btn btn-light">Đóng</button>
           </form>
         </div>
@@ -115,6 +112,7 @@ const { required, numeric } = require("vuelidate/lib/validators");
 export default {
   data() {
     return {
+      onLoading:false,
       idDV: null,
       tenDV: null,
       moTaDV: null,
@@ -154,6 +152,7 @@ export default {
       });
     },
     update() {
+      this.onLoading=true;
       if (!this.$v.$invalid) {
          axios.patch(`/dichvu/${this.idDV}/update`, {
         tenDV: this.tenDV,
@@ -166,10 +165,12 @@ export default {
           this.$emit('updateSuccess');
           alert('update thành công');
           this.$modal.hide('updateDichVu');
+          this.onLoading=false;
           
       });
       }else{
          this.$v.$touch();
+         this.onLoading=false;
       }
     },
     changeDonGia(){
