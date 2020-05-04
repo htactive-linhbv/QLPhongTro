@@ -22,14 +22,19 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Khu trọ</label>
                     <div class="col-sm-9">
-                      <select class="form-control" v-model="khuTro_id" @change="getDataPhong" name="khuTro_id">
+                      <select
+                        class="form-control"
+                        v-model="khuTro_id"
+                        @change="getDataPhong"
+                        name="khuTro_id"
+                      >
                         <option
                           v-for="khu in khuTros"
                           :key="khu._id"
                           :value="khu._id"
                         >{{khu.tenKhuTro}}</option>
                       </select>
-                       <div
+                      <div
                         class="alert alert-danger"
                         v-if="$v.khuTro_id.$error"
                         role="alert"
@@ -41,14 +46,19 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Phòng trọ</label>
                     <div class="col-sm-9">
-                      <select class="form-control" v-model="phongTro_id" name="phongTro_id" @change="$v.phongTro_id.$touch()">
+                      <select
+                        class="form-control"
+                        v-model="phongTro_id"
+                        name="phongTro_id"
+                        @change="setTienPhong"
+                      >
                         <option
                           v-for="phong in phongTros"
                           :key="phong._id"
                           :value="phong._id"
                         >{{phong.tenPhongTro}}</option>
                       </select>
-                       <div
+                      <div
                         class="alert alert-danger"
                         v-if="$v.phongTro_id.$error"
                         role="alert"
@@ -69,7 +79,7 @@
                           :value="khach._id"
                         >{{khach.tenKhachThue}}</option>
                       </select>
-                       <div
+                      <div
                         class="alert alert-danger"
                         v-if="$v.khachThue_id.$error"
                         role="alert"
@@ -81,122 +91,116 @@
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Tên Hoá đơn</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" v-model="loaiHopDong" />
+                      <input type="text" class="form-control" v-model="tenHoaDon"  name="tenHoaDon" @change="$v.tenHoaDon.$touch()"/>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tên Hợp Đồng</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" v-model="tenHopDong"  name="tenHopDong" placeholder="Nhập tên hợp đồng" @change="$v.tenHopDong.$touch()"/>
                      <div
                         class="alert alert-danger"
-                        v-if="$v.tenHopDong.$error"
+                        v-if="$v.tenHoaDon.$error"
                         role="alert"
-                      >Tên Hợp đồng không được trống</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Thời hạn</label>
-                    <div class="col-sm-9">
-                      <select class="form-control" v-model="thoiHan" name="thoiHan">
-                        <option value="1 tháng">1 Tháng</option>
-                        <option value="3 tháng">3 Tháng</option>
-                        <option value="6 tháng">6 Tháng</option>
-                        <option value="12 tháng">12 Tháng</option>
-                        <option value="Khác">khác</option>
-                      </select>
-                       <div
-                        class="alert alert-danger"
-                        v-if="$v.thoiHan.$error"
-                        role="alert"
-                      >Thời hạn không được trống</div>
-                    </div>
+                      >Tên hoá đơn không được trống</div>
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <p class="card-description">Dịch vụ</p>
+              <div class="row border border-primary">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Ngày Bắt đầu</label>
+                    <label class="col-sm-3 col-form-label">Danh sách dv</label>
                     <div class="col-sm-9">
-                      <date-dropdown
-                        min="2019"
-                        max="2030"
-                        name="ngayBatDau"
-                        v-model="ngayBatDau"
-                        months-names="Tháng 1, Tháng 2, Tháng 3, Tháng 4, Tháng 5, Tháng 6, Tháng 7, Tháng 8, Tháng 9, Tháng 10, Tháng 11, Tháng 12s"
-                      ></date-dropdown>
-                       
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Ngày Kết thúc</label>
-                    <div class="col-sm-9">
-                      <date-dropdown
-                        min="2019"
-                        max="2030"
-                        name="ngayBatDau"
-                        v-model="ngayKetThuc"
-                        months-names="Tháng 1, Tháng 2, Tháng 3, Tháng 4, Tháng 5, Tháng 6, Tháng 7, Tháng 8, Tháng 9, Tháng 10, Tháng 11, Tháng 12s"
-                      ></date-dropdown>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tiền cọc</label>
-                    <div class="col-sm-9">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Nhập tiền cọc"
-                          v-model="tienCoc"
-                          name="tienCoc"
-                          @change="$v.tienCoc.$touch()"
-                          @input="changeTienCoc()"
-                        />
-                        <div class="input-group-append">
-                          <span class="input-group-text">{{tienCocF}}</span>
+                      <div class="form-group">
+                        <div class="form-check" v-for="dv in dichVus" :key="dv._id">
+                          <label class="form-check-label">
+                            <input
+                              type="checkbox"
+                              @change.prevent="getInput"
+                              class="form-check-input"
+                              :value="dv._id"
+                              v-model="dichVu_ids"
+                            />
+                            {{dv.tenDV}}
+                          </label>
                         </div>
                       </div>
-                      <div v-if="$v.tienCoc.$error" class="alert alert-danger" role="alert">
-                        <p
-                          v-if="!$v.tienCoc.required"
-                          style="margin:0px"
-                        >Tiền cọc không được bỏ trống</p>
-                        <p
-                          v-if="!$v.tienCoc.numeric"
-                          style="margin:0px"
-                        >Tiền cọc không đúng</p>
-                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group row" v-for="dvu in dichvusInput" :key="dvu._id">
+                    <label class="col-sm-3 col-form-label">{{dvu.tenDV}}</label>
+                    <div class="col-sm-4" v-if="dvu.quyTacTinhTien==='3'">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="dvu.soCu"
+                        @input="getInput"
+                        placeholder="Nhập số củ"
+                      />
+                      <div
+                        v-if="dvu.soCu===''"
+                        class="alert alert-danger"
+                        role="alert"
+                      >không được trống</div>
+                    </div>
+                    <div class="col-sm-5" v-if="dvu.quyTacTinhTien==='3'">
+                      <input
+                        type="text"
+                        class="form-control"
+                        v-model="dvu.soMoi"
+                        name="soMoi"
+                        @input="getInput"
+                        placeholder="Nhập số mới"
+                      />
+                      <div
+                        class="alert alert-danger"
+                        v-if="dvu.soMoi===''"
+                        role="alert"
+                      >không được trống</div>
+                      <div
+                        class="alert alert-danger"
+                        v-if="dvu.soCu > dvu.soMoi "
+                        role="alert"
+                      >Số mới Phải lớn hơn số củ</div>
+                    </div>
+
+                    <div class="col-sm-9" v-if="dvu.quyTacTinhTien==='1'">
+                      <p class="text-primary">Có {{phong.khachThue_ids.length}} Khách thuê</p>
+                    </div>
+                    <div class="col-sm-9" v-if="dvu.quyTacTinhTien==='4'">
+                      <p class="text-primary">Dịch Vụ Miễn phí</p>
+                    </div>
+                    <div class="col-sm-9" v-if="dvu.quyTacTinhTien==='2'">
+                      <p class="text-primary">Dịch Vụ Theo Phòng</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">nội dung</label>
+                    <div class="col-sm-9">
+                      <textarea type="text" v-model="noiDung" class="form-control" rows="7" />
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Nội dung</label>
-                    <div class="col-sm-9">
-                      <textarea rows="8" type="text" class="form-control" v-model="noiDung" placeholder="Nhập nội dung hợp đồng" @change="$v.noiDung.$touch()"/>
-                   <div
-                        class="alert alert-danger"
-                        v-if="$v.noiDung.$error"
-                        role="alert"
-                      >Nội dung không được trống</div>
+                    <label class="col-sm-3 col-form-label">Tổng tiền</label>
+
+                    <div class="col-sm-9 input-group-prepend">
+                      <span class="input-group-text">
+                        {{ new Intl.NumberFormat("it-IT", {
+                        style: "currency",
+                        currency: "VND"
+                        }).format(tongTien)}}
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-md-7"></div>
                 <div class="col-md-4">
@@ -205,7 +209,10 @@
                       <button class="btn btn-success" @click.prevent="create()">Thêm mới</button>
                     </div>
                     <div class="col-md-6">
-                      <button class="btn btn-light" @click.prevent="$modal.hide('createHoaDon')">Cancel</button>
+                      <button
+                        class="btn btn-light"
+                        @click.prevent="$modal.hide('createHoaDon')"
+                      >Cancel</button>
                     </div>
                   </div>
                 </div>
@@ -219,102 +226,181 @@
 </template>
 
 <script>
-const { required, numeric } = require("vuelidate/lib/validators");
-import DateDropdown from "vue-date-dropdown";
+const { required } = require("vuelidate/lib/validators");
+//import DateDropdown from "vue-date-dropdown";
 import axios from "axios";
 export default {
   created() {
     this.getDataKhu();
     this.getKhachThue();
+    this.getDichVu();
   },
   data: function() {
     return {
-      tienCocF: "",
       phongTros: "",
       khuTros: "",
       khachThues: "",
-      tenHopDong: null,
-      loaiHopDong: null,
+      dichVu_ids: [],
+      tenHoaDon: null,
+      dichVus: null,
       khachThue_id: null,
       khuTro_id: null,
       phongTro_id: null,
-      thoiHan: null,
-      ngayBatDau: null,
-      ngayKetThuc: null,
-      tienCoc: null,
+      dichvusInput: [],
+      dichvusCreate: null,
+
+      phong: null,
+      tienPhong: null,
+      tongTien: null,
       noiDung: null,
       onLoading: false
     };
   },
   components: {
-    DateDropdown
+    //  DateDropdown
   },
   validations: {
-     tenHopDong: {
-       required
-     },    
-      khachThue_id: {
-        required
-      },
-      khuTro_id: {
-        required
-      },
-      phongTro_id: {
-        required
-      },
-      thoiHan: {
-        required
-      },
-    
-      tienCoc: {
-        required,
-        numeric
-      },
-      noiDung: {
-        required
-      },
+    khachThue_id: {
+      required
+    },
+    khuTro_id: {
+      required
+    },
+    phongTro_id: {
+      required
+    },
+    tenHoaDon: {
+      required
+    },
+    dichVu_ids: {
+      required
+    }
   },
   methods: {
     create() {
       if (!this.$v.$invalid) {
-      this.onLoading = true;
-      axios
-        .post("/hopdong/", {
-          tenHopDong: this.tenHopDong,
-          loaiHopDong: this.loaiHopDong,
-          khachThue_id: this.khachThue_id,
-          khuTro_id: this.khuTro_id,
-          phongTro_id: this.phongTro_id,
-          thoiHan: this.thoiHan,
-          ngayBatDau: this.ngayBatDau,
-          ngayKetThuc: this.ngayKetThuc,
-          tienCoc: Number(this.tienCoc),
-          noiDung: this.noiDung
-        })
-        .then(() => {
-          this.onLoading = false;
-          alert("Thêm mới thành công");
-          this.$emit("createSuccess");
-          this.$modal.hide("createHoaDon");
-        })
-        .catch(() => {
-          this.onLoading = false;
-          alert("Thêm mới thất bại");
-        });
+        this.onLoading = true;
+        axios
+          .post("/hoadon/", {
+            tenHoaDon: this.tenHoaDon,
+           
+            noiDung: this.noiDung,
+            khuTro_id:this.khuTro_id,
+            khachThue_id:this.khachThue_id,
+            phongTro_id:this.phongTro_id,
+            dichVu_ids:this.dichVu_ids,
+            tongTien:Number(this.tongTien),
+           
+          })
+          .then(() => {
+            this.onLoading = false;
+            alert("Thêm mới thành công");
+            this.$emit("createSuccess");
+            this.$modal.hide("createHoaDon");
+          })
+          .catch(() => {
+            this.onLoading = false;
+            alert("Thêm mới thất bại");
+          });
       } else {
         this.$v.$touch();
       }
+    },
+    setTienPhong() {
+     
+      this.$v.phongTro_id.$touch();
+      let phong = this.phongTros.find(item => item._id == this.phongTro_id);
+      this.phong = phong;
+      this.noiDung = ` Tiền phòng: ${new Intl.NumberFormat("it-IT", {
+        style: "currency",
+        currency: "VND"
+      }).format(phong.giaPhong)} `;
+      this.tienPhong = phong.giaPhong;
+      this.setTongTien();
+    },
+    getInput() {
+      
+      this.dichvusInput = [];
+      this.dichVu_ids.forEach(id => {
+        let dv = this.dichVus.find(item => item._id == id);
+        this.dichvusInput.push(dv);
+      });
+      this.noiDung = ` Tiền phòng: ${new Intl.NumberFormat("it-IT", {
+        style: "currency",
+        currency: "VND"
+      }).format(this.tienPhong)} `;
+      this.dichvusInput.forEach(item => {
+        if (item.quyTacTinhTien == "1") {
+          let phong = this.phongTros.find(x => x._id == this.phongTro_id);
+          item.tongTien =
+            Number(phong.khachThue_ids.length) * Number(item.donGia);
+          this.noiDung = `${this.noiDung}
+          ${item.tenDV}:
+                 Số người/phòng: ${phong.khachThue_ids.length} 
+                 Giá tiền/người: ${new Intl.NumberFormat("it-IT", {
+                   style: "currency",
+                   currency: "VND"
+                 }).format(item.donGia)}
+                 tổng: ${new Intl.NumberFormat("it-IT", {
+                   style: "currency",
+                   currency: "VND"
+                 }).format(item.tongTien)}
+                 `;
+        }
+        if (item.quyTacTinhTien == "3") {
+          item.tongTien =
+            (Number(item.soMoi) - Number(item.soCu)) * Number(item.donGia);
+          this.noiDung = `${this.noiDung}
+          ${item.tenDV}: 
+                Số củ: ${item.soCu},
+                Số mới: ${item.soMoi},
+                số sử dụng:${Number(item.soMoi) - Number(item.soCu)}
+                Đơn giá  ${new Intl.NumberFormat("it-IT", {
+                  style: "currency",
+                  currency: "VND"
+                }).format(item.donGia)};
+                tổng:${new Intl.NumberFormat("it-IT", {
+                  style: "currency",
+                  currency: "VND"
+                }).format(item.tongTien)}
+          `;
+        }
+        if (item.quyTacTinhTien == "2") {
+          item.tongTien = Number(item.donGia);
+          this.noiDung = `${this.noiDung}
+             ${item.tenDV}: 
+                    Tổng:${new Intl.NumberFormat("it-IT", {
+                      style: "currency",
+                      currency: "VND"
+                    }).format(item.tongTien)}
+            `;
+        }
+        if (item.quyTacTinhTien == "4") {
+          item.tongTien = 0;
+          this.noiDung = `${this.noiDung}
+             ${item.tenDV}: Dịch vụ miễn phí
+                    
+            `;
+        }
+      });
+      this.setTongTien();
+    },
+    setTongTien() {
+      this.tongTien = 0;
+      this.tongTien = Number(this.tienPhong);
+      this.dichvusInput.forEach(item => {
+        this.tongTien = Number(this.tongTien) + Number(item.tongTien);
+      });
     },
     getDataKhu() {
       this.onLoading = true;
       axios.get("/khutro/getphongtro").then(response => {
         this.khuTros = response.data.data;
         this.onLoading = false;
-       
       });
     },
     getDataPhong() {
-      this.$v.khuTro_id.$touch()
+      this.$v.khuTro_id.$touch();
       this.phongTros = this.khuTros.find(
         item => item._id == this.khuTro_id
       ).phongTro_ids;
@@ -322,15 +408,18 @@ export default {
     getKhachThue() {
       axios.get("/khachthue/getallkhachthue/").then(response => {
         this.khachThues = response.data.data;
-        
       });
     },
-    changeTienCoc() {
-      this.tienCocF = new Intl.NumberFormat("it-IT", {
-        style: "currency",
-        currency: "VND"
-      }).format(this.tienCoc);  
-    }
+    getDichVu() {
+      this.onLoading = true;
+      axios.get("/dichvu/").then(response => {
+        this.dichVus = response.data.data;
+        
+
+        this.onLoading = false;
+      });
+    },
+   
   }
 };
 </script>

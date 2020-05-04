@@ -358,8 +358,9 @@ export default {
   created() {},
   data: function() {
     return {
+      onLoading:false,
       data: {
-        onLoading:false,
+        
         tenKhachThue: null,
         sdtKhachThue: null,
         ngaySinh: null,

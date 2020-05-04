@@ -53,7 +53,10 @@
                           currency: "VND"
                           }).format(hd.tongTien)}}
                         </td>
-                         <td>Trạng Thái</td>
+                          <td>
+                          <label v-if="hd.trangThai" class="badge badge-success">Đã Thanh Toán</label>
+                          <label v-else class="badge badge-danger">Chưa thanh toán</label>
+                        </td>
                         <td>
                           <div class="dropdown">
                             <button
@@ -73,8 +76,8 @@
                               <button
                                 class="dropdown-item"
                                 type="button"
-                                @click.prevent="showModalUpdate(hd._id,)"
-                              >Chỉnh sửa</button>
+                                @click.prevent="showModalUpdate(hd._id)"
+                              >Thanh Toán</button>
                               <button
                                 class="dropdown-item"
                                 type="button"
@@ -113,7 +116,7 @@ export default {
   name: "hoadon",
   data() {
     return {
-      hoaDons: null,
+      hoaDons:[],
       onLoading: false
     };
   },
@@ -121,7 +124,11 @@ export default {
     this.onLoading = true;
     axios.get("/hoadon/").then(response => {
       this.hoaDons = response.data.data;
+      console.log(this.hoaDons);
+      
       this.onLoading = false;
+      
+      
     });
   },
 
@@ -144,10 +151,8 @@ export default {
       this.$modal.show("updateHoaDon", { hopDong: hopDong });
     },
      showModalGet(id) {
-      const hopDong = this.hopDongs.find(
-        item => item._id == id
-      );
-     this.$modal.show("getHoaDon", { hopDong: hopDong });
+      const hoaDon = this.hoaDons.find(item=>item._id==id);
+     this.$modal.show("getHoaDon", { hoaDon: hoaDon});
     },
     getNewData() {
       this.onLoading = true;
@@ -157,10 +162,10 @@ export default {
       });
     },
     remove(id) {
-      const result = confirm("Bạn có muốn xoá Hợp Đồng");
+      const result = confirm("Bạn có muốn xoá Hoá đơn này");
       if (result) {
         axios
-          .delete(`/hopdong/${id}/delete`)
+          .delete(`/hoadon/${id}/delete`)
           .then(() => {
             alert("Delete thành công");
             this.getNewData();

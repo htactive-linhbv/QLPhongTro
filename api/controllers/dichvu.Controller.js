@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 
 module.exports = {
     getAll: ((req,res)=>{
-        DichVus.find().then(response=>{
+        const chuTro_id = req.chuTro._id;
+        DichVus.find({chuTro_id:chuTro_id}).then(response=>{
             res.status(200).json({data:response})
         }).catch(err=>{
             res.status(404).json(err)
@@ -19,11 +20,11 @@ module.exports = {
     }),
     
     create: ((req, res) => {
-        
+        chuTro_id = req.chuTro._id;
         const dichVu = new DichVus({
             _id: new mongoose.Types.ObjectId(),
             tenDV: req.body.tenDV,
-            chuTro_id:req.body.chuTro_id,
+            chuTro_id:chuTro_id,
             moTaDV: req.body.moTaDV,
             donGia: Number(req.body.donGia),
             donVi: req.body.donVi,
@@ -62,7 +63,7 @@ module.exports = {
         }).catch(err=>{
             res.status(400).json(err)
         })
-    })
-
+    }),
+    
 
 }

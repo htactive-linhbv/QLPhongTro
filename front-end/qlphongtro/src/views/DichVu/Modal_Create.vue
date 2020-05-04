@@ -108,7 +108,7 @@
                 />
               </div>
 
-              <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">Thêm Mới</button>
+              <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">Thêm Mới<span v-if="onLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
               <button @click.prevent="$modal.hide('createDichVu')" class="btn btn-light">Đóng</button>
             </form>
           </div>
@@ -124,6 +124,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
+      onLoading:false,
       tenDV: null,
       chuTro_id: null,
       moTaDV: null,
@@ -156,10 +157,10 @@ export default {
     },
     create() {
       if (!this.$v.$invalid) {
+        this.onLoading=true;
         axios
           .post("/dichvu/", {
             tenDV: this.tenDV,
-            chuTro_id: localStorage.getItem("chutro-profile-id"),
             moTaDV: this.moTaDV,
             donGia: this.donGia,
             donVi: this.donVi,
@@ -167,15 +168,18 @@ export default {
             trangThai: Boolean(Number(this.trangThai))
           })
           .then(() => {
+            this.onLoading=false;
             alert("Thêm mới thành công");
             this.$emit("createSuccess");
             this.$emit("createSuccess", "Thêm mới thành công");
             this.$modal.hide("createDichVu");
           })
           .catch(() => {
+            this.onLoading=false;
             alert("Thêm mới thất bại");
           });
       } else {
+        this.onLoading=false;
         this.$v.$touch();
       }
     }

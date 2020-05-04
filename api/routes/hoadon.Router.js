@@ -6,8 +6,8 @@ const hoaDonController = require('../controllers/hoadon.Controller')
 router.use(checkLogin)
 router.get('/',hoaDonController.get)
 router.get('/:id/chitiet')
-router.post('/')
+router.post('/',hoaDonController.create)
 router.patch('/:id/update')
-router.delete('/:id/delete')
+router.delete('/:id/delete',hoaDonController.delete)
 
 module.exports = router;
