@@ -29,11 +29,12 @@ const userRouter = require('./routes/user.Router');
 const dichvuRouter= require('./routes/dichvu.Router');
 const loginRouter  = require('./routes/login.Router');
 const thietBiRouter = require('./routes/thietbi.Router');
-const khuTroRouter = require('./routes/khuTro.Router')
-const khachThueRouter = require('./routes/khachThue.Router')
-const phongTroRouter = require('./routes/phongtro.Router')
-const hopDongRouter = require('./routes/hopDong.Router')
-const hoaDonRouter = require('./routes/hoadon.Router')
+const khuTroRouter = require('./routes/khuTro.Router');
+const khachThueRouter = require('./routes/khachThue.Router');
+const phongTroRouter = require('./routes/phongtro.Router');
+const hopDongRouter = require('./routes/hopDong.Router');
+const hoaDonRouter = require('./routes/hoadon.Router');
+const baiDangRouter = require('./routes/baidang.Router')
 //middlerware
 
 //use middleware morgan
@@ -55,6 +56,7 @@ app.use('/api/khachthue',khachThueRouter);
 app.use('/api/phongtro',phongTroRouter);
 app.use('/api/hopdong',hopDongRouter);
 app.use('/api/hoadon',hoaDonRouter);
+app.use('/api/baidang',baiDangRouter);
 //use err
 app.use((req,res,next) => {
     const error = new Error('not found');

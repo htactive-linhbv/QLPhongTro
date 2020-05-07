@@ -55,10 +55,8 @@ module.exports = {
     update: ((req, res) => {
         const id = req.params.id;
         const hoaDonUpdate = {
-            tenHoaDon: req.body.hoadon.tenHoaDon,
-            soTien: Number(req.body.hoadon.soTien),
-            noiDung: req.body.hoadon.noiDung,
-            tinhTrang: req.body.hoadon.tinhTrang,
+            tienThanhToan:req.body.tienThanhToan,
+            tinhTrang:Boolean( req.body.tinhTrang)
         }
         HoaDons.findByIdAndUpdate(id, hoaDonUpdate).then(response => {
             res.status(200).json({ data: response });

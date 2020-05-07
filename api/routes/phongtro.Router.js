@@ -17,6 +17,6 @@ const checkLogin = require('../middlewares/checkChuTroLogin.Middleware');
 router.get('/:id/chitietkhachthue',phongTroController.getChiTietKhachThue)
 router.post('/addkhachthue',phongTroController.addkhachthue)
 router.post('/deletekhachthue',phongTroController.deleteKhachThue)
-
+router.patch('/:id/traphong',phongTroController.traPhong)
 
 module.exports = router;

@@ -97,8 +97,10 @@ module.exports = {
     addkhachthue:((req,res)=>{
         const id = req.body.phongTro_id;
         const khachThue_id = req.body.khachThue_id;
-        console.log(id);
-       PhongTros.findByIdAndUpdate(id,{$push:{khachThue_ids:khachThue_id}}).then(()=>{
+       PhongTros.findByIdAndUpdate(id,{
+           $push:{khachThue_ids:khachThue_id},
+           tinhTrangPhong:true           
+        }).then(()=>{
            KhachThues.findByIdAndUpdate(khachThue_id,{trangThai:true}).then(doc=>{
                res.status(200).json({data:doc})
            }).catch(err=>{
@@ -112,8 +114,13 @@ module.exports = {
     deleteKhachThue:((req,res)=>{
         const id = req.body.phongTro_id;
         const khachThue_id = req.body.khachThue_id;
-        PhongTros.findByIdAndUpdate(id,{$pull:{khachThue_ids:khachThue_id}}).then(()=>{
+        PhongTros.findByIdAndUpdate(id,{$pull:{khachThue_ids:khachThue_id}}).then((response)=>{
+            if(response.khachThue_ids.length<1){
+                response.tinhTrangPhong= true
+            }
+           
             KhachThues.findByIdAndUpdate(khachThue_id,{trangThai:false}).then((doc)=>{
+                response.save();
                 res.status(200).json({data:doc})
             }).catch(err=>{
                 res.status(400).json(err)
@@ -121,6 +128,25 @@ module.exports = {
         }).catch(err=>{
             res.status(401).json(err)
         })
-    })
+    }),
+    traPhong(req,res){
+        const id = req.params.id;
+     PhongTros.findById(id).then(response=>{
+         const khachs = response.khachThue_ids;
+         response.update({$pull:{khachThue_ids:{$in:khachs}}},(err,doc)=>{
+             if(err){
+                res.status(401).json(err)
+                return
+             }
+             KhachThues.updateMany({_id:{$in:khachs}},{$set:{trangThai:false}},{"multi": true}).then(()=>{
+                 res.status(200).json({message:'Trả thành công'})
+             }).catch(error=>{
+                 res.status(400).json(error)
+             })
+         })
+     }).catch(()=>{
+         res.status(400).json({message:'find thất bại'})
+     })
+    }
 
 }

@@ -5,6 +5,7 @@ const dichVuSchema = mongoose.Schema({
     tenDV: { type: String,  },
     chuTro_id: { type: mongoose.Schema.Types.ObjectId, ref: 'ChuTro' },
     moTaDV: { type: String },
+    soDienThoai:{type : String},
     donGia: { type: Number, },
     donVi: { type: String,  },
     quyTacTinhTien: { type: String,  },

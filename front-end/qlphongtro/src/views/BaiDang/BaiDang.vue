@@ -6,12 +6,12 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="page-header">
-            <h3 class="page-title">Hoá đơn</h3>
+            <h3 class="page-title">Bài Đăng</h3>
 
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="#">Quản lý Hoá đơn</a>
+                  <a href="#">Quản lý Bài Đăng</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
               </ol>
@@ -32,31 +32,22 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Tên Hoá đơn</th>
+                        <th scope="col">Tên Tiêu đề</th>
                         <th scope="col">Khu Trọ</th>
-                        <th scope="col">Tên Khách đại diện</th>
                         <th scope="col">Phòng</th>
-                        <th scope="col">Tổng tiền</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Option</th>
                         
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="hd in hoaDons" :key="hd._id">
-                        <td>{{hd.tenHoaDon}}</td>
-                        <td>{{hd.khuTro_id.tenKhuTro}}</td>
-                        <td>{{hd.khachThue_id.tenKhachThue}}</td>
-                        <td>{{hd.phongTro_id.tenPhongTro}}</td>
-                        <td>
-                          {{new Intl.NumberFormat("it-IT", {
-                          style: "currency",
-                          currency: "VND"
-                          }).format(hd.tongTien)}}
-                        </td>
+                      <tr v-for="bd in baiDangs" :key="bd._id">
+                        <td>{{bd.tieuDe}}</td>
+                        <td>{{bd}}</td>                     
+                        <td>{{bd}}</td>
                           <td>
-                          <label v-if="hd.tinhTrang" class="badge badge-success">Đã Thanh Toán</label>
-                          <label v-else class="badge badge-danger">Chưa thanh toán</label>
+                          <label v-if="bd.trangThai" class="badge badge-success">abc</label>
+                          <label v-else class="badge badge-danger">xyz</label>
                         </td>
                         <td>
                           <div class="dropdown" >
@@ -72,17 +63,17 @@
                               <button
                                 class="dropdown-item"
                                 type="button"
-                                @click.prevent="showModalGet(hd._id)"
+                                @click.prevent="showModalGet(bd._id)"
                               >Xem chi tiết</button>
                               <button
                                 class="dropdown-item"
                                 type="button"
-                                @click.prevent="showModalUpdate(hd._id)"
+                                @click.prevent="showModalUpdate(bd._id)"
                               >Thanh Toán</button>
                               <button
                                 class="dropdown-item"
                                 type="button"
-                                @click.prevent="remove(hd._id)"
+                                @click.prevent="remove(bd._id)"
                               >Xoá</button>
                             </div>
                           </div>
@@ -98,8 +89,8 @@
       </div>
     </div>
     <modal-create @createSuccess="getNewData"></modal-create>
-    <modal-update @updateSuccess="getNewData"></modal-update>
-    <modal-get></modal-get>
+    <!-- <modal-update @updateSuccess="getNewData"></modal-update>
+    <modal-get></modal-get> -->
   </div>
 </template>
 
@@ -108,27 +99,21 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 import Narbar from "../../components/Navbar.vue";
 import Sidebar from "../../components/Sidebar.vue";
-import ModalCreate from "./Modal_Create_HoaDon";
-import ModalUpdate from "./Modal_Update_HoaDon";
-import ModalGet from './Modal_Get_HoaDon';
+import ModalCreate from "./Modal_Create_BaiDang.vue";
+//import ModalUpdate from "./Modal_Update_HoaDon";
+//import ModalGet from './Modal_Get_HoaDon';
 
 import axios from "axios";
 export default {
-  name: "hoadon",
+  name: "baidang",
   data() {
     return {
-      hoaDons:[],
+      baiDangs:null,
       onLoading: false
     };
   },
   mounted() {
-    this.onLoading = true;
-    axios.get("/hoadon/").then(response => {
-      this.hoaDons = response.data.data;
-      this.onLoading = false;
-      
-      
-    });
+   this.getNewData()
   },
 
   components: {
@@ -136,12 +121,12 @@ export default {
     appNarbar: Narbar,
     appSidebar: Sidebar,
     ModalCreate,
-    ModalUpdate,
-    ModalGet
+   // ModalUpdate,
+   // ModalGet
   },
   methods: {
     showModalCreate() {
-      this.$modal.show("createHoaDon");
+      this.$modal.show("createBaiDang");
     },
     showModalUpdate(id) {
       
@@ -158,26 +143,26 @@ export default {
      this.$modal.show("getHoaDon", { hoaDon: hoaDon});
     },
     getNewData() {
-      this.onLoading = true;
-    axios.get("/hoadon/").then(response => {
-      this.hoaDons = response.data.data;
-      this.onLoading = false;
-      });
+       this.onLoading = true;
+     axios.get("/baidang/").then(response => {
+       this.baiDangs = response.data.data;
+       this.onLoading = false;
+       });
     },
-    remove(id) {
-      const result = confirm("Bạn có muốn xoá Hoá đơn này");
-      if (result) {
-        axios
-          .delete(`/hoadon/${id}/delete`)
-          .then(() => {
-            alert("Delete thành công");
-            this.getNewData();
-          })
-          .catch(() => {
-            alert("delete thất bại");
-          });
-      }
-    }
+    // remove(id) {
+    //   const result = confirm("Bạn có muốn xoá Hoá đơn này");
+    //   if (result) {
+    //     axios
+    //       .delete(`/hoadon/${id}/delete`)
+    //       .then(() => {
+    //         alert("Delete thành công");
+    //         this.getNewData();
+    //       })
+    //       .catch(() => {
+    //         alert("delete thất bại");
+    //       });
+    //   }
+    // }
   }
 };
 </script>

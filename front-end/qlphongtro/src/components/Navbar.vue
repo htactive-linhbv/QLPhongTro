@@ -2,11 +2,11 @@
   <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0  d-flex flex-row" >
     
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-    <a class="navbar-brand brand-logo" href="index.html"><img src="assets/images/logo/logo-1.png" alt="logo" /></a>
-    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo/logo-mini-1.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo" ><img src="assets/images/logo/logo-1.png" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" ><img src="assets/images/logo/logo-mini-1.png" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch">
-    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+    <button class="navbar-toggler navbar-toggler align-self-center" type="button" @click.prevent="miniMenu">
       <span class="mdi mdi-menu"></span>
     </button>
     
@@ -144,7 +144,7 @@
         </a>
       </li>
     </ul>
-    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" @click="hideMenu" >
       <span class="mdi mdi-menu"></span>
     </button>
   </div>
@@ -153,16 +153,30 @@
 
 <script>
 export default {
+  data:function(){
+    return{
+      mini:false
+    }
+  },
   computed:{
     name (){
       return this.$store.state.auth.chuTroProfile.hoVaTen
-    }
+    },
+   
   },
   methods:{
     logout(){
        this.$store.dispatch('LOGOUT').then(()=>{
        this.$router.push({ name: "Login"})
      })
+    },
+    hideMenu(){
+      this.$store.dispatch('onActive');
+    },
+    miniMenu(){
+      this.menu = !this.menu;
+       let sitebody = document.body;
+        this.menu ? sitebody.classList.add("sidebar-icon-only") : sitebody.classList.remove("sidebar-icon-only");
     }
   }
 }

@@ -5,14 +5,14 @@
     height="auto"
     width="70%"
     @before-open="getData"
-    :delay="500"
+    
   >
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
       <div class="col-md-1">
         <button
           class="btn btn-inverse-primary btn-rounded btn-icon"
-          @click="$modal.hide('addPhongTro')"
+          @click="addSuccess"
         >
           <i class="mdi mdi-window-close" style="font-size:20px"></i>
         </button>
@@ -87,7 +87,7 @@
             <div class="row" style="margin-top: 30px">
               <div class="col-md-6"></div>
               <div class="col-md-4">
-                <button class="btn btn-success" @click.prevent="$modal.hide('addPhongTro')">Xong</button>
+                <button class="btn btn-success" @click.prevent="addSuccess">Xong</button>
               </div>
             </div>
           </div>
@@ -110,6 +110,7 @@ export default {
       this.khachThues = response.data.data;
       this.onLoading = false;
     });
+    
   },
   data: function() {
     return {
@@ -134,6 +135,8 @@ export default {
           this.phongTros = response.data.data;
           this.phongTro_id = event.params.id;
           this.khachThue_ids = response.data.data.khachThue_ids;
+          this.getNewData();
+          this.getNewData2();
           this.onLoading = false;
         });
     },
@@ -201,6 +204,11 @@ export default {
               this.isMesage = "";
             }, 5000);
         });
+    },
+    addSuccess(){
+       this.$emit("createSuccess");
+       this.$modal.hide('addPhongTro');
+
     }
   },
   components:{

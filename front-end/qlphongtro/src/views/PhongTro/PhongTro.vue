@@ -78,7 +78,7 @@
                           <label
                             v-if="!phong.khachThue_ids.length==0"
                             class="badge badge-success"
-                          >Đã được thê</label>
+                          >Đã được thuê</label>
                           <label v-else class="badge badge-danger">Trống</label>
                         </td>
                         <td>
@@ -97,6 +97,11 @@
                                 type="button"
                                 @click.prevent="showModalGet(phong._id,khuTro_id,khuTros)"
                               >Xem chi tiết</button>
+                              <button
+                                class="dropdown-item"
+                                type="button"
+                                @click.prevent="traPhong(phong._id)"
+                              >Trả Phòng</button>
                               <button
                                 class="dropdown-item"
                                 type="button"
@@ -128,7 +133,7 @@
     <modal-create @createSuccess="getNewData"></modal-create>
     <modal-update @updateSuccess="getNewData"></modal-update>
     <modal-get></modal-get>
-    <modal-add></modal-add>
+    <modal-add @createSuccess="getNewData"></modal-add>
   </div>
 </template>
 
@@ -210,6 +215,20 @@ export default {
           })
           .catch(() => {
             alert("delete thất bại");
+          });
+      }
+    },
+    traPhong(id){
+      const result = confirm("Bạn có trả Phòng trọ");
+      if(result){
+        axios
+          .patch(`/phongtro/${id}/traphong`)
+          .then(() => {
+            alert("trả phòng thành công");
+            this.getNewData();
+          })
+          .catch(() => {
+            alert("trả thất bại thất bại");
           });
       }
     },

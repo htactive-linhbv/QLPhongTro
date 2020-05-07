@@ -299,10 +299,11 @@
                         name="anhDaiDien"
                       />
                     </div>
-                    <div class="col-sm-12 text-center">
-                      <img src class="rounded" alt="..." />
+                    <div class="col-sm-12 text-center  overflow: hidden;" v-if="urlAnhDaiDien">
+                      <img  :src='urlAnhDaiDien' class="img-fluid" alt="..." />
                     </div>
                   </div>
+                  
                 </div>
                 <div class="col-md-4">
                   <div class="form-group row">
@@ -315,6 +316,9 @@
                         ref="anhCMNDTruoc"
                         name="anhCMNDTruoc"
                       />
+                    </div>
+                     <div class="col-sm-12 text-center  overflow: hidden;" v-if="ulrAnhTruoc">
+                      <img  :src='ulrAnhTruoc' class="img-fluid" alt="..." />
                     </div>
                   </div>
                 </div>
@@ -329,6 +333,9 @@
                         ref="anhCMNDSau"
                         name="anhCMNDSau"
                       />
+                    </div>
+                    <div class="col-sm-12 text-center  overflow: hidden;" v-if="urlAnhSau">
+                      <img  :src='urlAnhSau' class="img-fluid" alt="..." />
                     </div>
                   </div>
                 </div>
@@ -375,7 +382,9 @@ export default {
         sdtBoMe: null,
         ghiChu: null
       },
-
+      urlAnhDaiDien:null,
+      urlAnhSau:null,
+      ulrAnhTruoc:null,
       anhDaiDien: "",
       anhCMNDTruoc: "",
       anhCMNDSau: ""
@@ -421,12 +430,15 @@ export default {
   methods: {
     onChangeFileUpload1() {
       this.anhDaiDien = this.$refs.anhDaiDien.files[0];
+      this.urlAnhDaiDien = URL.createObjectURL(this.anhDaiDien)
     },
     onChangeFileUpload2() {
       this.anhCMNDTruoc = this.$refs.anhCMNDTruoc.files[0];
+       this.ulrAnhTruoc = URL.createObjectURL(this.anhCMNDTruoc)
     },
     onChangeFileUpload3() {
       this.anhCMNDSau = this.$refs.anhCMNDSau.files[0];
+      this.urlAnhSau = URL.createObjectURL(this.anhCMNDSau)
     },
     create() {
       this.onLoading=true;
@@ -438,7 +450,6 @@ export default {
       for (let key in this.data) {
         formData.append(key, this.data[key]);
       }
-
       if (!this.$v.data.$invalid) {
         axios
           .post("/khachthue/", formData, {
