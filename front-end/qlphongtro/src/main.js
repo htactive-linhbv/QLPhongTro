@@ -15,6 +15,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
 Vue.use(Vuelidate)
 Vue.config.productionTip = false
 
+
 new Vue({
   router,
   store,

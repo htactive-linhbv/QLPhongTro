@@ -44,7 +44,7 @@ module.exports = {
             tongTien: Number(req.body.tongTien),
             noiDung: req.body.noiDung,
         })
-        console.log(hoaDon);
+       
         
         hoaDon.save().then(response => {
             res.status(200).json({ data: response });

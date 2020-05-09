@@ -26,7 +26,7 @@
           <div class="row">
             <div class="col-12 stretch-card">
               <div class="card">
-                <div class="card-body ">
+                <div class="card-body">
                   <h4 class="card-title">Danh Sách</h4>
 
                   <table class="table">
@@ -37,20 +37,19 @@
                         <th scope="col">Phòng</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Option</th>
-                        
                       </tr>
                     </thead>
                     <tbody>
                       <tr v-for="bd in baiDangs" :key="bd._id">
                         <td>{{bd.tieuDe}}</td>
-                        <td>{{bd}}</td>                     
-                        <td>{{bd}}</td>
-                          <td>
-                          <label v-if="bd.trangThai" class="badge badge-success">abc</label>
-                          <label v-else class="badge badge-danger">xyz</label>
+                        <td>{{bd.khuTro_id.tenKhuTro}}</td>
+                        <td>{{bd.phongTro_id.tenPhongTro}}</td>
+                        <td>
+                          <label v-if="bd.trangThai" class="badge badge-success">Mở</label>
+                          <label v-else class="badge badge-danger">Đóng</label>
                         </td>
                         <td>
-                          <div class="dropdown" >
+                          <div class="dropdown">
                             <button
                               class="btn btn-info btn-fw dropdown-toggle"
                               type="button"
@@ -58,7 +57,7 @@
                               data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
-                            >Tác vụ</button>
+                            ><span v-if="btnLoanding" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Tác vụ</button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                               <button
                                 class="dropdown-item"
@@ -90,7 +89,7 @@
     </div>
     <modal-create @createSuccess="getNewData"></modal-create>
     <!-- <modal-update @updateSuccess="getNewData"></modal-update>
-    <modal-get></modal-get> -->
+    <modal-get></modal-get>-->
   </div>
 </template>
 
@@ -108,61 +107,64 @@ export default {
   name: "baidang",
   data() {
     return {
-      baiDangs:null,
-      onLoading: false
+      baiDangs: null,
+      onLoading: false,
+      btnLoanding:false
     };
   },
   mounted() {
-   this.getNewData()
+    this.getNewData();
   },
 
   components: {
     //HelloWorld,
     appNarbar: Narbar,
     appSidebar: Sidebar,
-    ModalCreate,
-   // ModalUpdate,
-   // ModalGet
+    ModalCreate
+    // ModalUpdate,
+    // ModalGet
   },
   methods: {
     showModalCreate() {
       this.$modal.show("createBaiDang");
     },
     showModalUpdate(id) {
-      
-        const hoaDon = this.hoaDons.find(item=>item._id==id);
-        if(hoaDon.tinhTrang===true){
-          alert('Hoá đơn này đã thanh toán');
-        }else{
-             this.$modal.show("updateHoaDon", { hoaDon: hoaDon });
-        }
-     
+      const hoaDon = this.hoaDons.find(item => item._id == id);
+      if (hoaDon.tinhTrang === true) {
+        alert("Hoá đơn này đã thanh toán");
+      } else {
+        this.$modal.show("updateHoaDon", { hoaDon: hoaDon });
+      }
     },
-     showModalGet(id) {
-      const hoaDon = this.hoaDons.find(item=>item._id==id);
-     this.$modal.show("getHoaDon", { hoaDon: hoaDon});
+    showModalGet(id) {
+      const hoaDon = this.hoaDons.find(item => item._id == id);
+      this.$modal.show("getHoaDon", { hoaDon: hoaDon });
     },
     getNewData() {
-       this.onLoading = true;
-     axios.get("/baidang/").then(response => {
-       this.baiDangs = response.data.data;
-       this.onLoading = false;
-       });
+      this.onLoading = true;
+      axios.get("/baidang/").then(response => {
+        this.baiDangs = response.data.data;
+        this.onLoading = false;
+        console.log(this.baiDangs);
+      });
     },
-    // remove(id) {
-    //   const result = confirm("Bạn có muốn xoá Hoá đơn này");
-    //   if (result) {
-    //     axios
-    //       .delete(`/hoadon/${id}/delete`)
-    //       .then(() => {
-    //         alert("Delete thành công");
-    //         this.getNewData();
-    //       })
-    //       .catch(() => {
-    //         alert("delete thất bại");
-    //       });
-    //   }
-    // }
+    remove(id) {
+      const result = confirm("Bạn có muốn bài đăng này");
+      if (result) {
+        this.btnLoanding = true
+        axios
+          .delete(`/baidang/${id}/delete`)
+          .then(() => {
+            alert("Delete thành công");
+            this.getNewData();
+            this.btnLoanding=false
+          })
+          .catch(() => {
+            alert("delete thất bại");
+            this.btnLoanding=false
+          });
+      }
+    }
   }
 };
 </script>

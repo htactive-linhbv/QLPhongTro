@@ -126,7 +126,8 @@ export default {
     axios.get("/hoadon/").then(response => {
       this.hoaDons = response.data.data;
       this.onLoading = false;
-      
+    console.log(this.hoaDons);
+    
       
     });
   },
@@ -138,6 +139,9 @@ export default {
     ModalCreate,
     ModalUpdate,
     ModalGet
+  },
+  computed:{
+
   },
   methods: {
     showModalCreate() {

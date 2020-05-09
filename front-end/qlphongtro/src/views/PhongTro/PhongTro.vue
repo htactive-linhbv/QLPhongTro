@@ -158,10 +158,11 @@ export default {
     };
   },
   created() {
-    this.loading=true;
+    this.loading = true;
     axios.get("/khutro/getphongtro/").then(response => {
       this.khuTros = response.data.data;
-      this.loading=false;
+
+      this.loading = false;
     });
   },
 
@@ -196,31 +197,39 @@ export default {
       this.$modal.show("addPhongTro", { id: id });
     },
     getNewData() {
-     this.loading=true;
+      this.loading = true;
       axios.get("/khutro/getphongtro/").then(response => {
-      this.khuTros = response.data.data;
-       this.phongTros = this.khuTros.find(item => item._id == this.khuTro_id).phongTro_ids;
-      this.loading=false;
-
-    });
+        this.khuTros = response.data.data;
+        this.phongTros = this.khuTros.find(
+          item => item._id == this.khuTro_id
+        ).phongTro_ids;
+        this.loading = false;
+      });
     },
     remove(id, khuTro_id) {
-      const result = confirm("Bạn có muốn xoá Phòng trọ");
-      if (result) {
-        axios
-          .delete(`/phongtro/${id}/${khuTro_id}/delete`)
-          .then(() => {
-            alert("Delete thành công");
-            this.getNewData();
-          })
-          .catch(() => {
-            alert("delete thất bại");
-          });
+      const phong = this.phongTros.find(item => item._id == id);
+      if (phong) {
+        if (phong.khachThue_ids.length > 0) {
+          alert("Vẫn còn khách thuê phòng này... Hãy trả phòng trước!");
+        } else {
+          const result = confirm("Bạn có muốn xoá Phòng trọ");
+          if (result) {
+            axios
+              .delete(`/phongtro/${id}/${khuTro_id}/delete`)
+              .then(() => {
+                alert("Delete thành công");
+                this.getNewData();
+              })
+              .catch(() => {
+                alert("delete thất bại");
+              });
+          }
+        }
       }
     },
-    traPhong(id){
+    traPhong(id) {
       const result = confirm("Bạn có trả Phòng trọ");
-      if(result){
+      if (result) {
         axios
           .patch(`/phongtro/${id}/traphong`)
           .then(() => {
@@ -233,9 +242,11 @@ export default {
       }
     },
     getDataPhong() {
-      this.loading=true;
-       this.phongTros = this.khuTros.find(item => item._id == this.khuTro_id).phongTro_ids;
-     this.loading= false;
+      this.loading = true;
+      this.phongTros = this.khuTros.find(
+        item => item._id == this.khuTro_id
+      ).phongTro_ids;
+      this.loading = false;
     }
   }
 };

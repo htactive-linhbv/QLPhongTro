@@ -56,7 +56,7 @@
                           v-for="phong in phongTros"
                           :key="phong._id"
                           :value="phong._id"
-                        >{{phong.tenPhongTro}}     {{tinhTrangPhongF(phong.tinhTrangPhong)}} </option>
+                        >{{phong.tenPhongTro}} {{tinhTrangPhongF(phong.tinhTrangPhong)}}</option>
                       </select>
                       <div
                         class="alert alert-danger"
@@ -80,15 +80,14 @@
                         @change="$v.tieuDe.$touch()"
                       />
                       <div
-                      class="alert alert-danger"
-                      v-if="$v.tieuDe.$error"
-                      role="alert"
-                    >Tiêu đề không được trống</div>
+                        class="alert alert-danger"
+                        v-if="$v.tieuDe.$error"
+                        role="alert"
+                      >Tiêu đề không được trống</div>
                     </div>
-                    
                   </div>
                 </div>
-                 <div class="col-md-6">
+                <div class="col-md-6">
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Số ĐT liên hệ</label>
                     <div class="col-sm-9">
@@ -99,20 +98,17 @@
                         name="soDienThoai"
                         @change="$v.soDienThoai.$touch()"
                       />
-                       <div
-                      class="alert alert-danger"
-                      v-if="$v.soDienThoai.$error"
-                      role="alert"
-                    >Số điện thoại không được trống</div>
+                      <div
+                        class="alert alert-danger"
+                        v-if="$v.soDienThoai.$error"
+                        role="alert"
+                      >Số điện thoại không được trống</div>
                     </div>
-                   
                   </div>
                 </div>
               </div>
-              
-             
+
               <div class="row">
-               
                 <div class="col-md-6">
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Mô Tả</label>
@@ -121,28 +117,31 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-md-6">
                   <div class="col-md-6">
-                  <div class="form-group row">
-                    <label class="col-sm-12 col-form-label">Ảnh phòng trọ</label>
-                    <div class="col-sm-12">
-                      <input
-                        @change="onChangeFileUpload()"
-                        ref="photos"
-                        type="file"
-                        class="form-control"
+                    <div class="form-group row">
+                      <label class="col-sm-12 col-form-label">Ảnh phòng trọ</label>
+                      <div class="col-sm-12">
+                        <input
+                          @change="onChangeFileUpload()"
+                          ref="photos"
+                          type="file"
+                          class="form-control"
                           name="photos"
-                         multiple
-                      />
+                          multiple
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-                
+                <div class="col-md-6">
+                  <div class="text-center col-md-4 " v-for="url in urlPhotos" :key="url">
+                    <img class="rounded" :src="url" alt="..." />
+                  </div>
                 </div>
-                
-                
               </div>
-
               <div class="row">
                 <div class="col-md-7"></div>
                 <div class="col-md-4">
@@ -168,7 +167,7 @@
 </template>
 
 <script>
-const { required  } = require("vuelidate/lib/validators");
+const { required } = require("vuelidate/lib/validators");
 //import DateDropdown from "vue-date-dropdown";
 import axios from "axios";
 export default {
@@ -178,21 +177,21 @@ export default {
   data: function() {
     return {
       phongTros: "",
-      khuTro_id:null,
-      phongTro_id:null,
+      khuTro_id: null,
+      phongTro_id: null,
       khuTros: "",
       tieuDe: "",
-      soDienThoai:'',
-      moTa:'',
+      soDienThoai: "",
+      moTa: "",
       onLoading: false,
-      photos:[],
+      photos: [],
+      urlPhotos:[]
     };
   },
   components: {
     //  DateDropdown
   },
   validations: {
-    
     khuTro_id: {
       required
     },
@@ -208,39 +207,47 @@ export default {
   },
   methods: {
     create() {
-      this.onLoading=true;
+      this.onLoading = true;
       let formData = new FormData();
-       formData.append("photos", this.photos);
-   //    if (!this.$v.data.$invalid) {
-           axios
-          .post("/baidang/", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data"
-            }
-          })
-    //   }
-    },
-    tinhTrangPhongF(tinhTrang){
-        if(!tinhTrang){
-            return "'Trống'"
+      const intAnh = this.photos.length;
+      for (let i = 0; i < intAnh; i++) {
+        formData.append("photos", this.photos[i]);
+      }
+      formData.append('tieuDe',this.tieuDe);
+      formData.append('khuTro_id',this.khuTro_id)
+      formData.append('phongTro_id',this.phongTro_id)
+      formData.append('soDienThoai',this.soDienThoai)
+      formData.append('moTa',this.moTa)
+
+      //    if (!this.$v.data.$invalid) {
+      axios.post("/baidang/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
         }
+      }).then(()=>{
+        this.onLoading=false
+            alert("Thêm mới thành công");
+            this.$emit("createSuccess");
+            this.$modal.hide("createBaiDang");
+      });
+      //   }
+    },
+    tinhTrangPhongF(tinhTrang) {
+      if (!tinhTrang) {
+        return "'Trống'";
+      }
     },
 
     getDataKhu() {
       this.onLoading = true;
       axios.get("/khutro/getphongtro").then(response => {
         this.khuTros = response.data.data;
-        console.log(response.data.data);
-        
+
         this.onLoading = false;
-        
-        
       });
     },
-onChangeFileUpload() {
-      this.photos =this.$refs.photos.files;
-     
-      
+    onChangeFileUpload() {
+      this.photos = this.$refs.photos.files;
     },
     getDataPhong() {
       this.$v.khuTro_id.$touch();
