@@ -20,5 +20,12 @@ npm run build
 npm run lint
 ```
 
+
+### tài khoản... mk test
+```
+test123@gmail.com
+123123
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
