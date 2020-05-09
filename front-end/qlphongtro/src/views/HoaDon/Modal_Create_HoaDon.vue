@@ -20,7 +20,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Khu trọ</label>
+                    <label class="col-sm-3 col-form-label">Khu trọ<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-6" v-if="phongTros">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Phòng trọ</label>
+                    <label class="col-sm-3 col-form-label">Phòng trọ<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -70,7 +70,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Khách Thuê</label>
+                    <label class="col-sm-3 col-form-label">Khách Thuê<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select class="form-control" v-model="khachThue_id" name="khachThue_id">
                         <option
@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tên Hoá đơn</label>
+                    <label class="col-sm-3 col-form-label">Tên Hoá đơn<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" v-model="tenHoaDon"  name="tenHoaDon" @change="$v.tenHoaDon.$touch()"/>
                     </div>

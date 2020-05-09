@@ -17,7 +17,7 @@
 
             <form class="forms-sample">
               <div class="form-group">
-                <label for="exampleInputUsername1">Tên dịch vụ</label>
+                <label for="exampleInputUsername1">Tên dịch vụ<sup style="color:#e17055">(*)</sup></label>
                 <input
                   type="text"
                   class="form-control"
@@ -34,7 +34,7 @@
                 >Tên dịch vụ không được trống</div>
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">Đơn Giá</label>
+                <label for="exampleInputPassword1">Đơn Giá<sup style="color:#e17055">(*)</sup></label>
                 <div class="input-group">
                   <input
                     type="text"
@@ -57,7 +57,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="exampleInputUsername1">Đơn vị</label>
+                <label for="exampleInputUsername1">Đơn vị<sup style="color:#e17055">(*)</sup></label>
                 <input
                   type="text"
                   class="form-control"
@@ -74,7 +74,7 @@
                 >Đơn vị không được bỏ trống</div>
               </div>
               <div class="form-group">
-                <label for="exampleInputUsername1">Quy tắc tính tiền</label>
+                <label for="exampleInputUsername1">Quy tắc tính tiền<sup style="color:#e17055">(*)</sup></label>
               
                 <select class="form-control" v-model="quyTacTinhTien" name="quyTacTinhTien"  @change="$v.quyTacTinhTien.$touch()">
                         <option value="1">Theo Số Người/Phòng</option>

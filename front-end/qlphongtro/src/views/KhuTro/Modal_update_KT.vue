@@ -19,7 +19,7 @@
 
             <form class="forms-sample">
               <div class="form-group">
-                <label for="exampleInputUsername1">Tên khu trọ</label>
+                <label for="exampleInputUsername1">Tên khu trọ<sup style="color:#e17055">(*)</sup></label>
                 <input
                   type="text"
                   class="form-control"
@@ -39,7 +39,7 @@
               <div class="row">
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label>Tỉnh/Thành phố</label>
+                    <label>Tỉnh/Thành phố<sup style="color:#e17055">(*)</sup></label>
 
                     <select class="form-control" v-model="Tinh" name="Tinh" @change="$v.Tinh.$touch()">
                       <option value="Đà Nẵng" selected="selected">Đà Nẵng</option>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label>Quận/Huyện</label>
+                    <label>Quận/Huyện<sup style="color:#e17055">(*)</sup></label>
 
                     <select class="form-control" v-model="Quan" name="Quan" @change="$v.Quan.$touch()">
                       <option value="Hải Châu" selected="selected">Quận Hải Châu</option>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label for="exampleInputUsername1">Đường</label>
+                    <label for="exampleInputUsername1">Đường<sup style="color:#e17055">(*)</sup></label>
                     <input
                       type="text"
                       class="form-control"
@@ -85,7 +85,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">số tầng</label>
+                <label for="exampleInputPassword1">số tầng<sup style="color:#e17055">(*)</sup></label>
                 <div class="input-group">
                   <input
                     type="text"
@@ -104,7 +104,7 @@
               </div>
 
               <div class="form-group">
-                <label>Trang Thái</label>
+                <label>Trang Thái<sup style="color:#e17055">(*)</sup></label>
 
                 <select class="form-control" v-model="trangThai" name="trangThai">
                   <option value="1" selected="selected">bình thường</option>

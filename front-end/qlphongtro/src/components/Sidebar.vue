@@ -3,20 +3,16 @@
     <ul class="nav">
       <li class="nav-item nav-profile">
         <a href="#" class="nav-link">
-          <div class="nav-profile-image">
-            <img src="assets/images/faces/face1.jpg" alt="profile" />
-            <span class="login-status online"></span>
-            <!--change to offline or busy as needed-->
-          </div>
+          
           <div class="nav-profile-text d-flex flex-column">
-            <span class="font-weight-bold mb-2">{{name}}</span>
+            <h3 class="font-weight-bold mb-2">{{name}}</h3>
             <span class="text-secondary text-small">Manager</span>
           </div>
           <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
         </a>
       </li>
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a
           class="nav-link"
           data-toggle="collapse"
@@ -38,45 +34,45 @@
             </router-link>
           </ul>
         </div>
-      </li>
-      <router-link tag="li" class="nav-item" to="/dichvu" active-class="active">
+      </li> -->
+      <router-link tag="li" class="nav-item" to="/quantri/dichvu" active-class="active">
         <a class="nav-link">
           <span class="menu-title">Quản Lý dịch vụ</span>
           <i class="mdi mdi-wifi menu-icon"></i>
         </a>
       </router-link>
-      <router-link tag="li" class="nav-item" to="/khutro" active-class="active">
+      <router-link tag="li" class="nav-item" to="/quantri/khutro" active-class="active">
         <a class="nav-link">
           <span class="menu-title">Quản Lý Khu trọ</span>
           <i class="mdi mdi-hospital-building menu-icon"></i>
         </a>
       </router-link>
-      <router-link tag="li" class="nav-item" to="/phongtro" active-class="active">
+      <router-link tag="li" class="nav-item" to="/quantri/phongtro" active-class="active">
         <a class="nav-link">
           <span class="menu-title">Quản Lý Phòng Trọ</span>
           <i class="mdi mdi-home-map-marker menu-icon"></i>
         </a>
       </router-link>
-      <router-link tag="li" class="nav-item" to="/khachthue" active-class="active">
+      <router-link tag="li" class="nav-item" to="/quantri/khachthue" active-class="active">
         <a class="nav-link">
           <span class="menu-title">Quản Lý Khách Thuê</span>
           <i class="mdi mdi-account-search menu-icon"></i>
         </a>
       </router-link>
 
-      <router-link class="nav-item" tag="li" to="/hopdong" active-class="active">
+      <router-link class="nav-item" tag="li" to="/quantri/hopdong" active-class="active">
         <a class="nav-link">
           <span class="menu-title">Quản Lý Hợp Đồng</span>
           <i class="mdi mdi-file-document-box menu-icon"></i>
         </a>
       </router-link>
-      <router-link class="nav-item" tag="li" to="/hoadon" active-class="active">
+      <router-link class="nav-item" tag="li" to="/quantri/hoadon" active-class="active">
         <a class="nav-link">
           <span class="menu-title">Quản Lý Hoá đơn</span>
           <i class="mdi mdi-clipboard-outline menu-icon"></i>
         </a>
       </router-link>
-       <router-link class="nav-item" tag="li" to="/baidang" active-class="active">
+       <router-link class="nav-item" tag="li" to="/quantri/baidang" active-class="active">
         <a class="nav-link">
           <span class="menu-title">Quản Lý bài đăng</span>
           <i class="mdi mdi-clipboard-outline menu-icon"></i>

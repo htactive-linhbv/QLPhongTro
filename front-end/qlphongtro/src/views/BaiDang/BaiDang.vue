@@ -64,11 +64,7 @@
                                 type="button"
                                 @click.prevent="showModalGet(bd._id)"
                               >Xem chi tiết</button>
-                              <button
-                                class="dropdown-item"
-                                type="button"
-                                @click.prevent="showModalUpdate(bd._id)"
-                              >Thanh Toán</button>
+                             
                               <button
                                 class="dropdown-item"
                                 type="button"
@@ -88,8 +84,8 @@
       </div>
     </div>
     <modal-create @createSuccess="getNewData"></modal-create>
-    <!-- <modal-update @updateSuccess="getNewData"></modal-update>
-    <modal-get></modal-get>-->
+    <!-- <modal-update @updateSuccess="getNewData"></modal-update>-->
+    <modal-get></modal-get>
   </div>
 </template>
 
@@ -100,7 +96,7 @@ import Narbar from "../../components/Navbar.vue";
 import Sidebar from "../../components/Sidebar.vue";
 import ModalCreate from "./Modal_Create_BaiDang.vue";
 //import ModalUpdate from "./Modal_Update_HoaDon";
-//import ModalGet from './Modal_Get_HoaDon';
+import ModalGet from './Modal_Get_BaiDang';
 
 import axios from "axios";
 export default {
@@ -120,7 +116,8 @@ export default {
     //HelloWorld,
     appNarbar: Narbar,
     appSidebar: Sidebar,
-    ModalCreate
+    ModalCreate,
+    ModalGet
     // ModalUpdate,
     // ModalGet
   },
@@ -137,8 +134,8 @@ export default {
       }
     },
     showModalGet(id) {
-      const hoaDon = this.hoaDons.find(item => item._id == id);
-      this.$modal.show("getHoaDon", { hoaDon: hoaDon });
+      const baiDang = this.baiDangs.find(item => item._id == id);
+      this.$modal.show("getBaiDang", { baiDang: baiDang });
     },
     getNewData() {
       this.onLoading = true;

@@ -20,7 +20,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Khu trọ</label>
+                    <label class="col-sm-3 col-form-label">Khu trọ<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-6" v-if="phongTros">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Phòng trọ</label>
+                    <label class="col-sm-3 col-form-label">Phòng trọ<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -70,7 +70,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Khách Thuê</label>
+                    <label class="col-sm-3 col-form-label">Khách Thuê<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select class="form-control" v-model="khachThue_id" name="khachThue_id">
                         <option
@@ -99,7 +99,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tên Hợp Đồng</label>
+                    <label class="col-sm-3 col-form-label">Tên Hợp Đồng<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -119,7 +119,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Thời hạn</label>
+                    <label class="col-sm-3 col-form-label">Thời hạn<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select class="form-control" v-model="thoiHan" name="thoiHan">
                         <option value="1 tháng">1 Tháng</option>
@@ -140,7 +140,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Ngày Bắt đầu</label>
+                    <label class="col-sm-3 col-form-label">Ngày Bắt đầu<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <date-dropdown
                         min="2019"
@@ -155,7 +155,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Ngày Kết thúc</label>
+                    <label class="col-sm-3 col-form-label">Ngày Kết thúc<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <date-dropdown
                         min="2019"
@@ -172,7 +172,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tiền cọc</label>
+                    <label class="col-sm-3 col-form-label">Tiền cọc<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <div class="input-group">
                         <input
@@ -200,7 +200,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Nội dung</label>
+                    <label class="col-sm-3 col-form-label">Nội dung<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <textarea
                         rows="8"

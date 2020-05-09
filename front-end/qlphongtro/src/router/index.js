@@ -14,7 +14,7 @@ const checkLogin = (to, from, next) => {
   const loggedIn = localStorage.getItem('chutro-token');
 
   if (!loggedIn) {
-    return next('/login');
+    return next('/quantri/login');
 
   } else {
     next();
@@ -40,13 +40,13 @@ const routes = [
     beforeEnter: checkLogin,
   },
   {
-    path: '/login',
-    name: "Login",
+    path: '/quantri/login',
+    name: "QuanTri Login",
     component: Login,
 
   },
   {
-    path: '/thietbi',
+    path: '/quantri/thietbi',
     name: 'ThietBi',
     children: [
       {
@@ -67,7 +67,7 @@ const routes = [
     meta: {title: 'QUANTRI | Thiết Bị'},
   },
   {
-    path: '/dichvu',
+    path: '/quantri/dichvu',
     name: 'dichvu',
     meta: {title: 'QUANTRI | Dịch Vụ'},
     component: () => import('../views/DichVu.vue'),
@@ -75,50 +75,50 @@ const routes = [
    
   },
   {
-    path: '/khutro',
+    path: '/quantri/khutro',
     name: 'khutro',
     meta: {title: 'QUANTRI | Khu Trọ'},
     component: () => import('../views/KhuTro/KhuTro.vue'),
     beforeEnter: checkLogin,
   },
   {
-    path: '/khachthue',
+    path: '/quantri/khachthue',
     name: 'khachthue',
     meta: {title: 'QUANTRI | Khách Thuê'},
     component: () => import('../views/KhachThue/KhachThue.vue'),
     beforeEnter: checkLogin,
   },
   {
-    path: '/phongtro',
+    path: '/quantri/phongtro',
     name: 'phongtro',
     meta: {title: 'QUANTRI | Phòng Trọ'},
     component: () => import('../views/PhongTro/PhongTro.vue'),
     beforeEnter: checkLogin,
   },
   {
-    path: '/hopdong',
+    path: '/quantri/hopdong',
     name: 'hopdong',
     meta: {title: 'QUANTRI | Hợp Đồng'},
     component: () => import('../views/HopDong/HopDong.vue'),
     beforeEnter: checkLogin,
   },
   {
-    path: '/taikhoan',
+    path: '/quantri/taikhoan',
     name: 'taikhoan',
     meta: {title: 'QUANTRI | Cài Đặt-Tài Khoản'},
     component: () => import('../views/ChuTro/ChuTro.vue'),
     beforeEnter: checkLogin,
   },
   {
-    path: '/hoadon',
+    path: '/quantri/hoadon',
     name: '/hoadon',
     meta: {title: 'QUANTRI | Hoá Đơn'},
     component: () => import('../views/HoaDon/HoaDon.vue'),
     beforeEnter: checkLogin,
   },
   {
-    path: '/baidang',
-    name: '/baidang',
+    path: '/quantri/baidang',
+    name: 'baidang',
     meta: {title: 'QUANTRI | Bài Đăng'},
     component: () => import('../views/BaiDang/BaiDang.vue'),
     beforeEnter: checkLogin,

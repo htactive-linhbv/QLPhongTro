@@ -20,7 +20,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Khu trọ</label>
+                    <label class="col-sm-3 col-form-label">Khu trọ<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -46,7 +46,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tên Phòng</label>
+                    <label class="col-sm-3 col-form-label">Tên Phòng<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         class="form-control"
@@ -75,7 +75,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Số người tối đa</label>
+                    <label class="col-sm-3 col-form-label">Số người tối đa<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Diện tích</label>
+                    <label class="col-sm-3 col-form-label">Diện tích<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -125,7 +125,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Gác lững</label>
+                    <label class="col-sm-3 col-form-label">Gác lững<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -146,7 +146,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Giá phòng</label>
+                    <label class="col-sm-3 col-form-label">Giá phòng<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <div class="input-group">
                         <input

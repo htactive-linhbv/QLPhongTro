@@ -163,8 +163,7 @@
                         name="ngheNghiep"
                        readonly="readonly"
                       >
-                        <option value="Sinh Viên">Sinh Viên</option>
-                        <option value="Người Đi Làm">Người Đi Làm</option>
+                       
                      
                       
                     </div>

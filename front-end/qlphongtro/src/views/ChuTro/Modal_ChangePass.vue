@@ -4,13 +4,13 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Đổi Mật khẩu</h4>
+            <h4 class="card-title">Đổi Mật khẩu<sup style="color:#e17055">(*)</sup></h4>
             <div class="col-md-12">
                 <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
             </div>
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Mật khẩu hiện tại</label>
+                <label class="col-sm-3 col-form-label">Mật khẩu hiện tại<sup style="color:#e17055">(*)</sup></label>
                 <div class="col-sm-9">
                   <input type="password" class="form-control"  placeholder="Nhập mật khẩu hiện tại" v-model="password"/>
                 </div>
@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Mật khẩu mới</label>
+                <label class="col-sm-3 col-form-label">Mật khẩu mới<sup style="color:#e17055">(*)</sup></label>
                 <div class="col-sm-9">
                   <input type="password" class="form-control" name="newPassword" v-model="newPassword" @change="$v.newPassword.$touch()" placeholder="Nhập mật khẩu muốn đổi"/>
                   <div v-if="$v.newPassword.$error" class="alert alert-danger" role="alert">

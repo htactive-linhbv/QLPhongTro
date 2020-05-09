@@ -126,7 +126,7 @@ export default {
     axios.get("/hoadon/").then(response => {
       this.hoaDons = response.data.data;
       this.onLoading = false;
-    console.log(this.hoaDons);
+    
     
       
     });

@@ -20,7 +20,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Khu trọ</label>
+                    <label class="col-sm-3 col-form-label">Khu trọ<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-6" v-if="phongTros">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Phòng trọ</label>
+                    <label class="col-sm-3 col-form-label">Phòng trọ<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -70,7 +70,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tiêu Đề</label>
+                    <label class="col-sm-3 col-form-label">Tiêu Đề<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Số ĐT liên hệ</label>
+                    <label class="col-sm-3 col-form-label">Số ĐT liên hệ<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"

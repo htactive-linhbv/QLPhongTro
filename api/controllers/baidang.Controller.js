@@ -1,5 +1,8 @@
 const BaiDangs = require('../models/baiDang.Model');
 const mongoose = require('mongoose');
+const getYear = require('date-fns/getYear');
+const getDate = require('date-fns/getDate');
+const getMonth = require('date-fns/getMonth');
 const fs = require('fs')
 
 module.exports = {
@@ -10,6 +13,9 @@ module.exports = {
             { path: 'phongTro_id' },
 
         ]).then(response => {
+            response.forEach(docs=>{
+                docs._doc.ngayDang = `${getDate(docs.ngayDang)}.${getMonth(docs.ngayDang) + 1}.${getYear(docs.ngayDang)}`;
+            })
             res.status(200).json({ data: response })
         }).catch(err => {
             res.status(400).json(err)

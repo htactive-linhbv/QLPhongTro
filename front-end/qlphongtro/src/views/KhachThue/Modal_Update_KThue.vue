@@ -21,7 +21,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Họ tên Khách</label>
+                    <label class="col-sm-3 col-form-label">Họ tên Khách<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Số điện thoại</label>
+                    <label class="col-sm-3 col-form-label">Số điện thoại<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -72,7 +72,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Giới tính</label>
+                    <label class="col-sm-3 col-form-label">Giới tính<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Ngày Sinh</label>
+                    <label class="col-sm-3 col-form-label">Ngày Sinh<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <date-dropdown
                        min="1940"
@@ -117,7 +117,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Số CMND/CCCD</label>
+                    <label class="col-sm-3 col-form-label">Số CMND/CCCD<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -136,7 +136,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Ngày cấp CMND</label>
+                    <label class="col-sm-3 col-form-label">Ngày cấp CMND<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <date-dropdown
                        min="1940"
@@ -160,7 +160,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Nơi cấp CMND</label>
+                    <label class="col-sm-3 col-form-label">Nơi cấp CMND<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -180,7 +180,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Hộ Khẩu</label>
+                    <label class="col-sm-3 col-form-label">Hộ Khẩu<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
@@ -202,7 +202,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Nghề nghiệp</label>
+                    <label class="col-sm-3 col-form-label">Nghề nghiệp<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <select
                         class="form-control"
@@ -252,7 +252,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Số điện thoại</label>
+                    <label class="col-sm-3 col-form-label">Số điện thoại<sup style="color:#e17055">(*)</sup></label>
                     <div class="col-sm-9">
                       <input
                         type="text"
