@@ -125,6 +125,10 @@ export default {
     });
     },
     remove(id){
+       const khutro = this.khuTros.find(item => item._id == id);
+      if (khutro.phongTro_ids.length > 0) {
+          alert("Vẫn còn phòng trọ trong khu này... Hãy xoá phòng trọ trước!");
+        } else {
          const result = confirm("Bạn có muốn xoá Khu Trọ");
       if (result) {
         this.onLoading=true;
@@ -136,7 +140,7 @@ export default {
           this.onLoading=false;
             alert('delete thất bại')
         });
-      }
+      }}
     }
   },
 };
