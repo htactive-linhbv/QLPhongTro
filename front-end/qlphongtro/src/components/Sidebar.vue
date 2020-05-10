@@ -4,11 +4,11 @@
       <li class="nav-item nav-profile">
         <a href="#" class="nav-link">
           
-          <div class="nav-profile-text d-flex flex-column">
-            <h3 class="font-weight-bold mb-2">{{name}}</h3>
-            <span class="text-secondary text-small">Manager</span>
+         <div class="nav-profile-text d-flex flex-column">
+            <h1 class="font-weight-bold mb-2 text-info">Manager</h1>
+            <!-- <span class="text-secondary text-small">Manager</span> -->
           </div>
-          <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+        
         </a>
       </li>
 

@@ -6,6 +6,25 @@ const getMonth = require('date-fns/getMonth');
 const fs = require('fs')
 
 module.exports = {
+    getBaiDang:((req,res)=>{
+        BaiDangs.find().populate([
+            { path: 'khuTro_id' },
+            { path: 'phongTro_id' },
+
+        ]).then(response => {
+            let docF = response.sort(function(a, b) {
+              
+                return new Date(b.ngayDang) - new Date(a.ngayDang)
+            });
+            docF.forEach(docs=>{
+                docs._doc.ngayDang = `${getDate(docs.ngayDang)}.${getMonth(docs.ngayDang) + 1}.${getYear(docs.ngayDang)}`;
+            })
+            res.status(200).json({ data: docF })
+        }).catch(err => {
+            res.status(400).json(err)
+        })
+    }),
+
     getAll: ((req, res) => {
         const chuTro_id = req.chuTro._id;
         BaiDangs.find({ chuTro_id: chuTro_id }).populate([
