@@ -42,12 +42,11 @@ module.exports = {
     }),
     getId: ((req, res) => {
         const id = req.params.id;
-        BaiDangs.findById(id).populate([
+        BaiDangs.find({_id:id}).populate([
             { path: 'khuTro_id' },
             { path: 'phongTro_id' },
-
         ]).then(response => {
-            res.status(200).json({ data: response })
+            res.status(200).json({data:response})
         }).catch(err => {
             res.status(400).json(err)
         })

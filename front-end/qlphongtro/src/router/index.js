@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+//import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import ThietBi from '../views/ThietBi.vue'
 
@@ -17,27 +17,31 @@ const checkLogin = (to, from, next) => {
     return next('/quantri/login');
 
   } else {
-    next();
+   return next();
   }
 };
 
 
 const routes = [
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home,
+   
+  //   beforeEnter: checkLogin,
+
+  // },
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-   
-    beforeEnter: checkLogin,
-
+    name: 'index',
+    meta: {title: 'TRANG THÔNG TIN'},
+    component: () => import(/* webpackChunkName: "about" */ '../views/User/index.vue'),
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/:id/detail',
+    name: 'detail',
 
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-    
-    beforeEnter: checkLogin,
+    component: () => import(/* webpackChunkName: "about" */ '../views/User/detail'),
   },
   {
     path: '/quantri/login',

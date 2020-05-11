@@ -91,15 +91,18 @@ export default {
   data() {
     return {
       onLoading:false,
-      khuTros: null
+      khuTros: null,
+      
     };
   },
   mounted() {
     this.onLoading=true;
     axios.get('/khutro/').then(response => {
       this.khuTros = response.data.data;
+    
       this.onLoading=false
     });
+    
   },
  
   components: {
@@ -119,7 +122,7 @@ export default {
     },
     getNewData(){
       this.onLoading=true
-         axios.get('/khutro/').then(response => {
+      axios.get('/khutro/').then(response => {
       this.khuTros = response.data.data;
       this.onLoading = false
     });

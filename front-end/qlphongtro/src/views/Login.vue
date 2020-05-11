@@ -91,7 +91,7 @@ export default {
         .dispatch("LOGIN", this.chutro)
         .then(() => {
           this.onLoading = false;
-          this.$router.push({ name: "Home" });
+          this.$router.push({ path:'/quantri/dichvu' });
         })
         .catch(err => {
           this.onMessage = err.response.data.message;

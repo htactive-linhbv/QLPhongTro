@@ -161,7 +161,8 @@ export default {
     this.loading = true;
     axios.get("/khutro/getphongtro/").then(response => {
       this.khuTros = response.data.data;
-
+      this.khuTro_id=this.khuTros[0]._id
+      this.getNewData();
       this.loading = false;
     });
   },
