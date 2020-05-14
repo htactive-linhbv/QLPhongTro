@@ -23,27 +23,27 @@
             Giá cho thuê: {{ new Intl.NumberFormat("it-IT", {
             style: "currency",
             currency: "VND"
-            }).format(bai.phongTro_id.giaPhong)}}
+            }).format(bai.phongTro_id?bai.phongTro_id.giaPhong:'Phòng này đã bị xoá')}}
           </h4>
           <h5>
             <i class="mdi mdi-google-maps"></i>
-            Địa Chỉ: {{bai.khuTro_id.diaChi.Duong}}/ {{bai.khuTro_id.diaChi.Quan}}/ {{bai.khuTro_id.diaChi.Tinh}}
+            Địa Chỉ: {{bai.khuTro_id?bai.khuTro_id.diaChi.Duong:'Phòng này đã bị xoá'}}/ {{bai.khuTro_id?bai.khuTro_id.diaChi.Quan:'Phòng này đã bị xoá'}}/ {{bai.khuTro_id?bai.khuTro_id.diaChi.Tinh:'Phòng này đã bị xoá'}}
           </h5>
           <h5>
             <i class="mdi mdi-checkbox-blank-outline"></i>
-            Diện tích: {{bai.phongTro_id.dienTich}}
+            Diện tích: {{bai.phongTro_id?bai.phongTro_id.dienTich:'Phòng này đã bị xoá'}}
           </h5>
           <h5>
             <i class="mdi mdi-window-open"></i>
-            Gác Lững: {{bai.phongTro_id.gacLung?'Có':'Không'}}
+            Gác Lững: {{bai.phongTro_id?bai.phongTro_id.gacLung?'Có':'Không':'Phòng trọ đã bị xoá'}}
           </h5>
           <h5>
             <i class="mdi mdi-home-modern"></i>
-            Nằm ở tầng: {{bai.phongTro_id.Tang}}
+            Nằm ở tầng: {{bai.phongTro_id?bai.phongTro_id.Tang:'Phòng trọ đã bị xoá'}}
           </h5>
           <h5>
             <i class="mdi mdi-account-multiple-plus"></i>
-            Số Lượng Người tối đa: {{bai.phongTro_id.slNguoiToiDa}} người/phòng
+            Số Lượng Người tối đa: {{bai.phongTro_id?bai.phongTro_id.slNguoiToiDa:'Phòng trọ đã bị xoá'}} người/phòng
           </h5>
           <h5>
             <i class="mdi mdi-cellphone-basic"></i>

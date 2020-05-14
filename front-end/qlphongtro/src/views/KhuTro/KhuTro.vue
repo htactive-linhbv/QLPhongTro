@@ -101,6 +101,8 @@ export default {
       this.khuTros = response.data.data;
     
       this.onLoading=false
+    }).catch(()=>{
+      this.onLoading=false
     });
     
   },

@@ -16,14 +16,13 @@
               </ol>
               <button class="btn btn-success" @click="showModalCreate()">Thêm mới</button>
             </nav>
-
           </div>
-           <div v-if="onLoading" class="d-flex justify-content-center text-primary">
+          <div v-if="onLoading" class="d-flex justify-content-center text-primary">
             <div class="spinner-border" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
-           <div class="row">
+          <div class="row">
             <div class="col-12 stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -55,18 +54,18 @@
                               data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
-                            > Tác vụ</button>
+                            >Tác vụ</button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                               <button
                                 class="dropdown-item"
                                 type="button"
-                                @click.prevent="showModalGet(bd._id)"
-                              >Xem chi tiết</button>
-                             
+                                @click.prevent="showModalGet(chutro._id)"
+                              >Gia hạn</button>
+
                               <button
                                 class="dropdown-item"
                                 type="button"
-                                @click.prevent="remove(bd._id)"
+                                @click.prevent="remove(chutro._id)"
                               >Xoá</button>
                             </div>
                           </div>
@@ -81,54 +80,83 @@
         </div>
       </div>
     </div>
-    <modal-create @createSuccess='createSuccess'></modal-create>
+    <modal-create @createSuccess="createSuccess"></modal-create>
+    <modal-gia-han @createSuccess='createSuccess'></modal-gia-han>
   </div>
-
 </template>
 
 <script>
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
-import axios from "axios"
+import axios from "axios";
 import Narbar from "../../components/admin/Navbar";
 import Sidebar from "../../components/admin/Sidebar";
-import ModalCreate from './Modal_AddChuTro'
+import ModalCreate from "./Modal_AddChuTro";
+import ModalGiaHan from "./Modal_GiaHan";
 export default {
-    data(){
-        return{
-            chuTros:null,
-            onLoading:false
-        }
+  data() {
+    return {
+      chuTros: null,
+      onLoading: false
+    };
+  },
+  mounted() {
+    this.onLoading = true;
+    axios.get("/chutro/").then(response => {
+      this.chuTros = response.data.data;
+      this.onLoading = false;
+    }).catch(()=>{
+      this.onLoading=true
+    });
+  },
+  methods: {
+    changeDate(date) {
+      const dateF = date.split(".");
+      return `${dateF[0]}-${dateF[1]}-${dateF[2]}`;
     },
-    mounted(){
-        this.onLoading=true
-        axios.get('/chutro/').then(response=>{
-            this.chuTros= response.data.data;
-            this.onLoading=false
-        })
+    showModalCreate() {
+      this.$modal.show("createChuTro");
     },
-    methods:{
-      changeDate(date){
-        const dateF = date.split('.');
-        return `${dateF[0]}-${dateF[1]}-${dateF[2]}`
-      },
-      showModalCreate(){
-        this.$modal.show('createChuTro')
-      },
-    createSuccess(){
-       this.onLoading=true
-        axios.get('/chutro/').then(response=>{
-            this.chuTros= response.data.data;
-            this.onLoading=false
-        })
+    createSuccess() {
+      this.onLoading = true;
+      axios.get("/chutro/").then(response => {
+        this.chuTros = response.data.data;
+        this.onLoading = false;
+      }).catch(()=>{
+       this.onLoading = false;
+      });
+    },
+    showModalGet(id) {
+      const tro = this.chuTros.find(item => item._id == id);
+      this.$modal.show("giaHanChuTro", { chutro: tro });
+    },
+    remove(id) {
+      const result = confirm("Bạn có muốn xoá Chủ trọ này");
+      if (result) {
+        axios
+          .delete(`/chutro/${id}/delete`)
+          .then(() => {
+            this.chuTros.splice(
+              this.chuTros.findIndex(function(i) {
+                return i._id == id;
+              }),
+              1
+            );
+            alert("Xoá thành công");
+          })
+          .catch(() => {
+            alert("Xoá Thất bại");
+          });
+      }
     }
-    },
+  },
   name: "Home",
   components: {
     //HelloWorld,
     appNarbar: Narbar,
     appSidebar: Sidebar,
-    ModalCreate
+    ModalCreate,
+    ModalGiaHan
   }
 };
 </script>

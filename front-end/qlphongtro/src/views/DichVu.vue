@@ -97,6 +97,8 @@ export default {
     axios.get("/dichvu/").then(response => {
       this.dichVus = response.data.data;
       this.onLoading=false
+    }).catch(()=>{
+      this.onLoading=false
     });
   },
   computed: {

@@ -226,7 +226,7 @@ export default {
   },
   methods: {
     getData(){
-this.tenKhuTro = null;
+    this.tenKhuTro = null;
     this.Tinh = 'Đà Nẵng';
     this.Quan = 'Hải Châu';
     this.Duong = null;

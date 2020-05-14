@@ -80,7 +80,8 @@ export default {
       this.menu = !this.menu;
        let sitebody = document.body;
         this.menu ? sitebody.classList.add("sidebar-icon-only") : sitebody.classList.remove("sidebar-icon-only");
-    }
+    },
+    
   }
 }
 </script>

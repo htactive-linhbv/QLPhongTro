@@ -2,7 +2,6 @@
   <div style="background-color: #ecf0f1;">
     <navr></navr>
     <div class="container" style="margin-top: 80px;" >
-      
      <detailc :bai="baiDang[0]"></detailc>
     </div>
     <div class="row">

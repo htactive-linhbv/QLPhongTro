@@ -15,7 +15,6 @@
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
               </ol>
-              <button class="btn btn-success" @click="showModalCreate()">Tạo mới</button>
             </nav>
           </div>
           <div v-if="onLoading" class="d-flex justify-content-center text-primary">
@@ -57,14 +56,21 @@
                               data-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
-                            ><span v-if="btnLoanding" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Tác vụ</button>
+                            >
+                              <span
+                                v-if="btnLoanding"
+                                class="spinner-border spinner-border-sm"
+                                role="status"
+                                aria-hidden="true"
+                              ></span> Tác vụ
+                            </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                               <button
                                 class="dropdown-item"
                                 type="button"
                                 @click.prevent="showModalGet(bd._id)"
                               >Xem chi tiết</button>
-                             
+
                               <button
                                 class="dropdown-item"
                                 type="button"
@@ -83,29 +89,24 @@
         </div>
       </div>
     </div>
-    <modal-create @createSuccess="getNewData"></modal-create>
-    <!-- <modal-update @updateSuccess="getNewData"></modal-update>-->
-    <modal-get></modal-get>
+    <ModalGet></ModalGet>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
-import Narbar from "../../components/Navbar.vue";
-import Sidebar from "../../components/Sidebar.vue";
-import ModalCreate from "./Modal_Create_BaiDang.vue";
-//import ModalUpdate from "./Modal_Update_HoaDon";
-import ModalGet from './Modal_Get_BaiDang';
-
 import axios from "axios";
+import Narbar from "../../components/admin/Navbar";
+import Sidebar from "../../components/admin/Sidebar";
+import ModalGet from './BaiDang/Modal_GetBaiDang'
 export default {
   name: "baidang",
   data() {
     return {
       baiDangs: null,
       onLoading: false,
-      btnLoanding:false
+      btnLoanding: false
     };
   },
   mounted() {
@@ -113,53 +114,41 @@ export default {
   },
 
   components: {
-    //HelloWorld,
     appNarbar: Narbar,
     appSidebar: Sidebar,
-    ModalCreate,
     ModalGet
-    // ModalUpdate,
-    // ModalGet
   },
   methods: {
-    showModalCreate() {
-      this.$modal.show("createBaiDang");
-    },
-    showModalUpdate(id) {
-      const hoaDon = this.hoaDons.find(item => item._id == id);
-      if (hoaDon.tinhTrang === true) {
-        alert("Hoá đơn này đã thanh toán");
-      } else {
-        this.$modal.show("updateHoaDon", { hoaDon: hoaDon });
-      }
-    },
     showModalGet(id) {
       const baiDang = this.baiDangs.find(item => item._id == id);
       this.$modal.show("getBaiDang", { baiDang: baiDang });
     },
     getNewData() {
       this.onLoading = true;
-      axios.get("/baidang/").then(response => {
-        this.baiDangs = response.data.data;
-        this.onLoading = false;
-      }).catch(()=>{
-        this.onLoading =false
-      });
+      axios
+        .get("/baidang/baidang/all")
+        .then(response => {
+          this.baiDangs = response.data.data;
+          this.onLoading = false;
+        })
+        .catch(() => {
+          this.onLoading = false;
+        });
     },
     remove(id) {
       const result = confirm("Bạn có muốn bài đăng này");
       if (result) {
-        this.btnLoanding = true
+        this.btnLoanding = true;
         axios
           .delete(`/baidang/${id}/delete`)
           .then(() => {
             alert("Delete thành công");
             this.getNewData();
-            this.btnLoanding=false
+            this.btnLoanding = false;
           })
           .catch(() => {
             alert("delete thất bại");
-            this.btnLoanding=false
+            this.btnLoanding = false;
           });
       }
     }

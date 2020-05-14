@@ -44,9 +44,9 @@
                     <tbody>
                       <tr v-for="hd in hopDongs" :key="hd._id">
                         <td>{{hd.tenHopDong}}</td>
-                        <td>{{hd.khuTro_id.tenKhuTro}}</td>
-                        <td>{{hd.khachThue_id.tenKhachThue}}</td>
-                        <td>{{hd.phongTro_id.tenPhongTro}}</td>
+                        <td>{{hd.khuTro_id?hd.khuTro_id.tenKhuTro:'Khu trọ này đã bị xoá'}}</td>
+                        <td>{{hd.khachThue_id?hd.khachThue_id.tenKhachThue:'Khách đã bị xoá'}}</td>
+                        <td>{{hd.phongTro_id?hd.phongTro_id.tenPhongTro:'Phòng này đã bị xoá'}}</td>
                         <td>{{hd.thoiHan}}</td>
                         <td>
                           {{new Intl.NumberFormat("it-IT", {
@@ -106,7 +106,7 @@ import Narbar from "../../components/Navbar.vue";
 import Sidebar from "../../components/Sidebar.vue";
 import ModalCreate from "./Modal_Create_HD";
 import ModalUpdate from "./Modal_Update_HD";
-import ModalGet from './Modal_Get_HD';
+import ModalGet from "./Modal_Get_HD";
 
 import axios from "axios";
 export default {
@@ -138,21 +138,17 @@ export default {
       this.$modal.show("createHopDong");
     },
     showModalUpdate(id) {
-       const hopDong = this.hopDongs.find(
-        item => item._id == id
-      );
+      const hopDong = this.hopDongs.find(item => item._id == id);
       this.$modal.show("updateHopDong", { hopDong: hopDong });
     },
-     showModalGet(id) {
-      const hopDong = this.hopDongs.find(
-        item => item._id == id
-      );
-     this.$modal.show("getHopDong", { hopDong: hopDong });
+    showModalGet(id) {
+      const hopDong = this.hopDongs.find(item => item._id == id);
+      this.$modal.show("getHopDong", { hopDong: hopDong });
     },
     getNewData() {
       this.onLoading = true;
       axios.get("/hopdong/").then(response => {
-      this.hopDongs = response.data.data;
+        this.hopDongs = response.data.data;
         this.onLoading = false;
       });
     },

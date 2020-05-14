@@ -45,9 +45,9 @@
                     <tbody>
                       <tr v-for="hd in hoaDons" :key="hd._id">
                         <td>{{hd.tenHoaDon}}</td>
-                        <td>{{hd.khuTro_id.tenKhuTro||''}}</td>
-                        <td>{{hd.khachThue_id.tenKhachThue||''}}</td>
-                        <td>{{hd.phongTro_id.tenPhongTro||''}}</td>
+                        <td>{{hd.khuTro_id?hd.khuTro_id.tenKhuTro:'Khu trọ đã xoá'}}</td>
+                        <td>{{hd.khachThue_id?hd.khachThue_id.tenKhachThue:'Khách thuê đã bị xoá'||[]}}</td>
+                        <td>{{hd.phongTro_id?hd.phongTro_id.tenPhongTro:'Phòng trọ đã bị xoá'||[]}}</td>
                         <td>
                           {{new Intl.NumberFormat("it-IT", {
                           style: "currency",
@@ -117,8 +117,8 @@ export default {
   name: "hoadon",
   data() {
     return {
-      hoaDons:[],
-      onLoading: false
+      hoaDons:null,
+      onLoading: false,
     };
   },
   mounted() {
@@ -126,7 +126,7 @@ export default {
     axios.get("/hoadon/").then(response => {
       this.hoaDons = response.data.data;
       this.onLoading = false;
-    
+      
     
       
     });

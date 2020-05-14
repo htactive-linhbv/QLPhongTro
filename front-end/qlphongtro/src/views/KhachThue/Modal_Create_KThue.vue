@@ -1,5 +1,5 @@
 <template>
-  <modal name="createKhachThue" :scrollable="true" height="auto" width="80%">
+  <modal name="createKhachThue" :scrollable="true" height="auto" width="80%" @before-open="getData">
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
       <div class="col-md-1">
@@ -428,6 +428,15 @@ export default {
     }
   },
   methods: {
+    getData(){
+       this.data={};
+         this.urlAnhDaiDien=null,
+      this.urlAnhSau=null,
+      this.ulrAnhTruoc=null,
+      this.anhDaiDien= "",
+      this.sanhCMNDTruoc= "",
+      this.anhCMNDSau= ""
+    },
     onChangeFileUpload1() {
       this.anhDaiDien = this.$refs.anhDaiDien.files[0];
       this.urlAnhDaiDien = URL.createObjectURL(this.anhDaiDien)

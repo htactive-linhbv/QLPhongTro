@@ -263,7 +263,6 @@ export default {
   },
   methods: {
     getData(){
-      this.khuTros= null;
       this.khuTro_id= null;
       this.tenPhongTro= null;
       this.slNguoiToiDa= null;

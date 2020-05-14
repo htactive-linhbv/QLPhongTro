@@ -5,7 +5,7 @@
     height="auto"
     width="80%"
     @before-open="getData"
-    :delay="500"
+    
   >
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
@@ -211,7 +211,7 @@ export default {
       //   this.khuTros = response.data.data;
       // });
       axios.get(`/phongtro/${event.params.id}/chitiet`).then(response => {
-        this.khuTros = event.params.khuTros;
+        this.khuTros = event.params.khuTros;  
         this.idPhong = event.params.id;
         this.khuTro_id = event.params.khuTro_id;
         this.tenPhongTro = response.data.data.tenPhongTro;

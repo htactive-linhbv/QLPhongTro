@@ -70,6 +70,12 @@ const routes = [
       component: () => import(/* webpackChunkName: "about" */ '../views/admin/Home'),
     },
     {
+      path: '/admin/danhsachbaidang',
+      name: 'adminBaiDang',
+      beforeEnter: checkAdminLogin,
+      component: () => import(/* webpackChunkName: "about" */ '../views/admin/AdminBaiDang'),
+    },
+    {
       path: '/admin/chitietchutro',
       name: 'adminChiTIetChuTro',
       beforeEnter: checkAdminLogin,

@@ -15,7 +15,7 @@
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Danh Sách</li>
               </ol>
-              <button class="btn btn-success" @click="showModalCreate()">Thêm mới</button>
+              <button class="btn btn-success" @click="showModalCreate(khuTros)">Thêm mới</button>
             </nav>
           </div>
 
@@ -164,6 +164,8 @@ export default {
       this.khuTro_id=this.khuTros[0]._id
       this.getNewData();
       this.loading = false;
+    }).catch(()=>{
+      this.loading = false;
     });
   },
 
@@ -177,8 +179,9 @@ export default {
     ModalAdd
   },
   methods: {
-    showModalCreate() {
-      this.$modal.show("createPhongTro");
+    showModalCreate(khuTros) {
+      this.$modal.show("createPhongTro",{khuTros:khuTros});
+
     },
     showModalUpdate(id, khuTro_id, khuTros) {
       this.$modal.show("updatePhongTro", {

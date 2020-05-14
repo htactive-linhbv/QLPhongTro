@@ -1,5 +1,5 @@
 <template>
-  <modal name="createHopDong" :scrollable="true" height="auto" width="80%">
+  <modal name="createHopDong" :scrollable="true" height="auto" width="80%"  @before-open="getData">
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
       <div class="col-md-1">
@@ -145,7 +145,7 @@
                         max="2030"
                         name="ngayBatDau"
                         v-model="ngayKetThuc"
-                        months-names="Tháng 1, Tháng 2, Tháng 3, Tháng 4, Tháng 5, Tháng 6, Tháng 7, Tháng 8, Tháng 9, Tháng 10, Tháng 11, Tháng 12s"
+                        months-names="Tháng 1, Tháng 2, Tháng 3, Tháng 4, Tháng 5, Tháng 6, Tháng 7, Tháng 8, Tháng 9, Tháng 10, Tháng 11, Tháng 12"
                       ></date-dropdown>
                     </div>
                   </div>
@@ -275,6 +275,18 @@ export default {
       },
   },
   methods: {
+    getData(){
+ this.tienCocF= "",
+      this.tenHopDong= null;
+      this.loaiHopDong= null;
+      this.khachThue_id= null;
+      this.khuTro_id= null;
+      this.phongTro_id= null;
+      this.thoiHan= null;
+      
+      this.tienCoc= null;
+      this.noiDung= null;
+    },
     create() {
       if (!this.$v.$invalid) {
       this.onLoading = true;

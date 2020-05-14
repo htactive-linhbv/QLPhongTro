@@ -75,7 +75,7 @@
        <router-link class="nav-item" tag="li" to="/quantri/baidang" active-class="active">
         <a class="nav-link">
           <span class="menu-title">Quản Lý bài đăng</span>
-          <i class="mdi mdi-clipboard-outline menu-icon"></i>
+          <i class="mdi mdi-book-open-variant menu-icon"></i>
         </a>
       </router-link>
     </ul>

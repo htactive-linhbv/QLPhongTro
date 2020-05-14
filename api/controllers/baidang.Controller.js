@@ -40,6 +40,20 @@ module.exports = {
             res.status(400).json(err)
         })
     }),
+    getAdmin:((req,res)=>{
+        BaiDangs.find().populate([
+            { path: 'khuTro_id' },
+            { path: 'phongTro_id' },
+
+        ]).then(response => {
+            response.forEach(docs=>{
+                docs._doc.ngayDang = `${getDate(docs.ngayDang)}.${getMonth(docs.ngayDang) + 1}.${getYear(docs.ngayDang)}`;
+            })
+            res.status(200).json({ data: response })
+        }).catch(err => {
+            res.status(400).json(err)
+        })
+    }),
     getId: ((req, res) => {
         const id = req.params.id;
         BaiDangs.find({_id:id}).populate([
