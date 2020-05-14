@@ -21,11 +21,16 @@ npm run lint
 ```
 
 
-### tài khoản... mk test
+### tài khoản... mk chủ trọ test
 ```
 test123@gmail.com
 123123
 ```
-
+### tài khoản... admin mk test
+```
+path: '/admin/login'
+admin@khutro.com
+abc123123
+```
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

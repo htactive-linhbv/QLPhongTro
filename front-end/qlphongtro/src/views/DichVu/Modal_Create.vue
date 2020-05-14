@@ -1,5 +1,5 @@
 <template>
-  <modal name="createDichVu" :scrollable="true" height="auto" width="60%">
+  <modal name="createDichVu" :scrollable="true" height="auto" width="60%" @before-open="getData">
     <div class="row">
       <div class="col-md-11"></div>
       <button
@@ -122,6 +122,9 @@
 const { required, numeric } = require("vuelidate/lib/validators");
 import axios from "axios";
 export default {
+  mounted(){
+  
+  },
   data: function() {
     return {
       onLoading:false,
@@ -152,6 +155,19 @@ export default {
     }
   },
   methods: {
+    getData(){
+   
+      this.tenDV='',
+      this.chuTro_id= null,
+      this.moTaDV= null,
+      this.donGia= null,
+      this.donVi= null,
+      this.quyTacTinhTien= null,
+      this.trangThai= "1",
+      this.trueFalse= null,
+      this.donGiaF=null
+      this.$v.$reset()
+    },
     changeGiaPhong(){
       this.donGiaF = new Intl.NumberFormat('it-IT',{style:'currency', currency:'VND'}).format(this.donGia)  
     },

@@ -42,8 +42,8 @@
                     <tbody>
                       <tr v-for="bd in baiDangs" :key="bd._id">
                         <td>{{bd.tieuDe}}</td>
-                        <td>{{bd.khuTro_id.tenKhuTro}}</td>
-                        <td>{{bd.phongTro_id.tenPhongTro}}</td>
+                        <td>{{bd.khuTro_id.tenKhuTro||''}}</td>
+                        <td>{{bd.phongTro_id.tenPhongTro||''}}</td>
                         <td>
                           <label v-if="bd.trangThai" class="badge badge-success">Mở</label>
                           <label v-else class="badge badge-danger">Đóng</label>
@@ -142,7 +142,6 @@ export default {
       axios.get("/baidang/").then(response => {
         this.baiDangs = response.data.data;
         this.onLoading = false;
-        console.log(this.baiDangs);
       });
     },
     remove(id) {

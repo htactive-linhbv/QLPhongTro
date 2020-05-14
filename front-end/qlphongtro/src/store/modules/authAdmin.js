@@ -10,12 +10,7 @@
 import axios from 'axios'
 export default ({
     state: {
-        token: localStorage.getItem('chutro-token') || null,
-        chuTroProfile: {
-            // lay tu api
-            _id: localStorage.getItem('chutro-profile-id'),
-            hoVaTen: localStorage.getItem('chutro-profile-name')
-        } || {},
+        token: localStorage.getItem('admin-token') || null,
         trangThaiLogin: false,
     },
     mutations: {
@@ -24,29 +19,26 @@ export default ({
         },
         LOGIN_SUCCESS(state, result) {
             state.token = result.token;
-            state.chuTroProfile = result.chutro;
             state.trangThaiLogin = true
         },
         LOGOUT: (state) => {
             state.token = "";
             state.trangThaiLogin = false;
-            state.chuTroProfile = {};
+           
 
         },
     },
 
     actions: {
-        LOGIN({ commit }, data) {
+        ADMINLOGIN({ commit }, data) {
             return new Promise((resolve, reject) => {
-                axios.post('login/chutro', {
+                axios.post('login/admin', {
                     email: data.email,
                     password: data.password
                 }).then(response => {
                     commit('LOGIN_SUCCESS', response.data);
-                    localStorage.setItem("chutro-token", response.data.token);
-                    localStorage.setItem("chutro-profile-name", response.data.chutro.hoVaTen);
-                    localStorage.setItem("chutro-profile-id", response.data.chutro._id);
-                    axios.defaults.headers.common['Authorization-chutro'] = `Bearer ${response.data.token}`
+                    localStorage.setItem("admin-token", response.data.token);
+                    axios.defaults.headers.common['authorization-admin'] = `Bearer ${response.data.token}`
                     resolve(response)
                 }).catch(err => {
 
@@ -55,15 +47,14 @@ export default ({
                 })
             })
         },
-        LOGOUT({ commit }) {
+        ADMINLOGOUT({ commit }) {
 
             return new Promise((resolve, reject) => {
                 try {
                     commit('LOGOUT');
-                    localStorage.removeItem('chutro-token');
-                    localStorage.removeItem('chutro-profile-name');
-                    localStorage.removeItem('chutro-profile-id');
-                    axios.defaults.headers.common['authorization-chutro'] = "";
+                    localStorage.removeItem('admin-token');
+                   
+                    axios.defaults.headers.common['authorization-admin'] = "";
                     resolve();
                 } catch (error) {
                     reject(error);

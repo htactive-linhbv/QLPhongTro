@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const adminSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  hoTen: { Type: String, required: true },
-  email: { Type: String, required: true },
-  password: { Type: String, required: true },
-  quyen: { Type: String, required: true, default: 'admin' }
+  hoTen: { type: String },
+  email: { type: String },
+  password: { type: String },
+  quyen: { type: String, default: 'admin' }
 
 })
 

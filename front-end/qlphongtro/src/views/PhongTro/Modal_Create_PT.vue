@@ -1,5 +1,5 @@
 <template>
-  <modal name="createPhongTro" :scrollable="true" height="auto" width="80%">
+  <modal name="createPhongTro" :scrollable="true" height="auto" width="80%" @before-open="getData">
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
       <div class="col-md-1">
@@ -262,6 +262,19 @@ export default {
     }
   },
   methods: {
+    getData(){
+      this.khuTros= null;
+      this.khuTro_id= null;
+      this.tenPhongTro= null;
+      this.slNguoiToiDa= null;
+      this.dienTich= null;
+      this.Tang= null;
+      this.gacLung= null;
+      this.giaPhong= null;
+      this.moTa= null;
+      this.giaPhongF= null;
+      this.$v.$reset(); 
+    },
     create() {
       if (!this.$v.$invalid) {
         this.loading = true;

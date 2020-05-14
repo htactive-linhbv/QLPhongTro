@@ -45,9 +45,9 @@
                     <tbody>
                       <tr v-for="hd in hoaDons" :key="hd._id">
                         <td>{{hd.tenHoaDon}}</td>
-                        <td>{{hd.khuTro_id.tenKhuTro}}</td>
-                        <td>{{hd.khachThue_id.tenKhachThue}}</td>
-                        <td>{{hd.phongTro_id.tenPhongTro}}</td>
+                        <td>{{hd.khuTro_id.tenKhuTro||''}}</td>
+                        <td>{{hd.khachThue_id.tenKhachThue||''}}</td>
+                        <td>{{hd.phongTro_id.tenPhongTro||''}}</td>
                         <td>
                           {{new Intl.NumberFormat("it-IT", {
                           style: "currency",

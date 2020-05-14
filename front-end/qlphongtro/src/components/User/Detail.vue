@@ -49,7 +49,7 @@
             <i class="mdi mdi-cellphone-basic"></i>
             Liên hệ {{bai.soDienThoai}}
           </h5>
-         <h5>Mô Tả <p>{{bai.moTa}}</p></h5> 
+         <h5>Mô Tả<p>{{bai.moTa}}</p></h5> 
         </div>
       </div>
     </div>

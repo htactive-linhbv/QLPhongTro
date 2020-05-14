@@ -21,6 +21,17 @@ const checkLogin = (to, from, next) => {
   }
 };
 
+const checkAdminLogin = (to, from, next) => {
+
+  const loggedIn = localStorage.getItem('admin-token');
+
+  if (!loggedIn) {
+    return next('/admin/login');
+
+  } else {
+   return next();
+  }
+};
 
 const routes = [
   // {
@@ -31,6 +42,7 @@ const routes = [
   //   beforeEnter: checkLogin,
 
   // },
+  // user
   {
     path: '/',
     name: 'index',
@@ -43,11 +55,33 @@ const routes = [
 
     component: () => import(/* webpackChunkName: "about" */ '../views/User/detail'),
   },
+  //admin
+  
+    {
+      path: '/admin/login',
+      name: 'adminLogin',
+  
+      component: () => import(/* webpackChunkName: "about" */ '../views/admin/login'),
+    },
+    {
+      path: '/admin/',
+      name: 'adminHome',
+      beforeEnter: checkAdminLogin,
+      component: () => import(/* webpackChunkName: "about" */ '../views/admin/Home'),
+    },
+    {
+      path: '/admin/chitietchutro',
+      name: 'adminChiTIetChuTro',
+      beforeEnter: checkAdminLogin,
+      component: () => import(/* webpackChunkName: "about" */ '../views/admin/ChuTro'),
+    },
+
+  //phần chủ trọ
   {
     path: '/quantri/login',
     name: "QuanTri Login",
     component: Login,
-
+    meta: {title: 'QUANTRI | Đăng nhập'},
   },
   {
     path: '/quantri/thietbi',

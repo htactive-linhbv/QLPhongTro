@@ -1,5 +1,5 @@
 <template>
-  <modal name="createKhuTro" :scrollable="true" height="auto" width="60%" >
+  <modal name="createKhuTro" :scrollable="true" height="auto" width="70%" @before-open="getData">
     <div class="row" style="margin-top:20px">
       <div class="col-md-11"></div>
       <div class="col-md-1">
@@ -19,7 +19,10 @@
 
             <form class="forms-sample">
               <div class="form-group">
-                <label for="exampleInputUsername1">Tên khu trọ<sup style="color:#e17055">(*)</sup></label>
+                <label for="exampleInputUsername1">
+                  Tên khu trọ
+                  <sup style="color:#e17055">(*)</sup>
+                </label>
                 <input
                   type="text"
                   class="form-control"
@@ -33,25 +36,44 @@
                   v-if="$v.tenKhuTro.$error"
                   class="alert alert-danger"
                   role="alert"
-                >Tên khu trọ không được trống
-                </div>
+                >Tên khu trọ không được trống</div>
               </div>
               <div class="row">
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label>Tỉnh/Thành phố<sup style="color:#e17055">(*)</sup></label>
+                    <label>
+                      Tỉnh/Thành phố
+                      <sup style="color:#e17055">(*)</sup>
+                    </label>
 
-                    <select class="form-control" v-model="Tinh" name="Tinh" @change="$v.Tinh.$touch()">
+                    <select
+                      class="form-control"
+                      v-model="Tinh"
+                      name="Tinh"
+                      @change="$v.Tinh.$touch()"
+                    >
                       <option value="Đà Nẵng" selected="selected">Đà Nẵng</option>
                     </select>
-                    <div v-if="$v.Tinh.$error" class="alert alert-danger" role="alert"> không được để trống </div>
+                    <div
+                      v-if="$v.Tinh.$error"
+                      class="alert alert-danger"
+                      role="alert"
+                    >không được để trống</div>
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label>Quận/Huyện<sup style="color:#e17055">(*)</sup></label>
+                    <label>
+                      Quận/Huyện
+                      <sup style="color:#e17055">(*)</sup>
+                    </label>
 
-                    <select class="form-control" v-model="Quan" name="Quan" @change="$v.Quan.$touch()">
+                    <select
+                      class="form-control"
+                      v-model="Quan"
+                      name="Quan"
+                      @change="$v.Quan.$touch()"
+                    >
                       <option value="Hải Châu" selected="selected">Quận Hải Châu</option>
                       <option value="Cẩm Lệ" selected="selected">Quận Cẩm Lệ</option>
                       <option value="Thanh Khê" selected="selected">Quận Thanh Khê</option>
@@ -61,12 +83,19 @@
                       <option value="Hòa Vang" selected="selected">Huyện Hòa Vang</option>
                       <option value="Hoàng Sa" selected="selected">Huyện Hoàng Sa.</option>
                     </select>
-                      <div v-if="$v.Quan.$error" class="alert alert-danger" role="alert"> không được để trống </div>
+                    <div
+                      v-if="$v.Quan.$error"
+                      class="alert alert-danger"
+                      role="alert"
+                    >không được để trống</div>
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <label for="exampleInputUsername1">Đường<sup style="color:#e17055">(*)</sup></label>
+                    <label for="exampleInputUsername1">
+                      Đường
+                      <sup style="color:#e17055">(*)</sup>
+                    </label>
                     <input
                       type="text"
                       class="form-control"
@@ -85,7 +114,10 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1">số tầng<sup style="color:#e17055">(*)</sup></label>
+                <label for="exampleInputPassword1">
+                  số tầng
+                  <sup style="color:#e17055">(*)</sup>
+                </label>
                 <div class="input-group">
                   <input
                     type="text"
@@ -104,13 +136,20 @@
               </div>
 
               <div class="form-group">
-                <label>Trang Thái<sup style="color:#e17055">(*)</sup></label>
+                <label>
+                  Trang Thái
+                  <sup style="color:#e17055">(*)</sup>
+                </label>
 
                 <select class="form-control" v-model="trangThai" name="trangThai">
                   <option value="1" selected="selected">bình thường</option>
                   <option value="0">Tạm dừng</option>
                 </select>
-                 <div v-if="$v.trangThai.$error" class="alert alert-danger" role="alert"> không được để trống </div>
+                <div
+                  v-if="$v.trangThai.$error"
+                  class="alert alert-danger"
+                  role="alert"
+                >không được để trống</div>
               </div>
               <div class="form-group">
                 <label for="mota">mô tả</label>
@@ -124,7 +163,15 @@
                 />
               </div>
 
-              <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">Thêm Mới <span v-if="onLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+              <button @click.prevent="create()" class="btn btn-gradient-primary mr-2">
+                Thêm Mới
+                <span
+                  v-if="onLoading"
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              </button>
               <button @click.prevent="$modal.hide('createKhuTro')" class="btn btn-light">Đóng</button>
             </form>
           </div>
@@ -138,6 +185,9 @@
 const { required, numeric } = require("vuelidate/lib/validators");
 import axios from "axios";
 export default {
+  mounted() {
+    
+  },
   data: function() {
     return {
       tenKhuTro: null,
@@ -147,7 +197,7 @@ export default {
       mota: null,
       soTang: null,
       trangThai: null,
-      onLoading : false
+      onLoading: false
     };
   },
   validations: {
@@ -170,40 +220,49 @@ export default {
       required,
       numeric
     },
-    trangThai:{
+    trangThai: {
       required
     }
   },
   methods: {
+    getData(){
+this.tenKhuTro = null;
+    this.Tinh = 'Đà Nẵng';
+    this.Quan = 'Hải Châu';
+    this.Duong = null;
+    this.mota = null;
+    this.soTang = null;
+    this.trangThai = "1";
+    this.$v.$reset()
+    },
     create() {
-        if (!this.$v.$invalid) {
-          this.onLoading=true;
-            axios
-        .post("/khutro/", {
-          tenKhuTro:this.tenKhuTro,
-          mota:this.mota,
-          soTang:this.soTang,
-          trangThai:Boolean(Number(this.trangThai)),
-          diaChi:{
-            Tinh:this.Tinh,
-            Quan:this.Quan,
-            Duong:this.Duong
-          }
-        })
-        .then(() => {
-          this.onLoading=false
-          alert("Thêm mới thành công");
-          this.$emit("createSuccess");
-          this.$modal.hide("createKhuTro");
-        })
-        .catch(() => {
-          this.onLoading=false
-          alert("Thêm mới thất bại");
-        })
-        }else{
-            this.$v.$touch();
-        }
-      
+      if (!this.$v.$invalid) {
+        this.onLoading = true;
+        axios
+          .post("/khutro/", {
+            tenKhuTro: this.tenKhuTro,
+            mota: this.mota,
+            soTang: this.soTang,
+            trangThai: Boolean(Number(this.trangThai)),
+            diaChi: {
+              Tinh: this.Tinh,
+              Quan: this.Quan,
+              Duong: this.Duong
+            }
+          })
+          .then(() => {
+            this.onLoading = false;
+            alert("Thêm mới thành công");
+            this.$emit("createSuccess");
+            this.$modal.hide("createKhuTro");
+          })
+          .catch(() => {
+            this.onLoading = false;
+            alert("Thêm mới thất bại");
+          });
+      } else {
+        this.$v.$touch();
+      }
     }
   }
 };
