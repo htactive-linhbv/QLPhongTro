@@ -60,18 +60,20 @@ const routes = [
     {
       path: '/admin/login',
       name: 'adminLogin',
-  
+      meta: {title: 'ADMIN | Đăng nhập'},
       component: () => import(/* webpackChunkName: "about" */ '../views/admin/login'),
     },
     {
       path: '/admin/',
       name: 'adminHome',
+      meta: {title: 'ADMIN | HOME'},
       beforeEnter: checkAdminLogin,
       component: () => import(/* webpackChunkName: "about" */ '../views/admin/Home'),
     },
     {
       path: '/admin/danhsachbaidang',
       name: 'adminBaiDang',
+      meta: {title: 'ADMIN | QL Bài Đăng'},
       beforeEnter: checkAdminLogin,
       component: () => import(/* webpackChunkName: "about" */ '../views/admin/AdminBaiDang'),
     },
@@ -79,6 +81,7 @@ const routes = [
       path: '/admin/chitietchutro',
       name: 'adminChiTIetChuTro',
       beforeEnter: checkAdminLogin,
+      meta: {title: 'ADMIN | QL-Chủ Trọ'},
       component: () => import(/* webpackChunkName: "about" */ '../views/admin/ChuTro'),
     },
 
@@ -166,7 +169,25 @@ const routes = [
     meta: {title: 'QUANTRI | Bài Đăng'},
     component: () => import('../views/BaiDang/BaiDang.vue'),
     beforeEnter: checkLogin,
-  }
+  },
+
+  //404
+  {
+    meta: {title: 'ERROR 404 | KHÔNG TÌM THẤY TRANG'},
+    path: '*',
+    component: () => import('../views/404/404'),
+  },
+  {
+    meta: {title: 'ERROR 404 | KHÔNG TÌM THẤY TRANG'},
+    path: '/quantri/*',
+    component: () => import('../views/404/QuanTri_404'),
+  },
+  {
+    meta: {title: 'ERROR 404 | KHÔNG TÌM THẤY TRANG'},
+    path: '/admin/*',
+    component: () => import('../views/404/Admin_404'),
+  },
+ 
 ]
 
 const router = new VueRouter({
