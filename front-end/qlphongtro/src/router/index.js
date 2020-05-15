@@ -79,7 +79,7 @@ const routes = [
     },
     {
       path: '/admin/chitietchutro',
-      name: 'adminChiTIetChuTro',
+      name: 'adminChiTietChuTro',
       beforeEnter: checkAdminLogin,
       meta: {title: 'ADMIN | QL-Chủ Trọ'},
       component: () => import(/* webpackChunkName: "about" */ '../views/admin/ChuTro'),

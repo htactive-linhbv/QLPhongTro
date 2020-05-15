@@ -86,7 +86,7 @@ export default {
         .dispatch("ADMINLOGIN", this.admin)
         .then(() => {
           this.onLoading = false;
-          this.$router.push({ path:'/admin/chitietchutro ' });
+          this.$router.push({ path:'/admin/chitietchutro' });
         })
         .catch(err => {
           this.onMessage = err.response.data.message;
